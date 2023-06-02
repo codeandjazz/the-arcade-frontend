@@ -1,15 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import NotFound from 'components/NotFound';
+import SingleGame from 'components/SingleGame';
+import GamesList from 'components/GamesList';
+import UserProfile from 'components/UserProfile';
+import LandingPage from 'components/LandingPage';
+import Login from './components/Login';
 
 export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>Hello</h1>} />
+        <Route path="/" element={<LandingPage />} />
         {/* ↑↑↑ This is the home page ↑↑↑ */}
-        <Route path="/details/:id" element={<h1>Details</h1>} />
+        <Route path="/login" element={<Login />} />
         {/* ↑↑↑ This is a fake route ↑↑↑ */}
-        <Route path="/404" element={<h1>Not found</h1>} />
+        <Route path="/404" element={<NotFound />} />
         {/* ↑↑↑ Insert 404component here ↑↑↑ */}
         <Route path="*" element={<Navigate to="/404" replace />} />
         {/* ↑↑↑ This routs to 404 if no route is found ↑↑↑ */}
