@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import user from 'reducers/user';
 
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
@@ -11,18 +12,26 @@ import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
 
 export const App = () => {
+  const reducer = combineReducers({
+    user: user.reducer
+  });
+
+  const store = configureStore({ reducer });
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* ↑↑↑ This is the home page ↑↑↑ */}
-        <Route path="/login" element={<Login />} />
-        {/* ↑↑↑ This is a fake route ↑↑↑ */}
-        <Route path="/404" element={<NotFound />} />
-        {/* ↑↑↑ Insert 404component here ↑↑↑ */}
-        <Route path="*" element={<Navigate to="/404" replace />} />
-        {/* ↑↑↑ This routs to 404 if no route is found ↑↑↑ */}
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          {/* ↑↑↑ This is the home page ↑↑↑ */}
+          <Route path="/login" element={<Login />} />
+          {/* ↑↑↑ This is a fake route ↑↑↑ */}
+          <Route path="/404" element={<NotFound />} />
+          {/* ↑↑↑ Insert 404component here ↑↑↑ */}
+          <Route path="*" element={<Navigate to="/404" replace />} />
+          {/* ↑↑↑ This routs to 404 if no route is found ↑↑↑ */}
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 };
