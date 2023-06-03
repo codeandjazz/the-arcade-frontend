@@ -1,6 +1,18 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {
+  Container,
+  Card,
+  Row,
+  Text,
+  Input,
+  Spacer,
+  Button,
+  Checkbox
+} from '@nextui-org/react';
+
 import user from 'reducers/user';
 import { API_URL } from '../utils/urls';
 
@@ -17,6 +29,7 @@ const Login = () => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
+    console.log('clicked!');
     const options = {
       method: 'POST',
       headers: {
@@ -44,8 +57,38 @@ const Login = () => {
   return (
     <main>
       <section className="login">
-        <h1>Sign in</h1>
-        {/* Insert Form below... */}
+        <Container fluid>
+          <Card css={{ nw: '420px', p: '20px', display: 'flex' }}>
+            <Card.Header>
+              <Text h3>Sign in</Text>
+            </Card.Header>
+            <Card.Body>
+              <form onSubmit={onFormSubmit}>
+                <Input
+                  clearable
+                  bordered
+                  fullWidth
+                  size="lg"
+                  label="Username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+                <Spacer y={1} />
+                <Input
+                  clearable
+                  bordered
+                  fullWidth
+                  size="lg"
+                  label="Password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <Spacer y={1} />
+                <Button type="submit">Sign in</Button>
+              </form>
+            </Card.Body>
+          </Card>
+        </Container>
       </section>
     </main>
   );
