@@ -57,8 +57,8 @@ const Login = () => {
   return (
     <main>
       <section className="login">
-        <Container fluid>
-          <Card css={{ nw: '420px', p: '20px', display: 'flex' }}>
+        <Container fluid css={{ minHeight: '100vh' }}>
+          <Card css={{ p: '20px', display: 'flex' }}>
             <Card.Header>
               <Text h3>Sign in</Text>
             </Card.Header>
