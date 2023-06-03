@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
 import GamesList from 'components/GamesList';
