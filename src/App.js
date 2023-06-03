@@ -10,6 +10,7 @@ import GamesList from 'components/GamesList';
 import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
+import GlobalStyle from './components/GlobalStyles';
 
 export const App = () => {
   const reducer = combineReducers({
@@ -20,6 +21,7 @@ export const App = () => {
 
   return (
     <Provider store={store}>
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
