@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import GamesDisplay10 from './GamesDisplay10';
 
 const LandingPage = () => {
   return (
@@ -8,6 +9,7 @@ const LandingPage = () => {
       <Header />
       <main>
         <section className="hero">HERO</section>
+        <GamesDisplay10 />
         <section className="featured">FEATURED</section>
         <section className="new">NEW GAMES</section>
         <section className="popular">POPULAR</section>
