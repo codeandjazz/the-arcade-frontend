@@ -1,4 +1,8 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable react/jsx-closing-bracket-location */
+// add modes to the login form, so that we can switch between login and signup
+// modal for signup and login
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +14,8 @@ import {
   Input,
   Spacer,
   Button,
-  Checkbox
+  Checkbox,
+  Radio
 } from '@nextui-org/react';
 
 import user from 'reducers/user';
@@ -23,10 +28,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
   const [errors, setErrors] = useState(null);
-  const [mode, setMode] = useState('LOGIN');
+  const [mode, setMode] = useState('USERS/REGISTER');
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
 
+  useEffect(() => {
+    console.log(mode);
+  }, [mode]);
   const onFormSubmit = (event) => {
     event.preventDefault();
     console.log('clicked!');
@@ -35,21 +43,26 @@ const Login = () => {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username: username, password: password })
     };
+    console.log('this is the options: ', options);
+    console.log(mode);
+    // fetch('http://localhost:8080/users/register', options)
     fetch(API_URL(mode.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          dispatch(user.actions.setUsername(data.response.username));
-          dispatch(user.actions.setAccessToken(data.response.accessToken));
-          dispatch(user.actions.setUserId(data.response.userId));
-          dispatch(user.actions.setError(null));
+          // dispatch(user.actions.setUsername(data.response.username));
+          // dispatch(user.actions.setAccessToken(data.response.accessToken));
+          // dispatch(user.actions.setUserId(data.response.userId));
+          // dispatch(user.actions.setError(null));
+          console.log(data);
         } else {
-          dispatch(user.actions.setAccessToken(null));
-          dispatch(user.actions.setUsername(null));
-          dispatch(user.actions.setUserId(null));
-          dispatch(user.actions.setError(data.response.message));
+          // dispatch(user.actions.setAccessToken(null));
+          // dispatch(user.actions.setUsername(null));
+          // dispatch(user.actions.setUserId(null));
+          // dispatch(user.actions.setError(data.response.message));
+          console.error(data);
         }
       });
   };
@@ -63,6 +76,17 @@ const Login = () => {
               <Text h3>Sign in</Text>
             </Card.Header>
             <Card.Body>
+              <Radio.Group
+                defaultValue={mode}
+                onChange={setMode}
+                orientation="horizontal"
+                label="Mode"
+              >
+                <Radio value="USERS/REGISTER">Sign up</Radio>
+                <Radio value="USERS/LOGIN">Login</Radio>
+              </Radio.Group>
+
+              <Spacer y={1} />
               <form onSubmit={onFormSubmit}>
                 <Input
                   clearable
