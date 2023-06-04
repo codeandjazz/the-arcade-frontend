@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { produce } from 'immer';
 
 const user = createSlice({
   name: 'user',
@@ -10,17 +11,25 @@ const user = createSlice({
   },
 
   reducers: {
-    setUsername: (store, action) => {
-      store.username = action.payload;
+    setUsername: (state, action) => {
+      return produce(state, (draftState) => {
+        draftState.username = action.payload;
+      });
     },
-    setUserId: (store, action) => {
-      store.user_id = action.payload;
+    setUserId: (state, action) => {
+      return produce(state, (draftState) => {
+        draftState.user_id = action.payload;
+      });
     },
-    setAccessToken: (store, action) => {
-      store.accessToken = action.payload;
+    setAccessToken: (state, action) => {
+      return produce(state, (draftState) => {
+        draftState.accessToken = action.payload;
+      });
     },
-    setError: (store, action) => {
-      store.error = action.payload;
+    setError: (state, action) => {
+      return produce(state, (draftState) => {
+        draftState.error = action.payload;
+      });
     }
   }
 });
