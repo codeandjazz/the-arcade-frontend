@@ -10,6 +10,7 @@ import GamesList from 'components/GamesList';
 import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
+import Game from './components/Game';
 import GlobalStyle from './components/GlobalStyles';
 
 export const App = () => {
@@ -27,7 +28,8 @@ export const App = () => {
           <Route path="/" element={<LandingPage />} />
           {/* ↑↑↑ This is the home page ↑↑↑ */}
           <Route path="/login" element={<Login />} />
-          {/* ↑↑↑ This is a fake route ↑↑↑ */}
+          <Route path="/games/:slug/:id" element={<Game />} />
+          {/* ↑↑↑ This is a game page ↑↑↑ */}
           <Route path="/404" element={<NotFound />} />
           {/* ↑↑↑ Insert 404component here ↑↑↑ */}
           <Route path="*" element={<Navigate to="/404" replace />} />
