@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navbar, Button, Link, Text, Image } from '@nextui-org/react';
 import Logo from '../assets/img/logo-the-arcade.png';
+import { OuterWrapper } from './GlobalStyles';
 
 const Header = () => {
   return (
-    <section>
+    <OuterWrapper>
       <Navbar isCompact isBordered variant="sticky">
         <Navbar.Brand>
           <Image src={Logo} width={100} height={50} alt="logo" />
@@ -28,7 +29,7 @@ const Header = () => {
           </Navbar.Item>
         </Navbar.Content>
       </Navbar>
-    </section>
+    </OuterWrapper>
   );
 };
 

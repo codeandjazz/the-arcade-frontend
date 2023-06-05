@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Grid, Row, Text, Link, Loading } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import defaultImg from '../assets/img/default-img.png';
+import { InnerWrapper, OuterWrapper } from './GlobalStyles';
 
 const GamesDisplay10 = () => {
   const [storedGames, setStoredGames] = useState([]);
@@ -42,47 +43,49 @@ const GamesDisplay10 = () => {
   }, []);
 
   return (
-    <>
-      <h1>10 random games</h1>
-      <Grid.Container gap={1} justify="flex-start" direction="row">
-        {loading ? (
-          <Loading type="points" />
-        ) : (
-          storedGames.map((game, index) => (
-            <Grid key={game._id}>
-              <Link href={`/games/${game.slug}/${game._id}`}>
-                <Card isPressable css={{ w: '8rem', h: '15rem' }}>
-                  <Card.Body css={{ p: 0 }}>
-                    {game.cover && game.cover.url ? (
-                      <Card.Image
-                        src={game.cover.url}
-                        objectFit="cover"
-                        width="100%"
-                        height={140}
-                        alt="image"
-                      />
-                    ) : (
-                      <Card.Image
-                        src={defaultImg}
-                        objectFit="contain"
-                        width="100%"
-                        height={140}
-                        alt="image"
-                      />
-                    )}
-                    <Card.Footer css={{ justifyItems: 'flex-start' }}>
-                      <Row wrap="wrap" align="center">
-                        <Text>{game.name}</Text>
-                      </Row>
-                    </Card.Footer>
-                  </Card.Body>
-                </Card>
-              </Link>
-            </Grid>
-          ))
-        )}
-      </Grid.Container>
-    </>
+    <OuterWrapper>
+      <InnerWrapper>
+        <h1>10 random games</h1>
+        <Grid.Container gap={1} justify="flex-start" direction="row">
+          {loading ? (
+            <Loading type="points" />
+          ) : (
+            storedGames.map((game, index) => (
+              <Grid key={game._id}>
+                <Link href={`/games/${game.slug}/${game._id}`}>
+                  <Card isPressable css={{ w: '8rem', h: '15rem' }}>
+                    <Card.Body css={{ p: 0 }}>
+                      {game.cover && game.cover.url ? (
+                        <Card.Image
+                          src={game.cover.url}
+                          objectFit="cover"
+                          width="100%"
+                          height={140}
+                          alt="image"
+                        />
+                      ) : (
+                        <Card.Image
+                          src={defaultImg}
+                          objectFit="contain"
+                          width="100%"
+                          height={140}
+                          alt="image"
+                        />
+                      )}
+                      <Card.Footer css={{ justifyItems: 'flex-start' }}>
+                        <Row wrap="wrap" align="center">
+                          <Text>{game.name}</Text>
+                        </Row>
+                      </Card.Footer>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Grid>
+            ))
+          )}
+        </Grid.Container>
+      </InnerWrapper>
+    </OuterWrapper>
   );
 };
 

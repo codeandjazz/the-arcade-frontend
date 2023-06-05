@@ -1,7 +1,8 @@
 import React from 'react';
+import { OuterWrapper } from './GlobalStyles';
 
 const Footer = () => {
-  return <div>Footer</div>;
+  return <OuterWrapper>Footer</OuterWrapper>;
 };
 
 export default Footer;

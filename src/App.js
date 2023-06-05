@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import GlobalStyle from 'components/GlobalStyles';
 import { user } from 'reducers/user';
 
 import NotFound from 'components/NotFound';
@@ -13,7 +14,6 @@ import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
 import Game from './components/Game';
-import GlobalStyle from './components/GlobalStyles';
 
 export const App = () => {
   const reducer = combineReducers({
@@ -23,8 +23,8 @@ export const App = () => {
   const store = configureStore({ reducer });
   return (
     <Provider store={store}>
-      <GlobalStyle />
       <BrowserRouter>
+        <GlobalStyle />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           {/* ↑↑↑ This is the home page ↑↑↑ */}
