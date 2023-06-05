@@ -35,6 +35,11 @@ const Login = () => {
   useEffect(() => {
     console.log(mode);
   }, [mode]);
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken, navigate]);
   const onFormSubmit = (event) => {
     event.preventDefault();
     console.log('clicked!');

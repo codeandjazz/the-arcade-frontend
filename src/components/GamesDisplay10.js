@@ -3,6 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { Card, Grid, Row, Text, Link, Loading } from '@nextui-org/react';
+import { API_URL } from 'utils/urls';
 import defaultImg from '../assets/img/default-img.png';
 
 const GamesDisplay10 = () => {
@@ -14,7 +15,7 @@ const GamesDisplay10 = () => {
     const fetchGames = async () => {
       try {
         // Get the games from the API
-        const response = await fetch('http://localhost:8080/games');
+        const response = await fetch(API_URL('games'));
         const data = await response.json();
         const getRandomGames = (games, count) => {
           // Shuffle the games
