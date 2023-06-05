@@ -50,7 +50,7 @@ const GamesDisplay10 = () => {
           storedGames.map((game, index) => (
             <Grid key={game._id}>
               <Link href={`/games/${game.slug}/${game._id}`}>
-                <Card isPressable>
+                <Card isPressable css={{ w: '8rem', h: '15rem' }}>
                   <Card.Body css={{ p: 0 }}>
                     {game.cover && game.cover.url ? (
                       <Card.Image
@@ -71,7 +71,7 @@ const GamesDisplay10 = () => {
                     )}
                     <Card.Footer css={{ justifyItems: 'flex-start' }}>
                       <Row wrap="wrap" align="center">
-                        <Text p>{game.name}</Text>
+                        <Text>{game.name}</Text>
                       </Row>
                     </Card.Footer>
                   </Card.Body>
