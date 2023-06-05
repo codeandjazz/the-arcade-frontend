@@ -18,7 +18,7 @@ import {
   Radio
 } from '@nextui-org/react';
 
-import { user } from 'reducers/user';
+import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
 const Login = () => {
