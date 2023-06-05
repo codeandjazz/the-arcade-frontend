@@ -16,6 +16,18 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: var(--muted);
   }
+
+  p {
+    font-family: 'Miriam Libre', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Audiowide', cursive;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-family: 'Khand', sans-serif;
+  }
 `;
 
 export const OuterWrapper = styled.section`
