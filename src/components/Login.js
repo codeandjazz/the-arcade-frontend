@@ -18,7 +18,7 @@ import {
   Radio
 } from '@nextui-org/react';
 
-import user from 'reducers/user';
+import { user } from 'reducers/user';
 import { API_URL } from '../utils/urls';
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState(null); // move to store
   const [mode, setMode] = useState('USERS/REGISTER');
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
@@ -47,21 +47,24 @@ const Login = () => {
     };
     console.log('this is the options: ', options);
     console.log(mode);
+    console.log(API_URL(mode.toLowerCase()));
     // fetch('http://localhost:8080/users/register', options)
     fetch(API_URL(mode.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // dispatch(user.actions.setUsername(data.response.username));
-          // dispatch(user.actions.setAccessToken(data.response.accessToken));
-          // dispatch(user.actions.setUserId(data.response.userId));
-          // dispatch(user.actions.setError(null));
-          console.log(data);
+          dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setAccessToken(data.response.accessToken));
+          dispatch(user.actions.setUserId(data.response.id));
+          dispatch(user.actions.setError(null));
+          console.log(data.response.id);
+          console.log(data.response.accessToken);
+          console.log(data.response.username);
         } else {
-          // dispatch(user.actions.setAccessToken(null));
-          // dispatch(user.actions.setUsername(null));
-          // dispatch(user.actions.setUserId(null));
-          // dispatch(user.actions.setError(data.response.message));
+          dispatch(user.actions.setAccessToken(null));
+          dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setUserId(null));
+          dispatch(user.actions.setError(data.response.message));
           console.error(data);
         }
       });

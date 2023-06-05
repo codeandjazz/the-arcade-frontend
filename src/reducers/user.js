@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { produce } from 'immer';
+import { createSlice, current, isAction } from '@reduxjs/toolkit';
 
-const user = createSlice({
+export const user = createSlice({
   name: 'user',
   initialState: {
     username: null,
@@ -11,27 +10,21 @@ const user = createSlice({
   },
 
   reducers: {
-    setUsername: (state, action) => {
-      return produce(state, (draftState) => {
-        draftState.username = action.payload;
-      });
+    setUsername: (store, action) => {
+      store.username = action.payload;
+      console.log(action.payload);
     },
-    setUserId: (state, action) => {
-      return produce(state, (draftState) => {
-        draftState.user_id = action.payload;
-      });
+    setUserId: (store, action) => {
+      store.user_id = action.payload;
+      console.log(action.payload);
     },
-    setAccessToken: (state, action) => {
-      return produce(state, (draftState) => {
-        draftState.accessToken = action.payload;
-      });
+    setAccessToken: (store, action) => {
+      store.accessToken = action.payload;
+      console.log(action.payload);
     },
-    setError: (state, action) => {
-      return produce(state, (draftState) => {
-        draftState.error = action.payload;
-      });
+    setError: (store, action) => {
+      store.error = action.payload;
+      console.log(action.payload);
     }
   }
 });
-
-export default user;
