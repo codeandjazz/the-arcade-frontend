@@ -1,8 +1,10 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-len */
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import user from 'reducers/user';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { user } from 'reducers/user';
 
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
@@ -19,7 +21,6 @@ export const App = () => {
   });
 
   const store = configureStore({ reducer });
-
   return (
     <Provider store={store}>
       <GlobalStyle />
