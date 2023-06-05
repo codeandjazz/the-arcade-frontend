@@ -45,7 +45,7 @@ const GamesDisplay10 = () => {
   return (
     <OuterWrapper>
       <InnerWrapper>
-        <h1>10 random games</h1>
+        <h2>10 random games</h2>
         <Grid.Container gap={1} justify="flex-start" direction="row">
           {loading ? (
             <Loading type="points" />
