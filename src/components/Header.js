@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navbar, Button, Link, Text, Image } from '@nextui-org/react';
 import Logo from '../assets/img/logo-the-arcade.png';
-import UserProfile from './User';
+import UserProfile from './UserProfile';
 
 const Header = () => {
   // Check if the user is logged in
