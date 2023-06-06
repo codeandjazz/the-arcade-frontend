@@ -89,8 +89,8 @@ const Login = () => {
                 orientation="horizontal"
                 label="Mode"
               >
-                <Radio value="USERS/REGISTER">Sign up</Radio>
                 <Radio value="USERS/LOGIN">Login</Radio>
+                <Radio value="USERS/REGISTER">Sign up</Radio>
               </Radio.Group>
 
               <Spacer y={1} />

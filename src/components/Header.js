@@ -1,9 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Navbar, Button, Link, Text, Image } from '@nextui-org/react';
 import Logo from '../assets/img/logo-the-arcade.png';
-import { OuterWrapper } from './GlobalStyles';
+import UserProfile from './User';
 
 const Header = () => {
+  // Check if the user is logged in
+  const accessToken = useSelector((store) => store.user.accessToken);
   return (
     <Navbar isCompact isBordered variant="sticky">
       <Navbar.Brand>
@@ -18,14 +21,23 @@ const Header = () => {
         <Navbar.Link href="#">Game</Navbar.Link>
       </Navbar.Content>
       <Navbar.Content>
-        <Navbar.Link color="inherit" href="#">
+        {!accessToken && (
+          <Navbar.Link color="inherit" href="login">
             Login
-        </Navbar.Link>
-        <Navbar.Item>
-          <Button auto flat as={Link} href="#">
+          </Navbar.Link>
+        )}
+        {!accessToken && (
+          <Navbar.Item>
+            <Button auto flat as={Link} href="login">
               Sign Up
-          </Button>
-        </Navbar.Item>
+            </Button>
+          </Navbar.Item>
+        )}
+        {accessToken && (
+          <Navbar.Item>
+            <UserProfile />
+          </Navbar.Item>
+        )}
       </Navbar.Content>
     </Navbar>
   );

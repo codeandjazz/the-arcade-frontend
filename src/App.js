@@ -10,7 +10,7 @@ import { user } from 'reducers/user';
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
 import GamesList from 'components/GamesList';
-import UserProfile from 'components/UserProfile';
+import UserProfile from 'components/User';
 import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
 import Game from './components/Game';
@@ -31,6 +31,12 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/games/:slug/:id" element={<SingleGame />} />
           {/* ↑↑↑ This is a game page ↑↑↑ */}
+          <Route path="/games" element={<GamesList />} />
+          {/* ↑↑↑ This is the games list page ↑↑↑ */}
+          <Route path="/users/:id" element={<UserProfile />} />
+          {/* ↑↑↑ This is a user profile page ↑↑↑ */}
+          <Route path="/games/:id" element={<SingleGame />} />
+          {/* ↑↑↑ This is a single game page ↑↑↑ */}
           <Route path="/404" element={<NotFound />} />
           {/* ↑↑↑ Insert 404component here ↑↑↑ */}
           <Route path="*" element={<Navigate to="/404" replace />} />
