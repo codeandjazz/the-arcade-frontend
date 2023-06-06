@@ -30,7 +30,7 @@ export const App = () => {
           <Route path="/" element={<LandingPage />} />
           {/* ↑↑↑ This is the home page ↑↑↑ */}
           <Route path="/login" element={<Login />} />
-          <Route path="/games/:slug/:id" element={<Game />} />
+          <Route path="/games/:slug/:id" element={<SingleGame />} />
           {/* ↑↑↑ This is a game page ↑↑↑ */}
           <Route path="/games" element={<GamesList />} />
           {/* ↑↑↑ This is the games list page ↑↑↑ */}
