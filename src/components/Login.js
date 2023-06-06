@@ -61,9 +61,9 @@ const Login = () => {
           dispatch(user.actions.setAccessToken(data.response.accessToken));
           dispatch(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setError(null));
-          console.log(data.response.id);
-          console.log(data.response.accessToken);
-          console.log(data.response.username);
+          console.log('This is id: ', data.response.id);
+          console.log('This is the accestoken: ', data.response.accessToken);
+          console.log('This is username: ', data.response.username);
         } else {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));
