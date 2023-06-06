@@ -36,7 +36,7 @@ export const App = () => {
           {/* ↑↑↑ This is the games list page ↑↑↑ */}
           <Route path="/users/:id" element={<UserProfilePage />} />
           {/* ↑↑↑ This is a user profile page ↑↑↑ */}
-          <Route path="/games/:id" element={<SingleGame />} />
+          <Route path="/games/:slug/:id" element={<SingleGame />} />
           {/* ↑↑↑ This is a single game page ↑↑↑ */}
           <Route path="/404" element={<NotFound />} />
           {/* ↑↑↑ Insert 404component here ↑↑↑ */}
