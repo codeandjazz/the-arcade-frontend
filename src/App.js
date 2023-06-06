@@ -25,7 +25,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           {/* ↑↑↑ This is the home page ↑↑↑ */}
