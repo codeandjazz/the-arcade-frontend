@@ -53,7 +53,6 @@ const Login = () => {
     console.log('this is the options: ', options);
     console.log(mode);
     console.log(API_URL(mode.toLowerCase()));
-    // fetch('http://localhost:8080/users/register', options)
     fetch(API_URL(mode.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
