@@ -10,7 +10,7 @@ import { user } from 'reducers/user';
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
 import GamesList from 'components/GamesList';
-import UserProfile from 'components/UserProfile';
+import UserProfile from 'components/User';
 import LandingPage from 'components/LandingPage';
 import Login from './components/Login';
 import Game from './components/Game';
