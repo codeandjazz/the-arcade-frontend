@@ -27,8 +27,8 @@ export const App = () => {
   GlobalStyles();
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <NextUIProvider theme={theme}>
+      <NextUIProvider theme={theme}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             {/* ↑↑↑ This is the home page ↑↑↑ */}
@@ -46,8 +46,8 @@ export const App = () => {
             <Route path="*" element={<Navigate to="/404" replace />} />
             {/* ↑↑↑ This routs to 404 if no route is found ↑↑↑ */}
           </Routes>
-        </NextUIProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </NextUIProvider>
     </Provider>
   );
 };

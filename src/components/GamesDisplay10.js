@@ -44,7 +44,7 @@ const GamesDisplay10 = () => {
   return (
     <>
       <h2>10 random games</h2>
-      <Grid.Container gap={1} justify="flex-start" direction="row">
+      <Grid.Container gap={1} justify="flex-start" alignContent="center" direction="row">
         {loading ? (
           <Loading type="points" />
         ) : (
