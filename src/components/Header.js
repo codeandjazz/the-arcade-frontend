@@ -8,7 +8,7 @@ const Header = () => {
   // Check if the user is logged in
   const accessToken = useSelector((store) => store.user.accessToken);
   return (
-    <Navbar isCompact isBordered variant="sticky">
+    <Navbar isCompact isBordered variant="sticky" color="#56048C">
       <Navbar.Brand>
         <Image src={Logo} width={100} height={50} alt="logo" />
       </Navbar.Brand>
@@ -22,13 +22,13 @@ const Header = () => {
       </Navbar.Content>
       <Navbar.Content>
         {!accessToken && (
-          <Navbar.Link color="inherit" href="login">
+          <Navbar.Link color="inherit" href="/login">
             Login
           </Navbar.Link>
         )}
         {!accessToken && (
           <Navbar.Item>
-            <Button auto flat as={Link} href="login">
+            <Button auto flat as={Link} href="/login">
               Sign Up
             </Button>
           </Navbar.Item>

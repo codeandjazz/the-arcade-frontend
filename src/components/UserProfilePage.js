@@ -12,13 +12,6 @@ const UserProfilePage = () => {
       <Header />
       <OuterWrapper>
         <InnerWrapper>
-          <Card>
-            <Card.Body>
-              <Text>
-                                  Please log in to view your profile
-              </Text>
-            </Card.Body>
-          </Card>
           {accessToken && (
             <>
               <Grid.Container gap={1} justify="center">
@@ -58,6 +51,21 @@ const UserProfilePage = () => {
                 </Grid>
               </Grid.Container>
             </>
+          )}
+          {!accessToken && (
+            <Container>
+              <Row>
+                <Col>
+                  <Card>
+                    <Card.Body>
+                      <Text>
+                                        You need to be logged in to view this page
+                      </Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
           )}
         </InnerWrapper>
       </OuterWrapper>
