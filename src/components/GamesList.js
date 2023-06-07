@@ -12,7 +12,7 @@ const GamesList = () => {
 
   // Fetch the games from the API when the component mounts
   useEffect(() => {
-    const fetchGames = async () => {
+    /* const fetchGames = async () => {
       try {
         // Get the games from the API
         const response = await fetch(API_URL('games'));
@@ -28,11 +28,11 @@ const GamesList = () => {
       } catch (error) {
         console.error(error);
       }
-    };
+    }; */
     const fetchGenres = async () => {
       try {
         // Get the genres from the API
-        const response = await fetch(API_URL('games/genres'));
+        const response = await fetch(API_URL('/genres'));
         const data = await response.json();
         if (data.success) {
           const genres = data.response.map((genre) => ({ name: genre }));
@@ -47,7 +47,7 @@ const GamesList = () => {
         console.error(error);
       }
     };
-    fetchGames();
+    // fetchGames();
     fetchGenres();
   }, []);
 
