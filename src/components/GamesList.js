@@ -16,23 +16,6 @@ const GamesList = () => {
 
   // Fetch the games from the API when the component mounts
   useEffect(() => {
-    /* const fetchGames = async () => {
-      try {
-        // Get the games from the API
-        const response = await fetch(API_URL('games'));
-        const data = await response.json();
-        if (data.success) {
-          const games = data.response;
-          // Store the games in state
-          setStoredGames(games);
-        } else {
-          console.log(data.message);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }; */
     const fetchGenres = async () => {
       try {
         // Get the genres from the API
@@ -50,8 +33,26 @@ const GamesList = () => {
         console.error(error);
       }
     };
-    // fetchGames();
     fetchGenres();
+    const fetchGames = async () => {
+      try {
+        // Get the games from the API
+        // eslint-disable-next-line no-template-curly-in-string
+        const response = await fetch(API_URL('games'));
+        const data = await response.json();
+        if (data.success) {
+          const games = data.response;
+          // Store the games in state
+          setStoredGames(games);
+        } else {
+          console.log(data.message);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchGames();
   }, []);
 
   const selectedValue = React.useMemo(
@@ -74,9 +75,7 @@ const GamesList = () => {
             {(genre) => (
               <Dropdown.Item
                 key={genre.name}>
-                <Link href={`games/genres/${genre.name}`}>
-                  {genre.name}
-                </Link>
+                {genre.name}
               </Dropdown.Item>
             )}
           </Dropdown.Menu>
