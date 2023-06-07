@@ -1,8 +1,8 @@
 import React from 'react';
-import { OuterWrapper } from './GlobalStyles';
+import { Text } from '@nextui-org/react';
 
 const Footer = () => {
-  return <OuterWrapper>Footer</OuterWrapper>;
+  return <Text>Footer</Text>;
 };
 
 export default Footer;
