@@ -35,7 +35,8 @@ const GamesList = () => {
         const response = await fetch(API_URL('games/genres'));
         const data = await response.json();
         if (data.success) {
-          const genres = data.response;
+          const genres = data.response.map((genre) => ({ name: genre }));
+          console.log(genres);
           // Store the genres in state
           setStoredGenres(genres);
         } else {
@@ -50,25 +51,21 @@ const GamesList = () => {
     fetchGenres();
   }, []);
 
-  // Dropdown menu items
-  const menuItems = [
-    { key: 'new', name: 'New File' },
-    { key: 'copy', name: 'Copy Link' },
-    { key: 'edit', name: 'Edit File' },
-    { key: 'delete', name: 'Delete File' }
-  ];
-
   return (
     <>
       <Header />
       <Container md>
         <Dropdown>
           <Dropdown.Button>Categories</Dropdown.Button>
-          <Dropdown.Menu aria-label="Dynamic Actions" items={menuItems}>
-            {(item) => (
+          <Dropdown.Menu aria-label="Game Genres" items={storedGenres}>
+            {(genre) => (
               <Dropdown.Item
-                key={item.key}>
-                {item.name}
+                key={genre.name}
+                onClick={() => {
+                  // Handle genre selection
+                  console.log('Selected genre:', genre.name)
+                }}>
+                {genre.name}
               </Dropdown.Item>
             )}
           </Dropdown.Menu>
