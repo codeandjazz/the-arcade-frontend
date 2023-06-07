@@ -1,13 +1,16 @@
 /* eslint-disable quote-props */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-closing-bracket-location */
+import { Button } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from 'utils/urls';
 
-const ReviewForm = ({ id }) => {
+const ReviewForm = ({ setShowReviewForm }) => {
   const [message, setMessage] = useState('');
   //   const [rating, setRating] = useState(0);
+
+  console.log(setShowReviewForm);
 
   const accessToken = useSelector((store) => store.user.accessToken);
   const userId = useSelector((store) => store.user.user_id);
@@ -40,6 +43,10 @@ const ReviewForm = ({ id }) => {
     }
   };
 
+  const handleHideReviewForm = () => {
+    setShowReviewForm(false);
+  };
+
   return (
     <form onSubmit={onFormSubmit}>
       <label htmlFor="review">message</label>
@@ -50,6 +57,9 @@ const ReviewForm = ({ id }) => {
         onChange={(e) => setMessage(e.target.value)}
       />
       <button type="submit">Submit</button>
+      <Button type="button" onPress={handleHideReviewForm}>
+        Cancel
+      </Button>
     </form>
   );
 };
