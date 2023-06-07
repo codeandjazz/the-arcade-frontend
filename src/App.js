@@ -24,7 +24,7 @@ export const App = () => {
   });
 
   const store = configureStore({ reducer });
-  GlobalStyles();
+  // GlobalStyles();
   return (
     <Provider store={store}>
       <NextUIProvider theme={theme}>
