@@ -74,7 +74,9 @@ const GamesList = () => {
             {(genre) => (
               <Dropdown.Item
                 key={genre.name}>
-                {genre.name}
+                <Link href={`games/genres/${genre.name}`}>
+                  {genre.name}
+                </Link>
               </Dropdown.Item>
             )}
           </Dropdown.Menu>

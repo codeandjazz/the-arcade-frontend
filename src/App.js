@@ -4,7 +4,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import GlobalStyles from 'components/GlobalStyles';
 import { user } from 'reducers/user';
 import { NextUIProvider } from '@nextui-org/react';
 import theme from 'components/Theme';
@@ -16,6 +15,7 @@ import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import UserProfilePage from 'components/UserProfilePage';
 import Login from './components/Login';
+import GamesSortedByGenre from './components/GamesSortedByGenre';
 import Game from './components/Game';
 
 export const App = () => {
@@ -37,6 +37,8 @@ export const App = () => {
             {/* ↑↑↑ This is a game page ↑↑↑ */}
             <Route path="/games" element={<GamesList />} />
             {/* ↑↑↑ This is the games list page ↑↑↑ */}
+            <Route path="/games/genres/:genre" element={<GamesSortedByGenre />} />
+            {/* ↑↑↑ This is the games sorted by genre page ↑↑↑ */}
             <Route path="/users/:id" element={<UserProfilePage />} />
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
             <Route path="/games/:slug/:id" element={<SingleGame />} />
