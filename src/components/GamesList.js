@@ -8,6 +8,10 @@ import Header from './Header';
 const GamesList = () => {
   const [storedGames, setStoredGames] = useState([]);
   const [storedGenres, setStoredGenres] = useState([]);
+  // const { selectedGenre, setSelectedGenre } = useState('');
+  const [selected, setSelected] = React.useState(new Set(['Select genre']));
+  console.log(selected);
+  // console.log(selectedGenre);
   const [loading, setLoading] = useState(true);
 
   // Fetch the games from the API when the component mounts
@@ -36,7 +40,6 @@ const GamesList = () => {
         const data = await response.json();
         if (data.success) {
           const genres = data.response.map((genre) => ({ name: genre }));
-          console.log(genres);
           // Store the genres in state
           setStoredGenres(genres);
         } else {
@@ -51,20 +54,26 @@ const GamesList = () => {
     fetchGenres();
   }, []);
 
+  const selectedValue = React.useMemo(
+    () => Array.from(selected).join(', ').replaceAll('_', ' '),
+    [selected]
+  );
   return (
     <>
       <Header />
       <Container md>
         <Dropdown>
-          <Dropdown.Button>Categories</Dropdown.Button>
-          <Dropdown.Menu aria-label="Game Genres" items={storedGenres}>
+          <Dropdown.Button>{selectedValue}</Dropdown.Button>
+          <Dropdown.Menu
+            aria-label="Game Genres"
+            items={storedGenres}
+            disallowEmptySelection
+            selectionMode="single"
+            selectedKeys={selected}
+            onSelectionChange={setSelected}>
             {(genre) => (
               <Dropdown.Item
-                key={genre.name}
-                onClick={() => {
-                  // Handle genre selection
-                  console.log('Selected genre:', genre.name)
-                }}>
+                key={genre.name}>
                 {genre.name}
               </Dropdown.Item>
             )}
@@ -75,7 +84,7 @@ const GamesList = () => {
             <Loading type="points" />
           ) : (
             storedGames.map((game, index) => (
-            // eslint-disable-next-line no-underscore-dangle
+              // eslint-disable-next-line no-underscore-dangle
               <Grid key={game._id}>
                 <Link href={`/games/${game.slug}/${game._id}`}>
                   <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
@@ -111,6 +120,6 @@ const GamesList = () => {
       </Container>
     </>
   );
-};
+}
 
 export default GamesList;
