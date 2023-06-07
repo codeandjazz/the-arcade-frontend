@@ -6,7 +6,7 @@ import ReviewForm from './ReviewForm';
 
 const GameSummary = ({ game }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
-  console.log(showReviewForm);
+  // console.log(showReviewForm);
   // console.log(game);
 
   const handleShowReviewForm = () => {
@@ -25,7 +25,10 @@ const GameSummary = ({ game }) => {
           {/* Add summary, note not all games has summary */}
           <Button onPress={handleShowReviewForm}>Write a review</Button>
           {showReviewForm && (
-            <ReviewForm setShowReviewForm={setShowReviewForm} />
+            <ReviewForm
+              setShowReviewForm={setShowReviewForm}
+              showReviewForm={showReviewForm}
+            />
           )}
         </div>
       </Container>

@@ -1,21 +1,22 @@
 /* eslint-disable quote-props */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-closing-bracket-location */
-import { Button } from '@nextui-org/react';
+import { Modal, Button } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from 'utils/urls';
 
-const ReviewForm = ({ setShowReviewForm }) => {
+const ReviewForm = ({ showReviewForm, setShowReviewForm }) => {
   const [message, setMessage] = useState('');
   //   const [rating, setRating] = useState(0);
 
-  console.log(setShowReviewForm);
-
   const accessToken = useSelector((store) => store.user.accessToken);
+  // console.log(accessToken);
   const userId = useSelector((store) => store.user.user_id);
+  // console.log(userId);
   const onFormSubmit = async (event) => {
     event.preventDefault();
+    setShowReviewForm(!showReviewForm);
     // console.log('clicked!');
 
     try {
@@ -44,23 +45,27 @@ const ReviewForm = ({ setShowReviewForm }) => {
   };
 
   const handleHideReviewForm = () => {
-    setShowReviewForm(false);
+    console.log(showReviewForm);
+    setShowReviewForm(!showReviewForm);
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <label htmlFor="review">message</label>
-      <input
-        type="text"
-        id="review"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button type="submit">Submit</button>
-      <Button type="button" onPress={handleHideReviewForm}>
-        Cancel
-      </Button>
-    </form>
+    <Modal open onClose={handleHideReviewForm}>
+      <form onSubmit={onFormSubmit}>
+        <label htmlFor="review">Write your review here: </label>
+        <input
+          type="text"
+          id="review"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          maxLength={140}
+        />
+        <Button type="submit">Submit</Button>
+        <Button type="button" onPress={handleHideReviewForm}>
+          Cancel
+        </Button>
+      </form>
+    </Modal>
   );
 };
 
