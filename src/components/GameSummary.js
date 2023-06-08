@@ -7,7 +7,7 @@ import ReviewForm from './ReviewForm';
 const GameSummary = ({ game }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   // console.log(showReviewForm);
-  // console.log(game);
+  console.log(game);
 
   const handleShowReviewForm = () => {
     setShowReviewForm(!showReviewForm);
@@ -20,14 +20,15 @@ const GameSummary = ({ game }) => {
           <Image />
         </div>
         <div>
-          <h1>sadsa</h1>
-          <p>[Summary here]</p>
+          <h1>{game.name}</h1>
+          <p>{game.summary}</p>
           {/* Add summary, note not all games has summary */}
           <Button onPress={handleShowReviewForm}>Write a review</Button>
           {showReviewForm && (
             <ReviewForm
               setShowReviewForm={setShowReviewForm}
               showReviewForm={showReviewForm}
+              game={game}
             />
           )}
         </div>
