@@ -5,6 +5,7 @@ import Footer from './Footer';
 import heroImage from '../assets/img/hero-img.png';
 // import { OuterWrapper, InnerWrapper } from './StyledComponents';
 import GamesDisplay10 from './GamesDisplay10';
+import Reviews from './Reviews';
 
 const LandingPage = () => {
   return (
@@ -15,6 +16,7 @@ const LandingPage = () => {
           <Image src={heroImage} alt="hero image" />
         </section>
         <GamesDisplay10 />
+        <Reviews />
         <section className="featured">FEATURED</section>
         <section className="new">NEW GAMES</section>
         <section className="popular">POPULAR</section>
