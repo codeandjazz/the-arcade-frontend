@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import { User } from '@nextui-org/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -14,9 +15,10 @@ const UserProfile = () => {
         alt="Profile picture"
         name={username}
         zoomed
-        pointer />
+        pointer
+      />
     </Link>
   );
-}
+};
 
 export default UserProfile;
