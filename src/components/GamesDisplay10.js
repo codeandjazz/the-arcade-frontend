@@ -2,7 +2,8 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
-import { Card, Grid, Row, Text, Link, Loading, Container } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
+import { Card, Grid, Row, Text, Loading } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import defaultImg from '../assets/img/default-img.png';
 // import { InnerWrapper, OuterWrapper } from './StyledComponents';
@@ -49,7 +50,9 @@ const GamesDisplay10 = () => {
           color: '$yellow600',
           fontSize: '$xl',
           fontFamily: '$body'
-        }}>10 random games
+        }}
+      >
+        10 random games
       </Text>
       <Grid.Container gap={1} justify="flex-start" direction="row">
         {loading ? (
@@ -57,8 +60,11 @@ const GamesDisplay10 = () => {
         ) : (
           storedGames.map((game, index) => (
             <Grid key={game._id}>
-              <Link href={`/games/${game.slug}/${game._id}`}>
-                <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
+              <Link to={`/games/${game.slug}/${game._id}`}>
+                <Card
+                  isPressable
+                  css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}
+                >
                   <Card.Body css={{ p: 0 }}>
                     {game.cover && game.cover.url ? (
                       <Card.Image
