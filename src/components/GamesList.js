@@ -34,7 +34,7 @@ const GamesList = () => {
       }
     };
     fetchGenres();
-    const fetchGames = async () => {
+    /* const fetchGames = async () => {
       try {
         // Get the games from the API
         // eslint-disable-next-line no-template-curly-in-string
@@ -52,7 +52,7 @@ const GamesList = () => {
         console.error(error);
       }
     };
-    fetchGames();
+    fetchGames(); */
   }, []);
 
   const selectedValue = React.useMemo(
@@ -80,7 +80,7 @@ const GamesList = () => {
             )}
           </Dropdown.Menu>
         </Dropdown>
-        <Grid.Container gap={1} justify="center" direction="row">
+        {/* <Grid.Container gap={1} justify="center" direction="row">
           {loading ? (
             <Loading type="points" />
           ) : (
@@ -116,7 +116,7 @@ const GamesList = () => {
               </Grid>
             ))
           )}
-        </Grid.Container>
+        </Grid.Container> */}
         <Pagination total={20} initialPage={1} />
       </Container>
     </>

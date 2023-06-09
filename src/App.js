@@ -34,8 +34,6 @@ export const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/games/:id" element={<SingleGame />} />
             {/* ↑↑↑ This is a game page ↑↑↑ */}
-            <Route path="/games" element={<GamesList />} />
-            {/* ↑↑↑ This is the games list page ↑↑↑ */}
             <Route path="/users/:id" element={<UserProfilePage />} />
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
             <Route path="/games/:slug/:id" element={<SingleGame />} />

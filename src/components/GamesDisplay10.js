@@ -3,7 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Grid, Row, Text, Loading } from '@nextui-org/react';
+import { Card, Grid, Row, Text, Loading, Container } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import defaultImg from '../assets/img/default-img.png';
 // import { InnerWrapper, OuterWrapper } from './StyledComponents';

@@ -1,27 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navbar, Button, Link, Text, Image } from '@nextui-org/react';
-// import { OuterWrapper } from './StyledComponents';
+import { Navbar, Button, Link, Text, Image, Dropdown, Loading } from '@nextui-org/react';
+import { API_URL } from '../utils/urls';
 import Logo from '../assets/img/logo-the-arcade.png';
 import UserProfile from './UserProfile';
 
 const Header = () => {
   // Check if the user is logged in
   const accessToken = useSelector((store) => store.user.accessToken);
+  const [storedGenres, setStoredGenres] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        // Get the genres from the API
+        const response = await fetch(API_URL('/genres'));
+        const data = await response.json();
+        if (data.success) {
+          const genres = data.response.map((genre) => ({ name: genre }));
+          // Store the genres in state
+          setStoredGenres(genres);
+        } else {
+          console.log(data.message);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchGenres();
+  }, []);
   return (
     <Navbar isCompact variant="sticky" color="#56048C">
       <Navbar.Brand>
         <Image src={Logo} width={100} height={50} alt="logo" />
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} isActive href="#">
+        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/">
             Home
         </Navbar.Link>
         <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/games">
-            Games
+            About us
         </Navbar.Link>
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="#">Game</Navbar.Link>
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="#">Game</Navbar.Link>
+        <Dropdown isBordered>
+          <Navbar.Item>
+            <Dropdown.Button>
+              Browse games
+            </Dropdown.Button>
+          </Navbar.Item>
+          <Dropdown.Menu
+            items={storedGenres}
+            aria-label="game genres">
+            {(genre) => (
+              <Dropdown.Item
+                key={genre.name}>
+                <Link href={`/games/genres/${genre.name}`}>
+                  {genre.name}
+                </Link>
+              </Dropdown.Item>
+            )}
+          </Dropdown.Menu>
+        </Dropdown>
       </Navbar.Content>
       <Navbar.Content>
         {!accessToken && (
