@@ -60,6 +60,10 @@ const Login = () => {
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
           dispatch(user.actions.setUserId(data.response.id));
+          dispatch(user.actions.setCreatedAt(data.response.createdAt));
+          dispatch(user.actions.setReviews(data.response.reviews));
+          dispatch(user.actions.setFavorites(data.response.favorites));
+          dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
           console.log('This is id: ', data.response.id);
           console.log('This is the accestoken: ', data.response.accessToken);
@@ -68,6 +72,10 @@ const Login = () => {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));
           dispatch(user.actions.setUserId(null));
+          dispatch(user.actions.setCreatedAt(null));
+          dispatch(user.actions.setReviews(null));
+          dispatch(user.actions.setFavorites(null));
+          dispatch(user.actions.setPlayedGames(null));
           dispatch(user.actions.setError(data.response.message));
           console.error(data);
         }

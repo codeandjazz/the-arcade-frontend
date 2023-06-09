@@ -1,67 +1,87 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Container, Row, Col, Card, Text, Grid } from '@nextui-org/react';
+import { Container, Row, Col, Card, Text, Grid, Link } from '@nextui-org/react';
 import { useSelector } from 'react-redux';
 import UserProfile from './UserProfile';
+import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
 
 const UserProfilePage = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
+  const createdAt = useSelector((store) => store.user.createdAt);
+  const favoriteGames = useSelector((store) => store.user.favoriteGames);
+
+  // Extract the year and month from the createdAt string
+  const joinedDate = new Date(createdAt);
+  const joinedYear = joinedDate.getFullYear();
+  const joinedMonth = joinedDate.toLocaleString('default', { month: 'long' });
+
   return (
     <>
       <Header />
       {accessToken && (
-        <>
-          <Grid.Container gap={1} justify="center">
-            <Grid xs={9} sm={0}>
-              <Card>
-                <Card.Body>
-                  <Text>
-                                          Welcome to your profile page
-                  </Text>
-                </Card.Body>
-              </Card>
-            </Grid>
-          </Grid.Container>
-          <Grid.Container gap={1} justify="center">
-            <Grid xs={3}>
-              <Card>
+        <Container md>
+          <Grid.Container justify="center" gap={2}>
+            <Grid>
+              <Card css={{ borderRadius: '$xs' }}>
                 <Card.Body>
                   <UserProfile />
                   <Text>
-                                              Joined in 2023
-                  </Text>
-                  <Text>
-                                              user description
-                  </Text>
-                  <Text>
-                                              Created at
+                                              Joined in {joinedMonth} {joinedYear}
                   </Text>
                 </Card.Body>
               </Card>
             </Grid>
-            <Grid xs={6}>
-              <Card>
+            <Grid>
+              <Card css={{ borderRadius: '$xs' }}>
+                <Card.Header>Favorite Games</Card.Header>
                 <Card.Body>
-                  <Text>Favorite games</Text>
+                  {/* Map over the user's favorite games and display them here  */}
+                  {favoriteGames.map((game) => (
+                    <Grid key={game._id}>
+                      <Link href={`/games/${game.slug}/${game._id}`}>
+                        <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
+                          <Card.Body css={{ p: 0 }}>
+                            {game.cover && game.cover.url ? (
+                              <Card.Image
+                                src={game.cover.url}
+                                objectFit="cover"
+                                width="100%"
+                                height={140}
+                                alt="image" />
+                            ) : (
+                              <Card.Image
+                                src={defaultImg}
+                                objectFit="contain"
+                                width="100%"
+                                height={140}
+                                alt="image" />
+                            )}
+                            <Card.Footer css={{ justifyItems: 'flex-start' }}>
+                              <Row wrap="wrap" align="center">
+                                <Text>{game.name}</Text>
+                              </Row>
+                            </Card.Footer>
+                          </Card.Body>
+                        </Card>
+                      </Link>
+                    </Grid>
+                  ))}
                 </Card.Body>
               </Card>
             </Grid>
           </Grid.Container>
-        </>
+        </Container>
       )}
       {!accessToken && (
-        <Container>
-          <Row>
-            <Col>
-              <Card>
-                <Card.Body>
-                  <Text>
+        <Container xs>
+          <Card>
+            <Card.Body>
+              <Text>
                                         You need to be logged in to view this page
-                  </Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+              </Text>
+            </Card.Body>
+          </Card>
         </Container>
       )}
     </>

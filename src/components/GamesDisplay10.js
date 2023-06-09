@@ -43,7 +43,7 @@ const GamesDisplay10 = () => {
   }, []);
 
   return (
-    <>
+    <Container md>
       <Text
         css={{
           color: '$yellow600',
@@ -89,7 +89,7 @@ const GamesDisplay10 = () => {
           ))
         )}
       </Grid.Container>
-    </>
+    </Container>
   );
 };
 
