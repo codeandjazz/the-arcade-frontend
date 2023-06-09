@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { user } from 'reducers/user';
@@ -21,7 +21,6 @@ export const App = () => {
   const reducer = combineReducers({
     user: user.reducer
   });
-
   const store = configureStore({ reducer });
   // GlobalStyles();
   return (
@@ -38,6 +37,8 @@ export const App = () => {
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
             <Route path="/games/:slug/:id" element={<SingleGame />} />
             {/* ↑↑↑ This is a single game page ↑↑↑ */}
+            <Route path="/games/genres/:slug" element={<GamesList />} />
+            {/* ↑↑↑ This is a games list page ↑↑↑ */}
             <Route path="/404" element={<NotFound />} />
             {/* ↑↑↑ Insert 404component here ↑↑↑ */}
             <Route path="*" element={<Navigate to="/404" replace />} />

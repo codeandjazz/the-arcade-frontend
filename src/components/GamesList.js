@@ -2,43 +2,22 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Loading, Link, Card, Row, Text, Container, Pagination, Dropdown } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
+import { useParams } from 'react-router-dom';
 import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
 
 const GamesList = () => {
-  const [storedGames, setStoredGames] = useState([]);
-  const [storedGenres, setStoredGenres] = useState([]);
-  // const { selectedGenre, setSelectedGenre } = useState('');
-  const [selected, setSelected] = React.useState(new Set(['Select genre']));
-  console.log(selected);
-  // console.log(selectedGenre);
-  const [loading, setLoading] = useState(true);
-
   // Fetch the games from the API when the component mounts
+  const [storedGames, setStoredGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState('name');
+  const [order, setOrder] = useState('asc');
+  const { slug } = useParams();
   useEffect(() => {
-    const fetchGenres = async () => {
-      try {
-        // Get the genres from the API
-        const response = await fetch(API_URL('/genres'));
-        const data = await response.json();
-        if (data.success) {
-          const genres = data.response.map((genre) => ({ name: genre }));
-          // Store the genres in state
-          setStoredGenres(genres);
-        } else {
-          console.log(data.message);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchGenres();
-    /* const fetchGames = async () => {
+    const fetchGames = async () => {
       try {
         // Get the games from the API
-        // eslint-disable-next-line no-template-curly-in-string
-        const response = await fetch(API_URL('games'));
+        const response = await fetch(API_URL(`games/genres/${slug}`));
         const data = await response.json();
         if (data.success) {
           const games = data.response;
@@ -52,35 +31,17 @@ const GamesList = () => {
         console.error(error);
       }
     };
-    fetchGames(); */
-  }, []);
 
-  const selectedValue = React.useMemo(
-    () => Array.from(selected).join(', ').replaceAll('_', ' '),
-    [selected]
-  );
+    fetchGames();
+  }, [slug]);
   return (
     <>
       <Header />
       <Container md>
-        <Dropdown>
-          <Dropdown.Button>{selectedValue}</Dropdown.Button>
-          <Dropdown.Menu
-            aria-label="Game Genres"
-            items={storedGenres}
-            disallowEmptySelection
-            selectionMode="single"
-            selectedKeys={selected}
-            onSelectionChange={setSelected}>
-            {(genre) => (
-              <Dropdown.Item
-                key={genre.name}>
-                {genre.name}
-              </Dropdown.Item>
-            )}
-          </Dropdown.Menu>
-        </Dropdown>
-        {/* <Grid.Container gap={1} justify="center" direction="row">
+        <Text css={{ color: '$yellow600', fontSize: '$xl', fontFamily: '$body' }}>
+          {slug} games
+        </Text>
+        <Grid.Container gap={1} justify="center" direction="row">
           {loading ? (
             <Loading type="points" />
           ) : (
@@ -116,7 +77,7 @@ const GamesList = () => {
               </Grid>
             ))
           )}
-        </Grid.Container> */}
+        </Grid.Container>
         <Pagination total={20} initialPage={1} />
       </Container>
     </>
