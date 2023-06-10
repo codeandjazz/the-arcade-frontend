@@ -1,11 +1,17 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
+import { Modal } from '@nextui-org/react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 const Reviews = () => {
   const [review, setReview] = useState([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [newReviewText, setNewReviewText] = useState('');
+  const [editReviewId, setEditReviewId] = useState(null);
 
-  // get accestoken from store
+  // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const fetchReviews = async () => {
@@ -52,9 +58,77 @@ const Reviews = () => {
     }
   };
 
+  const updateReview = async (reviewId, reviewText) => {
+    console.log(reviewId);
+    console.log(reviewText);
+    try {
+      const response = await fetch(
+        `https://the-arcade-backend-6426jh4m2a-no.a.run.app/games/reviews/${reviewId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: accessToken
+          },
+          body: JSON.stringify({ message: newReviewText })
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        // Update the review in the state
+        // Find the index of the review in the state
+        const reviewIndex = review.findIndex((item) => item._id === reviewId);
+        if (reviewIndex !== -1) {
+          // Create a new array with the updated review
+          const updatedReview = [...review];
+          updatedReview[reviewIndex].message = newReviewText;
+          // Update the state with the new array
+          setReview(updatedReview);
+          console.log('Review updated successfully');
+        }
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleReviewEditSubmit = (reviewId, reviewText) => {
+    updateReview(reviewId, reviewText);
+    setShowReviewForm(false);
+  };
+
+  const showEditReviewModal = (reviewId) => {
+    if (reviewId === editReviewId) {
+      return (
+        <Modal open onClose={() => setShowReviewForm(false)}>
+          <p>Write your review here</p>
+          <textarea
+            type="text"
+            placeholder="Write your review here"
+            value={newReviewText}
+            onChange={(e) => setNewReviewText(e.target.value)}
+            required
+          />
+          <button type="button" onClick={() => setShowReviewForm(false)}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => handleReviewEditSubmit(reviewId, newReviewText)}
+          >
+            Update
+          </button>
+        </Modal>
+      );
+    }
+    return null;
+  };
+
   useEffect(() => {
     fetchReviews();
-    console.log(review);
+    // console.log(review);
   }, []);
 
   return (
@@ -67,6 +141,16 @@ const Reviews = () => {
           <button type="button" onClick={() => deleteReview(item._id)}>
             Delete
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              setShowReviewForm(true);
+              setEditReviewId(item._id);
+            }}
+          >
+            Edit
+          </button>
+          {showReviewForm && showEditReviewModal(item._id)}
         </div>
       ))}
     </div>
