@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
 import { Modal } from '@nextui-org/react';
@@ -110,7 +111,9 @@ const Reviews = () => {
             onChange={(e) => setNewReviewText(e.target.value)}
             required
           />
-          {/* <button onClick={() => setShowReviewForm(false)}>Cancel</button> */}
+          <button type="button" onClick={() => setShowReviewForm(false)}>
+            Cancel
+          </button>
           <button
             type="button"
             onClick={() => handleReviewEditSubmit(reviewId, newReviewText)}
@@ -138,10 +141,16 @@ const Reviews = () => {
           <button type="button" onClick={() => deleteReview(item._id)}>
             Delete
           </button>
-          <button type="button" onClick={() => setEditReviewId(item._id)}>
+          <button
+            type="button"
+            onClick={() => {
+              setShowReviewForm(true);
+              setEditReviewId(item._id);
+            }}
+          >
             Edit
           </button>
-          {showEditReviewModal(item._id)}
+          {showReviewForm && showEditReviewModal(item._id)}
         </div>
       ))}
     </div>
