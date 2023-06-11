@@ -14,7 +14,7 @@ import Header from './Header';
 const Game = () => {
   const { slug, id } = useParams();
   const [game, setGame] = useState({});
-  const [prompt, setPrompt] = useState('Mega Man 2: The Power Fighters');
+  const [prompt, setPrompt] = useState('');
   const [imageURL, setImage] = useState('');
 
   const createImg = async (imageDescription) => {
@@ -44,6 +44,7 @@ const Game = () => {
           if (data.success) {
             setGame(data.response);
             console.log(game);
+            setPrompt(data.response.name);
           } else {
             console.log(data.message);
           }
@@ -55,9 +56,14 @@ const Game = () => {
 
   useEffect(() => {
     fetchGameBasedOnId();
-    createImg(prompt);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (game.name) {
+      createImg(game.summary);
+    }
+  }, [game]);
   return (
     <>
       <Header />
@@ -66,7 +72,7 @@ const Game = () => {
           <Image // This could be a AI generated image based on the game name
             src={imageURL}
             alt={game.name}
-            css={{ maxHeight: '300px', width: '100%', objectFit: 'cover' }}
+            css={{ maxHeight: '200px', width: '100%', objectFit: 'cover' }}
           />
         )}
         {game && <GameSummary game={game} />}
