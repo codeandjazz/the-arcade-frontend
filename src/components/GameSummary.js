@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react';
-import { Container, Image, Button, Col, Row } from '@nextui-org/react';
+import { Container, Image, Button, Col, Row, Spacer } from '@nextui-org/react';
 import ReviewForm from './ReviewForm';
 
 const GameSummary = ({ game }) => {
@@ -27,6 +27,8 @@ const GameSummary = ({ game }) => {
                 objectFit="cover"
               />
               <Button onPress={handleShowReviewForm}>Write a review</Button>
+              <Spacer y={0.5} />
+              <Button>+ Add to wishlist</Button>
             </Col>
           )}
           <Col>
