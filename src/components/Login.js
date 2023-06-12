@@ -21,6 +21,13 @@ import {
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
+const saveCredentialsToLocalStorage = (accessToken, username, userId) => {
+  localStorage.setItem('accessToken', accessToken);
+  localStorage.setItem('username', username);
+  localStorage.setItem('userId', userId);
+  console.log('saved to local storage');
+};
+
 const Login = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
@@ -28,7 +35,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
   const [errors, setErrors] = useState(null); // move to store
-  const [mode, setMode] = useState('USERS/REGISTER');
+  const [mode, setMode] = useState('USERS/LOGIN');
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
 
@@ -40,9 +47,10 @@ const Login = () => {
       navigate('/');
     }
   }, [accessToken, navigate]);
+
   const onFormSubmit = (event) => {
     event.preventDefault();
-    console.log('clicked!');
+
     const options = {
       method: 'POST',
       headers: {
@@ -50,6 +58,7 @@ const Login = () => {
       },
       body: JSON.stringify({ username: username, password: password })
     };
+
     console.log('this is the options: ', options);
     console.log(mode);
     console.log(API_URL(mode.toLowerCase()));
@@ -62,12 +71,14 @@ const Login = () => {
           dispatch(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setCreatedAt(data.response.createdAt));
           dispatch(user.actions.setReviews(data.response.reviews));
-          dispatch(user.actions.setFavorites(data.response.favorites));
+          // dispatch(user.actions.setFavorites(data.response.favorites));
           dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
-          console.log('This is id: ', data.response.id);
-          console.log('This is the accestoken: ', data.response.accessToken);
-          console.log('This is username: ', data.response.username);
+          saveCredentialsToLocalStorage(
+            data.response.accessToken,
+            data.response.username,
+            data.response.id
+          );
         } else {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));
@@ -97,7 +108,9 @@ const Login = () => {
                 orientation="horizontal"
                 label="Mode"
               >
-                <Radio isActive value="USERS/LOGIN">Login</Radio>
+                <Radio isActive value="USERS/LOGIN">
+                  Login
+                </Radio>
                 <Radio value="USERS/REGISTER">Sign up</Radio>
               </Radio.Group>
 
