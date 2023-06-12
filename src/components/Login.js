@@ -21,11 +21,22 @@ import {
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
-const saveCredentialsToLocalStorage = (accessToken, username, userId) => {
+const saveCredentialsToLocalStorage = (
+  accessToken,
+  username,
+  userId,
+  createdAt,
+  reviews,
+  playedGames
+) => {
   localStorage.setItem('accessToken', accessToken);
   localStorage.setItem('username', username);
   localStorage.setItem('userId', userId);
-  console.log('saved to local storage');
+  localStorage.setItem('createdAt', createdAt);
+  localStorage.setItem('reviews', reviews);
+  localStorage.setItem('playedGames', playedGames);
+
+  console.log('user saved to local storage');
 };
 
 const Login = () => {
@@ -34,6 +45,10 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
+  const [createdAt, setCreatedAt] = useState(null);
+  const [reviews, setReviews] = useState(null);
+  // const [favorites, setFavorites] = useState(null);
+  const [playedGames, setPlayedGames] = useState(null);
   const [errors, setErrors] = useState(null); // move to store
   const [mode, setMode] = useState('USERS/LOGIN');
   const dispatch = useDispatch();
@@ -59,13 +74,11 @@ const Login = () => {
       body: JSON.stringify({ username: username, password: password })
     };
 
-    console.log('this is the options: ', options);
-    console.log(mode);
-    console.log(API_URL(mode.toLowerCase()));
     fetch(API_URL(mode.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          localStorage.clear();
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
           dispatch(user.actions.setUserId(data.response.id));
@@ -77,7 +90,8 @@ const Login = () => {
           saveCredentialsToLocalStorage(
             data.response.accessToken,
             data.response.username,
-            data.response.id
+            data.response.id,
+            data.response.createdAt
           );
         } else {
           dispatch(user.actions.setAccessToken(null));
