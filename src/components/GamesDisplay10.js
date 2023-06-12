@@ -86,6 +86,12 @@ const GamesDisplay10 = () => {
                     <Card.Footer css={{ justifyItems: 'flex-start' }}>
                       <Row wrap="wrap" align="center">
                         <Text>{game.name}</Text>
+                        {game.genres && game.genres.map((genre) => (
+                          <Text
+                            key={genre.id}
+                            css={{ backgroundColor: '$success', fontSize: '$xs', fontWeight: '$bold' }}>{genre.name}
+                          </Text>
+                        ))}
                       </Row>
                     </Card.Footer>
                   </Card.Body>
