@@ -6,6 +6,7 @@
     "@babel/eslint-parser": "^7.18.9",
     "@nextui-org/react": "^1.0.0-beta.13",
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "eslint": "^8.21.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
