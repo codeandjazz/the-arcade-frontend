@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navbar, Button, Link, Text, Image, Dropdown, Loading } from '@nextui-org/react';
+import { Navbar, Button, Text, Image, Dropdown, Loading } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import Logo from '../assets/img/logo-the-arcade.png';
 import UserProfile from './UserProfile';
@@ -54,7 +55,7 @@ const Header = () => {
             {(genre) => (
               <Dropdown.Item
                 key={genre.name}>
-                <Link href={`/games/genres/${genre.name}`}>
+                <Link to={`/games/genres/${genre.name}`}>
                   {genre.name}
                 </Link>
               </Dropdown.Item>

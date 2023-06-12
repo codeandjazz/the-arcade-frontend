@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import { Grid, Loading, Link, Card, Row, Text, Container, Pagination, Dropdown } from '@nextui-org/react';
+import { Grid, Loading, Card, Row, Text, Container, Pagination, Dropdown } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
 
@@ -50,7 +50,7 @@ const GamesList = () => {
             storedGames.map((game, index) => (
               // eslint-disable-next-line no-underscore-dangle
               <Grid key={game._id}>
-                <Link href={`/games/${game.slug}/${game._id}`}>
+                <Link to={`/games/${game.slug}/${game._id}`}>
                   <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
                     <Card.Body css={{ p: 0 }}>
                       {game.cover && game.cover.url ? (
@@ -71,6 +71,14 @@ const GamesList = () => {
                       <Card.Footer css={{ justifyItems: 'flex-start' }}>
                         <Row wrap="wrap" align="center">
                           <Text>{game.name}</Text>
+                          <Card.Divider />
+                          {game.genres && game.genres.map((genre) => (
+                            <Text
+                              key={genre.id}
+                              css={{ backgroundColor: '$purple200', fontSize: '$xs', fontWeight: '$bold', marginTop: '$1', marginRight: '$1' }}>
+                              {genre.name} &nbsp;
+                            </Text>
+                          ))}
                         </Row>
                       </Card.Footer>
                     </Card.Body>

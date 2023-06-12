@@ -65,15 +65,12 @@ const UserProfilePage = () => {
               <Card css={{ borderRadius: '$xs' }}>
                 <Card.Header>Favorite Games</Card.Header>
                 <Card.Body>
-                  {loading ? (
+                  {loading && (
                     <Loading type="points" />
-                  ) : (
-                    <Text>You have no favorite games</Text>
                   )}
-                  {/* Map over the user's favorite games and display them here  */}
                   {favoriteGames.map((game) => (
                     <Grid key={game._id}>
-                      <Link href={`/games/${game.slug}/${game._id}`}>
+                      <Link to={`/games/${game._id}`}>
                         <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
                           <Card.Body css={{ p: 0 }}>
                             {game.cover && game.cover.url ? (
@@ -101,6 +98,9 @@ const UserProfilePage = () => {
                       </Link>
                     </Grid>
                   ))}
+                  {!loading && favoriteGames.length === 0 && (
+                    <Text>You have no favorite games</Text>
+                  )}
                 </Card.Body>
               </Card>
             </Grid>
