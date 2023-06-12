@@ -9,6 +9,9 @@ const GameSummary = ({ game }) => {
   // console.log(showReviewForm);
   // console.log(game.cover.url);
 
+  const timestamp = game.first_release_date;
+  const date = new Date(timestamp * 1000);
+  const releaseDate = date.toLocaleDateString();
   const handleShowReviewForm = () => {
     setShowReviewForm(!showReviewForm);
   };
@@ -28,15 +31,20 @@ const GameSummary = ({ game }) => {
               />
               <Button onPress={handleShowReviewForm}>Write a review</Button>
               <Spacer y={0.5} />
-              <Button>+ Add to wishlist</Button>
+              <Button>❤️ Add to favorites</Button>
             </Col>
           )}
           <Col>
             <div>
               <h1>{game.name}</h1>
+              {/* Map out game genres if available */}
+              {game.genres && game.genres.map((genre) => (
+                <p key={genre.id}>{genre.name}</p>
+              ))}
+              {/* Add release date and tranform it from unix time stamp to readable date */}
+              <p>Release date: {releaseDate}</p>
               <p>{game.summary}</p>
               {/* Add summary, note not all games has summary */}
-
               {showReviewForm && (
                 <ReviewForm
                   setShowReviewForm={setShowReviewForm}
