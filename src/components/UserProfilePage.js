@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Container, Row, Col, Card, Text, Grid, Link } from '@nextui-org/react';
+import { Container, Row, Col, Card, Text, Grid } from '@nextui-org/react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
@@ -37,7 +38,7 @@ const UserProfilePage = () => {
                 <Card.Header>Favorite Games</Card.Header>
                 <Card.Body>
                   {/* Map over the user's favorite games and display them here  */}
-                  {favoriteGames.map((game) => (
+                  {/* {favoriteGames.map((game) => (
                     <Grid key={game._id}>
                       <Link href={`/games/${game.slug}/${game._id}`}>
                         <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
@@ -65,8 +66,8 @@ const UserProfilePage = () => {
                           </Card.Body>
                         </Card>
                       </Link>
-                    </Grid>
-                  ))}
+                    </Grid> */}
+                  {/* ))} */}
                 </Card.Body>
               </Card>
             </Grid>
