@@ -10,6 +10,8 @@ const GamesList = () => {
   // Fetch the games from the API when the component mounts
   const [storedGames, setStoredGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  // Sort by name, rating, etc.
+  // For example, /games/genres/action?sortBy=rating
   const [sort, setSort] = useState('name');
   const [order, setOrder] = useState('asc');
   const { slug } = useParams();
