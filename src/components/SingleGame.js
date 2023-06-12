@@ -1,9 +1,10 @@
+/* eslint-disable prefer-template */
 /* eslint-disable object-shorthand */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Image } from '@nextui-org/react';
+import { Container, Image, css } from '@nextui-org/react';
 import axios, { isCancel, AxiosError } from 'axios';
 import NotFoundImg from '../assets/img/not-found-404.jpg';
 import GameSummary from './GameSummary';
@@ -14,7 +15,7 @@ import Header from './Header';
 const Game = () => {
   const { slug, id } = useParams();
   const [game, setGame] = useState({});
-  const [prompt, setPrompt] = useState('Mega Man 2: The Power Fighters');
+  const [prompt, setPrompt] = useState('');
   const [imageURL, setImage] = useState('');
 
   const createImg = async (imageDescription) => {
@@ -44,6 +45,7 @@ const Game = () => {
           if (data.success) {
             setGame(data.response);
             console.log(game);
+            setPrompt(data.response.name);
           } else {
             console.log(data.message);
           }
@@ -55,9 +57,14 @@ const Game = () => {
 
   useEffect(() => {
     fetchGameBasedOnId();
-    createImg(prompt);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (game.name) {
+      createImg(game.name + 'retro video game');
+    }
+  }, [game]);
   return (
     <>
       <Header />
@@ -66,7 +73,12 @@ const Game = () => {
           <Image // This could be a AI generated image based on the game name
             src={imageURL}
             alt={game.name}
-            css={{ maxHeight: '300px', width: '100%', objectFit: 'cover' }}
+            css={{
+              maxHeight: '200px',
+              width: '100%',
+              objectFit: 'cover',
+              filter: 'blur(6px)'
+            }}
           />
         )}
         {game && <GameSummary game={game} />}
