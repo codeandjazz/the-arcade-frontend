@@ -32,7 +32,7 @@ const Header = () => {
     fetchGenres();
   }, []);
   return (
-    <Navbar isCompact variant="sticky" color="#56048C">
+    <Navbar isCompact variant="sticky">
       <Navbar.Brand>
         <Image src={Logo} width={100} height={50} alt="logo" />
       </Navbar.Brand>
@@ -45,7 +45,7 @@ const Header = () => {
         </Navbar.Link>
         <Dropdown isBordered>
           <Navbar.Item>
-            <Dropdown.Button>
+            <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
               Browse games
             </Dropdown.Button>
           </Navbar.Item>

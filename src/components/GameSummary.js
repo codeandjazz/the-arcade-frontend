@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Container, Image, Button, Col, Row, Spacer, Text } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import ReviewForm from './ReviewForm';
@@ -63,11 +64,11 @@ const GameSummary = ({ game }) => {
               <h1>{game.name}</h1>
               {/* Map out game genres if available */}
               {game.genres && game.genres.map((genre) => (
-                <Text
+                <Button
                   key={genre.id}
                   css={{ backgroundColor: '$purple400', fontSize: '$sm', fontWeight: '$bold', margin: '$2', padding: '$1' }}>
-                  {genre.name} &nbsp;
-                </Text>
+                  <Link to={`/games/genres/${genre.name}`}>{genre.name} &nbsp;</Link>
+                </Button>
               ))}
               {/* Add release date and tranform it from unix time stamp to readable date */}
               <p>Release date: {releaseDate}</p>
