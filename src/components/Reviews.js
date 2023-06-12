@@ -3,13 +3,24 @@
 /* eslint-disable no-underscore-dangle */
 import { Modal } from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { user } from '../reducers/user';
 
 const Reviews = () => {
   const [review, setReview] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newReviewText, setNewReviewText] = useState('');
   const [editReviewId, setEditReviewId] = useState(null);
+
+  const dispatch = useDispatch();
+
+  // if accessToken is in local storage, set it to the store
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      dispatch(user.actions.setAccessToken(accessToken));
+    }
+  }, [dispatch]);
 
   // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
