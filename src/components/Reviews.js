@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import { Modal } from '@nextui-org/react';
+import { Modal, Card, Text, Container, Button } from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { user } from '../reducers/user';
@@ -24,7 +24,7 @@ const Reviews = () => {
 
   // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
-
+  console.log('this is accesstoken: ', accessToken);
   const fetchReviews = async () => {
     try {
       const response = await fetch(
@@ -143,28 +143,59 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Reviews</h1>
+    <Container display="flex">
+      <Text>Reviews</Text>
       {review.map((item) => (
-        <div key={item._id}>
-          <p>{item.message}</p>
-          <p>Posted by: {item.user.username}</p>
-          <button type="button" onClick={() => deleteReview(item._id)}>
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowReviewForm(true);
-              setEditReviewId(item._id);
-            }}
-          >
-            Edit
-          </button>
+        <Card
+          key={item._id}
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          <div>10/10</div>
+          <Card.Body css={{ maxWidth: '40%', alignItems: 'baseline' }}>
+            <Text size="$2xl">{item.user.username}</Text>
+            <Text weight="bold">{item.message}</Text>
+          </Card.Body>
+          {accessToken ? (
+            <Button.Group css={{ maxWidth: '40%' }} vertical>
+              <Button type="button" onClick={() => deleteReview(item._id)}>
+                Delete
+              </Button>
+              <Button
+                type="button"
+                onClick={() => {
+                  setShowReviewForm(true);
+                  setEditReviewId(item._id);
+                }}
+              >
+                Edit
+              </Button>
+            </Button.Group>
+          ) : (
+            <Button.Group css={{ maxWidth: '40%' }} vertical>
+              <Button onClick={() => deleteReview(item._id)} disabled>
+                Delete
+              </Button>
+              <Button
+                onClick={() => {
+                  setShowReviewForm(true);
+                  setEditReviewId(item._id);
+                }}
+                disabled
+              >
+                Edit
+              </Button>
+            </Button.Group>
+          )}
+
           {showReviewForm && showEditReviewModal(item._id)}
-        </div>
+        </Card>
       ))}
-    </div>
+    </Container>
   );
 };
 
