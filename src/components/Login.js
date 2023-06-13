@@ -99,8 +99,6 @@ const Login = () => {
           dispatch(user.actions.setUserId(null));
           dispatch(user.actions.setCreatedAt(null));
           dispatch(user.actions.setReviews(null));
-          dispatch(user.actions.setFavorites(null));
-          dispatch(user.actions.setPlayedGames(null));
           dispatch(user.actions.setError(data.response.message));
           console.error(data);
         }

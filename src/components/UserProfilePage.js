@@ -1,8 +1,18 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
-import { Container, Row, Col, Card, Text, Grid, Link } from '@nextui-org/react';
+import React, { useState, useEffect } from 'react';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Text,
+  Grid,
+  Loading
+} from '@nextui-org/react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { API_URL } from 'utils/urls';
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
@@ -11,13 +21,40 @@ import UserProfileReviews from './UserProfileReviews';
 const UserProfilePage = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
   const createdAt = useSelector((store) => store.user.createdAt);
-  const favoriteGames = useSelector((store) => store.user.favoriteGames);
-
+  const [loading, setLoading] = useState(true);
+  const [favoriteGames, setFavoriteGames] = useState([]);
   // Extract the year and month from the createdAt string
   const joinedDate = new Date(createdAt);
   const joinedYear = joinedDate.getFullYear();
   const joinedMonth = joinedDate.toLocaleString('default', { month: 'long' });
 
+  // Get the user's favorite games
+  useEffect(() => {
+    const fetchFavoriteGames = async () => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            Authorization: accessToken
+          }
+        };
+        const response = await fetch(API_URL('favoritegames'), options);
+        const data = await response.json();
+        if (data.success) {
+          const favGames = data.response;
+          console.log(favGames);
+          setFavoriteGames(favGames);
+        } else {
+          console.log(data.message);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchFavoriteGames();
+  }, [accessToken]);
   return (
     <>
       <Header />
@@ -38,7 +75,7 @@ const UserProfilePage = () => {
               <Card css={{ borderRadius: '$xs' }}>
                 <Card.Header>Favorite Games</Card.Header>
                 <Card.Body>
-                  {/* Map over the user's favorite games and display them here  */}
+                  {loading && <Loading type="points" />}
                   {favoriteGames.map((game) => (
                     <Grid key={game._id}>
                       <Link href={`/games/${game.slug}/${game._id}`}>
@@ -74,6 +111,9 @@ const UserProfilePage = () => {
                       </Link>
                     </Grid>
                   ))}
+                  {!loading && favoriteGames.length === 0 && (
+                    <Text>You have no favorite games</Text>
+                  )}
                 </Card.Body>
               </Card>
             </Grid>
