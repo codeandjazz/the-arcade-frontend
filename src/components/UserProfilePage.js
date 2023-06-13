@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Text, Grid, Loading } from '@nextui-org/react';
+import { Container, Row, Col, Card, Text, Grid, Loading, Button } from '@nextui-org/react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
@@ -45,6 +45,24 @@ const UserProfilePage = () => {
     };
     fetchFavoriteGames();
   }, [accessToken]);
+
+  // Patch request to remove a game from favorites
+  const HandleRemoveFavorite = (game) => {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: accessToken
+      }
+    }
+    fetch(API_URL(`games/${game._id}/addfavorite`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+        }
+      })
+  }
   return (
     <>
       <Header />
@@ -91,6 +109,11 @@ const UserProfilePage = () => {
                             <Card.Footer css={{ justifyItems: 'flex-start' }}>
                               <Row wrap="wrap" align="center">
                                 <Text>{game.name}</Text>
+                                <Button
+                                  oonPress={HandleRemoveFavorite}
+                                  size="xs">
+                                  <Text>Remove</Text>
+                                </Button>
                               </Row>
                             </Card.Footer>
                           </Card.Body>
