@@ -10,20 +10,24 @@ const GamesList = () => {
   // Fetch the games from the API when the component mounts
   const [storedGames, setStoredGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   // Sort by name, rating, etc.
   // For example, /games/genres/action?sortBy=rating
   const [sort, setSort] = useState('');
   const { slug } = useParams();
+  const PAGE_SIZE = 20;
   useEffect(() => {
     const fetchGames = async () => {
       try {
         // Get the games from the API
-        const response = await fetch(API_URL(`games/genres/${slug}?sort=${sort}`));
+        const response = await fetch(API_URL(`games/genres/${slug}?sort=${sort}&page=${currentPage}`));
         const data = await response.json();
         if (data.success) {
-          const games = data.response;
+          const { games, total } = data.response;
           // Store the games in state
           setStoredGames(games);
+          setTotalPages(Math.ceil(total / PAGE_SIZE))
         } else {
           console.log(data.message);
         }
@@ -34,10 +38,14 @@ const GamesList = () => {
     };
 
     fetchGames();
-  }, [slug, sort]);
+  }, [slug, sort, currentPage]);
 
   const handleSort = (sortOption) => {
     setSort(sortOption);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -109,7 +117,7 @@ const GamesList = () => {
             </Grid>
           ))}
         </Grid.Container>
-        <Pagination total={20} initialPage={1} />
+        <Pagination total={totalPages} initialPage={currentPage} onChange={handlePageChange} />
       </Container>
     </>
   );
