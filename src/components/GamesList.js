@@ -76,23 +76,27 @@ const GamesList = () => {
     setCurrentPage(page);
   };
 
+  const handleClearSelection = () => {
+    setGenreQuery('');
+    setSort('');
+  };
+
   return (
     <>
       <Header />
       <Container md>
-        <Text css={{ color: '$yellow600', fontSize: '$xl', fontFamily: '$body' }}>
-          {genreQuery === '' && 'All games'}
-          {genreQuery} games
-        </Text>
+        <Text>Games</Text>
         <Dropdown isBordered>
           <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
-              Browse games
+            {genreQuery === '' ? (<Text>All genres</Text>) : (<Text>{genreQuery} games</Text>)}
           </Dropdown.Button>
           <Dropdown.Menu
+            selectionMode="single"
             items={storedGenres}
             aria-label="game genres">
             {(genre) => (
               <Dropdown.Item
+                withDivider
                 key={genre.name}>
                 <Button
                   css={{ borderRadius: '$xs' }}
@@ -127,6 +131,10 @@ const GamesList = () => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        <Button
+          onPress={handleClearSelection}>
+          X Clear filters
+        </Button>
         <Grid.Container gap={1} justify="center" direction="row">
           {loading || storedGames === undefined ? (
             <Loading type="points" />
