@@ -8,8 +8,6 @@ export const user = createSlice({
     accessToken: null,
     createdAt: null,
     reviews: [],
-    favoriteGames: [],
-    playedGames: [],
     error: null
   },
 
@@ -36,14 +34,6 @@ export const user = createSlice({
     },
     setReviews: (store, action) => {
       store.reviews = action.payload;
-      console.log(action.payload);
-    },
-    setFavoriteGames: (store, action) => {
-      store.favoriteGames = action.payload;
-      console.log(action.payload);
-    },
-    setPlayedGames: (store, action) => {
-      store.playedGames = action.payload;
       console.log(action.payload);
     }
   }

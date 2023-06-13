@@ -60,7 +60,7 @@ const GamesDisplay10 = () => {
         ) : (
           storedGames.map((game, index) => (
             <Grid key={game._id}>
-              <Link to={`/games/${game.slug}/${game._id}`}>
+              <Link to={`/games/${game._id}`}>
                 <Card
                   isPressable
                   css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}
@@ -85,7 +85,15 @@ const GamesDisplay10 = () => {
                     )}
                     <Card.Footer css={{ justifyItems: 'flex-start' }}>
                       <Row wrap="wrap" align="center">
-                        <Text>{game.name}</Text>
+                        <Text css={{ lineHeight: '$base' }}>{game.name}</Text>
+                        <Card.Divider />
+                        {game.genres && game.genres.map((genre) => (
+                          <Text
+                            key={genre.id}
+                            css={{ backgroundColor: '$purple200', fontSize: '$xs', fontWeight: '$bold', margin: '$1' }}>
+                            {genre.name} &nbsp;
+                          </Text>
+                        ))}
                       </Row>
                     </Card.Footer>
                   </Card.Body>

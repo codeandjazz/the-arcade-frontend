@@ -28,11 +28,11 @@ const theme = createTheme({
     // ...
 
     // brand colors
-    primaryLight: '$yellow600',
+    primaryLight: '$purple200',
     primaryLightHover: '$purple300', // commonly used on hover state
     primaryLightActive: '$purple400', // commonly used on pressed state
     primaryLightContrast: '$purple600', // commonly used for text inside the component
-    primary: '$yellow600',
+    primary: '$purple600',
     primaryBorder: '$purple500',
     primaryBorderHover: '$purple600',
     primarySolidHover: '$purple700',
