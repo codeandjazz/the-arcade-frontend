@@ -24,7 +24,6 @@ const Reviews = () => {
 
   // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
-  console.log('this is accesstoken: ', accessToken);
   const fetchReviews = async () => {
     try {
       const response = await fetch(
@@ -155,12 +154,13 @@ const Reviews = () => {
             justifyContent: 'space-between'
           }}
         >
+          {console.log(item)}
           <div>10/10</div>
           <Card.Body css={{ maxWidth: '40%', alignItems: 'baseline' }}>
             <Text size="$2xl">{item.user.username}</Text>
             <Text weight="bold">{item.message}</Text>
           </Card.Body>
-          {accessToken ? (
+          {item.user._id === localStorage.getItem('userId') ? (
             <Button.Group css={{ maxWidth: '40%' }} vertical>
               <Button type="button" onClick={() => deleteReview(item._id)}>
                 Delete
