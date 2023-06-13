@@ -86,6 +86,18 @@ const GamesList = () => {
       <Header />
       <Container md>
         <Text>Games</Text>
+        <Card css={{ borderRadius: '$xs' }}>
+          <Card.Body css={{ p: 0 }}>
+            <Row wrap="wrap" align="center">
+              <Text>Welcome to the Arcade Games Page!</Text>
+              <Text>
+                Browse and explore a wide range of exciting arcade games. Use the filters
+                to narrow down your search by genre and release date. Click on a game card
+                to view more details and immerse yourself in the world of arcade gaming.
+              </Text>
+            </Row>
+          </Card.Body>
+        </Card>
         <Dropdown isBordered>
           <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
             {genreQuery === '' ? (<Text>All genres</Text>) : (<Text>{genreQuery} games</Text>)}
