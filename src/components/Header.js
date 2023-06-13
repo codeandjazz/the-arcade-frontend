@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navbar, Button, Text, Image, Dropdown, Loading } from '@nextui-org/react';
+import { Navbar, Button, Text, Image, Dropdown, Loading, Input } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import Logo from '../assets/img/logo-the-arcade.png';
@@ -9,9 +9,9 @@ import UserProfile from './UserProfile';
 const Header = () => {
   // Check if the user is logged in
   const accessToken = useSelector((store) => store.user.accessToken);
-  const [storedGenres, setStoredGenres] = useState([]);
+  /* const [storedGenres, setStoredGenres] = useState([]); */
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchGenres = async () => {
       try {
         // Get the genres from the API
@@ -30,7 +30,7 @@ const Header = () => {
       }
     };
     fetchGenres();
-  }, []);
+  }, []); */
   return (
     <Navbar isCompact variant="sticky">
       <Navbar.Brand>
@@ -40,10 +40,10 @@ const Header = () => {
         <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/">
             Home
         </Navbar.Link>
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/games">
+        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/aboutus">
             About us
         </Navbar.Link>
-        <Dropdown isBordered>
+        {/* <Dropdown isBordered>
           <Navbar.Item>
             <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
               Browse games
@@ -61,7 +61,13 @@ const Header = () => {
               </Dropdown.Item>
             )}
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
+        {/* <Input
+          clearable
+          placeholder="Search..." /> */}
+        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/games">
+            Games
+        </Navbar.Link>
       </Navbar.Content>
       <Navbar.Content>
         {!accessToken && (
