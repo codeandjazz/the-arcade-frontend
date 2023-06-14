@@ -37,49 +37,21 @@ const Header = () => {
         <Image src={Logo} width={100} height={50} alt="logo" />
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/">
-            Home
-        </Navbar.Link>
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/aboutus">
-            About
-        </Navbar.Link>
-        {/* <Dropdown isBordered>
-          <Navbar.Item>
-            <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
-              Browse games
-            </Dropdown.Button>
-          </Navbar.Item>
-          <Dropdown.Menu
-            items={storedGenres}
-            aria-label="game genres">
-            {(genre) => (
-              <Dropdown.Item
-                key={genre.name}>
-                <Link to={`/games/genres/${genre.name}`}>
-                  {genre.name}
-                </Link>
-              </Dropdown.Item>
-            )}
-          </Dropdown.Menu>
-        </Dropdown> */}
-        {/* <Input
-          clearable
-          placeholder="Search..." /> */}
-        <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/games">
-            Games
-        </Navbar.Link>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/games">Games</Link>
       </Navbar.Content>
       <Navbar.Content>
         {!accessToken && (
-          <Navbar.Link color="inherit" href="/login">
+          <Link to="/login">
             Login
-          </Navbar.Link>
+          </Link>
         )}
         {!accessToken && (
           <Navbar.Item>
-            <Button auto flat as={Link} href="/login">
+            <Link to="/login">
               Sign Up
-            </Button>
+            </Link>
           </Navbar.Item>
         )}
         {accessToken && (

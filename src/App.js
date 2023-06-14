@@ -36,7 +36,7 @@ export const App = () => {
             {/* ↑↑↑ This is a game page ↑↑↑ */}
             <Route path="/users/:id" element={<UserProfilePage />} />
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
-            <Route path="/aboutus" element={<AboutPage />} />
+            <Route path="/about" element={<AboutPage />} />
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
             <Route path="/games/:slug/:id" element={<SingleGame />} />
             {/* ↑↑↑ This is a single game page ↑↑↑ */}

@@ -7,7 +7,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Image, css } from '@nextui-org/react';
+import { Container, Image, css, Loading } from '@nextui-org/react';
 import axios, { isCancel, AxiosError } from 'axios';
 import NotFoundImg from '../assets/img/not-found-404.jpg';
 import GameSummary from './GameSummary';
@@ -20,6 +20,7 @@ const Game = () => {
   const [game, setGame] = useState({});
   const [prompt, setPrompt] = useState('');
   const [imageURL, setImage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const createImg = async (imageDescription) => {
     const response = await axios.post(
@@ -30,6 +31,7 @@ const Game = () => {
     );
     setImage(response.data);
     console.log(imageURL);
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -49,6 +51,7 @@ const Game = () => {
             setGame(data.response);
             console.log(game);
             setPrompt(data.response.name);
+            setLoading(false);
           } else {
             console.log(data.message);
           }
@@ -72,6 +75,7 @@ const Game = () => {
     <>
       <Header />
       <Container width="100%" margin="0 auto">
+        {loading && <Loading type="points" />}
         {imageURL && (
           <Image // This could be a AI generated image based on the game name
             src={imageURL}
