@@ -56,26 +56,6 @@ const UserProfilePage = () => {
     };
     fetchFavoriteGames();
   }, [accessToken]);
-
-  // Patch request to remove a game from favorites
-  /* const HandleAddFavorite = (game) => {
-    const options = {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: accessToken
-      }
-    };
-    fetch(API_URL(`games/${game._id}/addfavorite`), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          console.log(data);
-        }
-      })
-  } */
-      });
-  };
   return (
     <>
       <Header />
