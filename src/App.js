@@ -14,6 +14,7 @@ import GamesList from 'components/GamesList';
 import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import UserProfilePage from 'components/UserProfilePage';
+import AboutPage from 'components/AboutPage';
 import Login from './components/Login';
 import Game from './components/Game';
 
@@ -34,6 +35,8 @@ export const App = () => {
             <Route path="/games/:id" element={<SingleGame />} />
             {/* ↑↑↑ This is a game page ↑↑↑ */}
             <Route path="/users/:id" element={<UserProfilePage />} />
+            {/* ↑↑↑ This is a user profile page ↑↑↑ */}
+            <Route path="/aboutus" element={<AboutPage />} />
             {/* ↑↑↑ This is a user profile page ↑↑↑ */}
             <Route path="/games/:slug/:id" element={<SingleGame />} />
             {/* ↑↑↑ This is a single game page ↑↑↑ */}

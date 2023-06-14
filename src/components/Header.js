@@ -41,7 +41,7 @@ const Header = () => {
             Home
         </Navbar.Link>
         <Navbar.Link css={{ color: '$yellow600', fontFamily: '$body' }} href="/aboutus">
-            About us
+            About
         </Navbar.Link>
         {/* <Dropdown isBordered>
           <Navbar.Item>
