@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable prefer-template */
 /* eslint-disable object-shorthand */
 /* eslint-disable implicit-arrow-linebreak */

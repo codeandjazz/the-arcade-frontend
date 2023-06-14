@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import { Modal } from '@nextui-org/react';
+import { Modal, Card, Text, Container, Button } from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { user } from '../reducers/user';
 
 const Reviews = () => {
   const [review, setReview] = useState([]);
@@ -11,9 +12,18 @@ const Reviews = () => {
   const [newReviewText, setNewReviewText] = useState('');
   const [editReviewId, setEditReviewId] = useState(null);
 
+  const dispatch = useDispatch();
+
+  // if accessToken is in local storage, set it to the store
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      dispatch(user.actions.setAccessToken(accessToken));
+    }
+  }, [dispatch]);
+
   // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
-
   const fetchReviews = async () => {
     try {
       const response = await fetch(
@@ -94,6 +104,24 @@ const Reviews = () => {
     }
   };
 
+  // fetch cover of game based on id
+  const fetchCover = useCallback(async (gameId) => {
+    try {
+      const response = await fetch(
+        `https://the-arcade-backend-6426jh4m2a-no.a.run.app/games/${gameId}`
+      );
+      const data = await response.json();
+      if (data.success) {
+        console.log(data.response.cover.url);
+        return data.response.cover.url;
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   const handleReviewEditSubmit = (reviewId, reviewText) => {
     updateReview(reviewId, reviewText);
     setShowReviewForm(false);
@@ -126,34 +154,76 @@ const Reviews = () => {
     return null;
   };
 
+  const formatDate = (string) => {
+    const dateString = string;
+    const date = new Date(dateString);
+
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+
+    return formattedDate;
+  };
+
   useEffect(() => {
     fetchReviews();
     // console.log(review);
   }, []);
 
   return (
-    <div>
-      <h1>Reviews</h1>
+    <Container display="flex">
+      <Text>Reviews</Text>
       {review.map((item) => (
-        <div key={item._id}>
-          <p>{item.message}</p>
-          <p>Posted by: {item.user.username}</p>
-          <button type="button" onClick={() => deleteReview(item._id)}>
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowReviewForm(true);
-              setEditReviewId(item._id);
-            }}
-          >
-            Edit
-          </button>
+        <Card
+          key={item._id}
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}
+        >
+          <Card.Image src={fetchCover(item.game)} width={50} height={50} />
+          {console.log(item)}
+          <Card.Body css={{ maxWidth: '40%', alignItems: 'baseline' }}>
+            <Text size="$2xl">{item.user.username}</Text>
+            <Text size="$sm">{formatDate(item.createdAt)}</Text>
+            <Text weight="bold">{item.message}</Text>
+          </Card.Body>
+          {/* {item.user._id === localStorage.getItem('userId') ? (
+            <Button.Group css={{ maxWidth: '40%' }} vertical>
+              <Button type="button" onClick={() => deleteReview(item._id)}>
+                Delete
+              </Button>
+              <Button
+                type="button"
+                onClick={() => {
+                  setShowReviewForm(true);
+                  setEditReviewId(item._id);
+                }}
+              >
+                Edit
+              </Button>
+            </Button.Group>
+          ) : (
+            <Button.Group css={{ maxWidth: '40%' }} vertical>
+              <Button onClick={() => deleteReview(item._id)} disabled>
+                Delete
+              </Button>
+              <Button
+                onClick={() => {
+                  setShowReviewForm(true);
+                  setEditReviewId(item._id);
+                }}
+                disabled
+              >
+                Edit
+              </Button>
+            </Button.Group>
+          )} */}
+
           {showReviewForm && showEditReviewModal(item._id)}
-        </div>
+        </Card>
       ))}
-    </div>
+    </Container>
   );
 };
 
