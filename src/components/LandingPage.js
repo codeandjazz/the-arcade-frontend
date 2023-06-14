@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Image, Container } from '@nextui-org/react';
+import Users from 'components/Users';
 import { user } from '../reducers/user';
 import Header from './Header';
 import Footer from './Footer';
@@ -43,7 +44,7 @@ const LandingPage = () => {
         </section>
         <GamesDisplay10 />
         <Reviews />
-        <section className="featured">FEATURED</section>
+        <Users />
         <section className="new">NEW GAMES</section>
         <section className="popular">POPULAR</section>
       </main>

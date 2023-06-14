@@ -57,6 +57,11 @@ const GameSummary = ({ game }) => {
                 onPress={HandleAddFavorite}>
                 ❤️ Add to favorites
               </Button>
+              <Button
+                disabled={!accessToken}
+                onPress={HandleAddFavorite}>
+                Remove from favorites
+              </Button>
             </Col>
           )}
           <Col>
