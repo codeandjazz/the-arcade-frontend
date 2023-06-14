@@ -70,9 +70,9 @@ const GameSummary = ({ game }) => {
                   <Link to={`/games/genres/${genre.name}`}>{genre.name} &nbsp;</Link>
                 </Button>
               ))}
-              {/* Add release date and tranform it from unix time stamp to readable date */}
-              <p>Release date: {releaseDate}</p>
-              <p>{game.summary}</p>
+              {/* Show release date and summary if they are not undefined */}
+              ? {releaseDate} : <p>Release date: {releaseDate}</p> : <p>Release date: Unknown</p>
+              ? {game.summary} : <p>{game.summary}</p> : <p>No summary available</p>
               {/* Add summary, note not all games has summary */}
               {showReviewForm && (
                 <ReviewForm

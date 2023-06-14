@@ -47,7 +47,7 @@ const UserProfilePage = () => {
   }, [accessToken]);
 
   // Patch request to remove a game from favorites
-  const HandleRemoveFavorite = (game) => {
+  /* const HandleAddFavorite = (game) => {
     const options = {
       method: 'PATCH',
       headers: {
@@ -62,7 +62,7 @@ const UserProfilePage = () => {
           console.log(data);
         }
       })
-  }
+  } */
   return (
     <>
       <Header />
@@ -109,11 +109,12 @@ const UserProfilePage = () => {
                             <Card.Footer css={{ justifyItems: 'flex-start' }}>
                               <Row wrap="wrap" align="center">
                                 <Text>{game.name}</Text>
-                                <Button
-                                  oonPress={HandleRemoveFavorite}
+                                {/* <Button
+                                  disabled={!accessToken}
+                                  onPress={() => HandleAddFavorite(game._id)}
                                   size="xs">
                                   <Text>Remove</Text>
-                                </Button>
+                                </Button> */}
                               </Row>
                             </Card.Footer>
                           </Card.Body>
@@ -135,7 +136,7 @@ const UserProfilePage = () => {
           <Card>
             <Card.Body>
               <Text>
-                                        You need to be logged in to view this page
+                                        Sorry, you need to be logged in to view this page
               </Text>
             </Card.Body>
           </Card>
