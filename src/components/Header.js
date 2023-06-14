@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Navbar, Button, Text, Image, Dropdown, Loading, Input } from '@nextui-org/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navbar, Button, Text, Image, Dropdown, Loading, Input, Avatar } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
+import { user } from '../reducers/user';
 import Logo from '../assets/img/logo-the-arcade.png';
 import UserProfile from './UserProfile';
 
@@ -11,6 +13,7 @@ const Header = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
   /* const [storedGenres, setStoredGenres] = useState([]); */
   const [loading, setLoading] = useState(true);
+  const { username, user_id } = useSelector((store) => store.user);
   /* useEffect(() => {
     const fetchGenres = async () => {
       try {
@@ -31,6 +34,16 @@ const Header = () => {
     };
     fetchGenres();
   }, []); */
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    // Remove the user from the store
+    dispatch(user.actions.setAccessToken(null))
+    dispatch(user.actions.setUsername(null))
+    dispatch(user.actions.setUserId(null))
+    dispatch(user.actions.setError(null))
+    dispatch(user.actions.setCreatedAt(null))
+    dispatch(user.actions.setReviews([]))
+  };
   return (
     <Navbar isCompact variant="sticky">
       <Navbar.Brand>
@@ -55,9 +68,34 @@ const Header = () => {
           </Navbar.Item>
         )}
         {accessToken && (
-          <Navbar.Item>
-            <UserProfile />
-          </Navbar.Item>
+          <Dropdown placement="bottom-right">
+            <Navbar.Item>
+              <Dropdown.Trigger>
+                {/* <UserProfile /> */}
+                <Avatar
+                  src="https://xsgames.co/randomusers/avatar.php?g=pixel"
+                  size="md"
+                  as="button"
+                  bordered />
+              </Dropdown.Trigger>
+            </Navbar.Item>
+            <Dropdown.Menu
+              aria-label="User menu">
+              <Dropdown.Item>
+                <Text>Welcome back, {username}</Text>
+              </Dropdown.Item>
+              <Dropdown.Item withDivider>
+                <Link to={`/users/${user_id}`}>
+                  <Button>My profile</Button>
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Button
+                  onPress={handleLogout}>Logout
+                </Button>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         )}
       </Navbar.Content>
     </Navbar>);

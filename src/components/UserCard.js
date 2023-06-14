@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Card, Text, Avatar, Grid, Row, Col } from '@nextui-org/react';
 
 const UserCard = ({ storedUsers }) => {
-  const { username, user_id } = storedUsers;
   // Generate random border color
   const randomColor = () => {
     const colors = [
@@ -20,12 +19,11 @@ const UserCard = ({ storedUsers }) => {
   };
   return (
     storedUsers.map((item) => (
-      <Link to={`/users/${item.user_id}`}>
+      <Link to={`/users/${item.user_id}`} key={item.user_id}>
         <Card
           isHoverable
           isPressable
-          css={{ borderRadius: '$xs' }}
-          key={item.user_id}>
+          css={{ borderRadius: '$xs' }}>
           <Card.Body>
             <Row>
               <Avatar
