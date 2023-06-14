@@ -1,7 +1,8 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import { Modal, Card, Text, Container, Button } from '@nextui-org/react';
+import { Modal, Card, Text, Container, Button, Image } from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { user } from '../reducers/user';
@@ -12,10 +13,10 @@ const Reviews = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newReviewText, setNewReviewText] = useState('');
   const [editReviewId, setEditReviewId] = useState(null);
+  const [coverUrls, setCoverUrls] = useState([]);
 
   const dispatch = useDispatch();
 
-  // if accessToken is in local storage, set it to the store
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
@@ -23,28 +24,25 @@ const Reviews = () => {
     }
   }, [dispatch]);
 
-  // get accessToken from store
   const accessToken = useSelector((store) => store.user.accessToken);
+
   const fetchReviews = async () => {
     try {
       const response = await fetch(
         'https://the-arcade-backend-6426jh4m2a-no.a.run.app/reviews'
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data.response);
-          if (data.success) {
-            setReview(data.response);
-          } else {
-            console.log(data.message);
-          }
-        });
+      );
+      const data = await response.json();
+      if (data.success) {
+        setReview(data.response);
+        fetchCoverUrls(data.response);
+      } else {
+        console.log(data.message);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // fetch cover of game based on id
   const fetchCover = useCallback(async (gameId) => {
     try {
       const response = await fetch(
@@ -53,7 +51,7 @@ const Reviews = () => {
       const data = await response.json();
       if (data.success) {
         console.log(data.response.cover.url);
-        return data.response.cover.url;
+        return `https:${data.response.cover.url}`;
       } else {
         console.log(data.message);
       }
@@ -62,15 +60,25 @@ const Reviews = () => {
     }
   }, []);
 
+  const fetchCoverUrls = useCallback(async (reviews) => {
+    try {
+      const urls = await Promise.all(
+        reviews.map((item) => fetchCover(item.game))
+      );
+      setCoverUrls(urls);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   useEffect(() => {
     fetchReviews();
-    // console.log(review);
   }, []);
 
   return (
     <Container display="flex">
       <Text>Reviews</Text>
-      {review.map((item) => (
+      {review.map((item, index) => (
         <Card
           key={item._id}
           css={{
@@ -79,7 +87,13 @@ const Reviews = () => {
             alignItems: 'center'
           }}
         >
-          <Card.Image src={fetchCover(item.game)} width={50} height={50} />
+          {coverUrls[index] && (
+            <Image
+              src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+              width={100}
+              height={100}
+            />
+          )}
           {console.log(item)}
           <Card.Body css={{ maxWidth: '40%', alignItems: 'baseline' }}>
             <Text size="$2xl">{item.user.username}</Text>
