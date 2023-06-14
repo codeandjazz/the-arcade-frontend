@@ -3,7 +3,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Image, Button, Col, Row, Spacer, Text } from '@nextui-org/react';
+import {
+  Container,
+  Image,
+  Button,
+  Col,
+  Row,
+  Spacer,
+  Text
+} from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import ReviewForm from './ReviewForm';
 
@@ -27,19 +35,24 @@ const GameSummary = ({ game }) => {
         'content-type': 'application/json',
         Authorization: accessToken
       }
-    }
+    };
     fetch(API_URL(`games/${game._id}/addfavorite`), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           console.log(data);
         }
-      })
-  }
+      });
+  };
 
   return (
     <section>
-      <Container md width="100%" margin="0 auto" gap={0}>
+      <Container
+        md
+        width="100%"
+        gap={0}
+        css={{ marginTop: '-100px', zIndex: '$max' }}
+      >
         <Row gap={1}>
           {game?.cover?.url && ( // Check if cover URL is available
             <Col>
@@ -52,32 +65,39 @@ const GameSummary = ({ game }) => {
               />
               <Button onPress={handleShowReviewForm}>Write a review</Button>
               <Spacer y={0.5} />
-              <Button
-                disabled={!accessToken}
-                onPress={HandleAddFavorite}>
+              <Button disabled={!accessToken} onPress={HandleAddFavorite}>
                 ❤️ Add to favorites
               </Button>
-              <Button
-                disabled={!accessToken}
-                onPress={HandleAddFavorite}>
+              <Button disabled={!accessToken} onPress={HandleAddFavorite}>
                 Remove from favorites
               </Button>
             </Col>
           )}
           <Col>
-            <div>
+            <Container css={{ marginTop: '100px' }}>
               <h1>{game.name}</h1>
               {/* Map out game genres if available */}
-              {game.genres && game.genres.map((genre) => (
-                <Button
-                  key={genre.id}
-                  css={{ backgroundColor: '$purple400', fontSize: '$sm', fontWeight: '$bold', margin: '$2', padding: '$1' }}>
-                  <Link to={`/games/genres/${genre.name}`}>{genre.name} &nbsp;</Link>
-                </Button>
-              ))}
-              {/* Show release date and summary if they are not undefined */}
-              ? {releaseDate} : <p>Release date: {releaseDate}</p> : <p>Release date: Unknown</p>
-              ? {game.summary} : <p>{game.summary}</p> : <p>No summary available</p>
+              {game.genres &&
+                game.genres.map((genre) => (
+                  <Button
+                    key={genre.id}
+                    css={{
+                      backgroundColor: '$purple400',
+                      fontSize: '$sm',
+                      fontWeight: '$bold',
+                      margin: '$2',
+                      padding: '$1'
+                    }}
+                  >
+                    <Link to={`/games/genres/${genre.name}`}>
+                      {genre.name} &nbsp;
+                    </Link>
+                  </Button>
+                ))}
+              {/* Show release date and summary if they are not undefined */}?{' '}
+              {releaseDate} : <p>Release date: {releaseDate}</p> :{' '}
+              <p>Release date: Unknown</p>? {game.summary} :{' '}
+              <p>{game.summary}</p> : <p>No summary available</p>
               {/* Add summary, note not all games has summary */}
               {showReviewForm && (
                 <ReviewForm
@@ -86,7 +106,7 @@ const GameSummary = ({ game }) => {
                   game={game}
                 />
               )}
-            </div>
+            </Container>
           </Col>
         </Row>
       </Container>
