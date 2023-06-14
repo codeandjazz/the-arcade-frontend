@@ -78,13 +78,13 @@ const Game = () => {
         {loading && <Loading type="points" />}
         {imageURL && (
           <Image // This could be a AI generated image based on the game name
+            showSkeleton
             src={imageURL}
             alt={game.name}
             css={{
-              maxHeight: '200px',
+              maxHeight: '300px',
               width: '100%',
-              objectFit: 'cover',
-              filter: 'blur(6px)'
+              objectFit: 'cover'
             }}
           />
         )}
