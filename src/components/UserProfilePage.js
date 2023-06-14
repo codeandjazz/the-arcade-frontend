@@ -1,12 +1,23 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Text, Grid, Loading, Button } from '@nextui-org/react';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Text,
+  Grid,
+  Loading,
+  Button
+} from '@nextui-org/react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 import Header from './Header';
+import UserProfileReviews from './UserProfileReviews';
 
 const UserProfilePage = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -28,7 +39,7 @@ const UserProfilePage = () => {
             'content-type': 'application/json',
             Authorization: accessToken
           }
-        }
+        };
         const response = await fetch(API_URL('favoritegames'), options);
         const data = await response.json();
         if (data.success) {
@@ -54,7 +65,7 @@ const UserProfilePage = () => {
         'content-type': 'application/json',
         Authorization: accessToken
       }
-    }
+    };
     fetch(API_URL(`games/${game._id}/addfavorite`), options)
       .then((res) => res.json())
       .then((data) => {
@@ -63,6 +74,8 @@ const UserProfilePage = () => {
         }
       })
   } */
+      });
+  };
   return (
     <>
       <Header />
@@ -74,7 +87,7 @@ const UserProfilePage = () => {
                 <Card.Body>
                   <UserProfile />
                   <Text>
-                                              Joined in {joinedMonth} {joinedYear}
+                    Joined in {joinedMonth} {joinedYear}
                   </Text>
                 </Card.Body>
               </Card>
@@ -83,13 +96,14 @@ const UserProfilePage = () => {
               <Card css={{ borderRadius: '$xs' }}>
                 <Card.Header>Favorite Games</Card.Header>
                 <Card.Body>
-                  {loading && (
-                    <Loading type="points" />
-                  )}
+                  {loading && <Loading type="points" />}
                   {favoriteGames.map((game) => (
                     <Grid key={game._id}>
-                      <Link to={`/games/${game._id}`}>
-                        <Card isPressable css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}>
+                      <Link href={`/games/${game.slug}/${game._id}`}>
+                        <Card
+                          isPressable
+                          css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}
+                        >
                           <Card.Body css={{ p: 0 }}>
                             {game.cover && game.cover.url ? (
                               <Card.Image
@@ -97,14 +111,16 @@ const UserProfilePage = () => {
                                 objectFit="cover"
                                 width="100%"
                                 height={140}
-                                alt="image" />
+                                alt="image"
+                              />
                             ) : (
                               <Card.Image
                                 src={defaultImg}
                                 objectFit="contain"
                                 width="100%"
                                 height={140}
-                                alt="image" />
+                                alt="image"
+                              />
                             )}
                             <Card.Footer css={{ justifyItems: 'flex-start' }}>
                               <Row wrap="wrap" align="center">
@@ -135,15 +151,14 @@ const UserProfilePage = () => {
         <Container xs>
           <Card>
             <Card.Body>
-              <Text>
-                                        Sorry, you need to be logged in to view this page
-              </Text>
+              <Text>Sorry, you need to be logged in to view this page</Text>
             </Card.Body>
           </Card>
         </Container>
       )}
+      {accessToken && <UserProfileReviews />}
     </>
-  )
-}
+  );
+};
 
 export default UserProfilePage;
