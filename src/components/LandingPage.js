@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Image, Container } from '@nextui-org/react';
+import { Image, Container, Text, css, Spacer } from '@nextui-org/react';
 import Users from 'components/Users';
 import { user } from '../reducers/user';
 import Header from './Header';
 import Footer from './Footer';
-import heroImage from '../assets/img/hero-img.png';
+import heroImage from '../assets/img/hero-img.jpg';
 // import { OuterWrapper, InnerWrapper } from './StyledComponents';
 import GamesDisplay10 from './GamesDisplay10';
 import Reviews from './Reviews';
@@ -36,18 +37,37 @@ const LandingPage = () => {
   }
 
   return (
-    <Container md>
+    <Container>
       <Header />
-      <main>
-        <section className="hero">
-          <Image src={heroImage} alt="hero image" />
-        </section>
-        <GamesDisplay10 />
-        <Reviews />
-        <Users />
-        <section className="new">NEW GAMES</section>
-        <section className="popular">POPULAR</section>
-      </main>
+      <Container
+        css={{
+          position: 'relative',
+          backgroundImage: `url(${heroImage})`,
+          height: '80vh',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+          Track games you’ve played.
+        </Text>
+        <Spacer y={0.5} />
+        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+          Save those you want to play.
+        </Text>
+        <Spacer y={0.5} />
+        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+          Tell your friends what’s awesome.
+        </Text>
+      </Container>
+      <GamesDisplay10 />
+      <Reviews />
+      <Users />
       <Footer />
     </Container>
   );
