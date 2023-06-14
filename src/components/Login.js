@@ -78,14 +78,13 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          localStorage.clear();
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
           dispatch(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setCreatedAt(data.response.createdAt));
           dispatch(user.actions.setReviews(data.response.reviews));
           // dispatch(user.actions.setFavorites(data.response.favorites));
-          dispatch(user.actions.setPlayedGames(data.response.playedGames));
+          // dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
           saveCredentialsToLocalStorage(
             data.response.accessToken,

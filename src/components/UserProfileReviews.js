@@ -19,9 +19,11 @@ const UserProfileReviews = () => {
   const accessToken =
     useSelector((store) => store.user.accessToken) ||
     localStorage.getItem('accessToken');
+  console.log(accessToken);
   // get userId from store
   const userId =
     useSelector((store) => store.user.userId) || localStorage.getItem('userId');
+  console.log(userId);
 
   // ////////////////////////////////////// //
 
@@ -44,7 +46,7 @@ const UserProfileReviews = () => {
 
   useEffect(() => {
     fetchLoggedInUserReviews(userId);
-    // console.log(review);
+    console.log(userId);
   }, []);
 
   // ////////////////////////////////////// //

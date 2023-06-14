@@ -74,8 +74,7 @@ const UserProfilePage = () => {
         }
       })
   } */
-      });
-  };
+
   return (
     <>
       <Header />
@@ -156,7 +155,7 @@ const UserProfilePage = () => {
           </Card>
         </Container>
       )}
-      {accessToken && <UserProfileReviews />}
+      <UserProfileReviews />
     </>
   );
 };
