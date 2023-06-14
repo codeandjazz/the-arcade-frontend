@@ -86,12 +86,13 @@ const Header = () => {
               </Dropdown.Item>
               <Dropdown.Item withDivider>
                 <Link to={`/users/${user_id}`}>
-                  <Button>My profile</Button>
+                  My profile
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Button
-                  onPress={handleLogout}>Logout
+                  onPress={handleLogout}>
+                  <Link to="/">Logout</Link>
                 </Button>
               </Dropdown.Item>
             </Dropdown.Menu>
