@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-underscore-dangle */
@@ -20,15 +22,15 @@ const GamesDisplay10 = () => {
         const response = await fetch(API_URL('games'));
         const data = await response.json();
         const getRandomGames = (games, count) => {
-          // Shuffle the games
-          const shuffled = games.sort(() => 0.5 - Math.random());
+          const shuffled = games.slice().sort(() => 0.5 - Math.random());
           return shuffled.slice(0, count);
         };
         if (data.success) {
-          const games = data.response;
+          const games = data.response.games;
+          console.log('this is games from gamesDisplay: ', games);
           // Get 10 random games
-          const randomGames = getRandomGames(games, 10);
-
+          const randomGames = getRandomGames(games, 6);
+          console.log('this is randomGames from gamesDisplay: ', randomGames);
           // Store the games in state
           setStoredGames(randomGames);
         } else {
@@ -87,13 +89,20 @@ const GamesDisplay10 = () => {
                       <Row wrap="wrap" align="center">
                         <Text css={{ lineHeight: '$base' }}>{game.name}</Text>
                         <Card.Divider />
-                        {game.genres && game.genres.map((genre) => (
-                          <Text
-                            key={genre.id}
-                            css={{ backgroundColor: '$purple200', fontSize: '$xs', fontWeight: '$bold', margin: '$1' }}>
-                            {genre.name} &nbsp;
-                          </Text>
-                        ))}
+                        {game.genres &&
+                          game.genres.map((genre) => (
+                            <Text
+                              key={genre.id}
+                              css={{
+                                backgroundColor: '$purple200',
+                                fontSize: '$xs',
+                                fontWeight: '$bold',
+                                margin: '$1'
+                              }}
+                            >
+                              {genre.name} &nbsp;
+                            </Text>
+                          ))}
                       </Row>
                     </Card.Footer>
                   </Card.Body>
