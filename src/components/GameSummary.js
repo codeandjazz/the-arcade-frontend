@@ -63,7 +63,7 @@ const GameSummary = ({ game }) => {
                 height={380}
                 objectFit="cover"
               />
-              <Button onPress={handleShowReviewForm}>Write a review</Button>
+              <Button disabled={!accessToken} onPress={handleShowReviewForm}>Write a review</Button>
               <Spacer y={0.5} />
               <Button disabled={!accessToken} onPress={HandleAddFavorite}>
                 ❤️ Add to favorites
@@ -75,30 +75,38 @@ const GameSummary = ({ game }) => {
           )}
           <Col>
             <Container css={{ marginTop: '100px' }}>
-              <h1>{game.name}</h1>
+              <Text h1 css={{ fontFamily: '$body' }}>{game.name}</Text>
               {/* Map out game genres if available */}
               {game.genres
               && game.genres.map((genre) => (
                 <Button
+                  type="button"
+                  flat
+                  color="secondary"
                   key={genre.id}
                   css={{
-                    backgroundColor: '$purple400',
-                    fontSize: '$sm',
-                    fontWeight: '$bold',
                     margin: '$2',
-                    padding: '$1'
+                    padding: '$1',
+                    borderRadius: '$xs'
                   }}
                 >
                   <Link to={`/games/genres/${genre.name}`}>
-                    {genre.name} &nbsp;
+                    <Text>{genre.name} &nbsp;</Text>
                   </Link>
                 </Button>
               ))}
-              {/* Show release date and summary if they are not undefined */}?{' '}
-              {releaseDate} : <p>Release date: {releaseDate}</p> :{' '}
-              <p>Release date: Unknown</p>? {game.summary} :{' '}
-              <p>{game.summary}</p> : <p>No summary available</p>
-              {/* Add summary, note not all games has summary */}
+              {releaseDate
+              && (
+                <>
+                  <Text h4>Release date:</Text>
+                  <Text> {releaseDate}</Text>
+                </>)}
+              {game.summary
+              && (
+                <>
+                  <Text h4>Summary:</Text>
+                  <Text>{game.summary}</Text>
+                </>)}
               {showReviewForm && (
                 <ReviewForm
                   setShowReviewForm={setShowReviewForm}
