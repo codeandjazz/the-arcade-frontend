@@ -77,23 +77,23 @@ const GameSummary = ({ game }) => {
             <Container css={{ marginTop: '100px' }}>
               <h1>{game.name}</h1>
               {/* Map out game genres if available */}
-              {game.genres &&
-                game.genres.map((genre) => (
-                  <Button
-                    key={genre.id}
-                    css={{
-                      backgroundColor: '$purple400',
-                      fontSize: '$sm',
-                      fontWeight: '$bold',
-                      margin: '$2',
-                      padding: '$1'
-                    }}
-                  >
-                    <Link to={`/games/genres/${genre.name}`}>
-                      {genre.name} &nbsp;
-                    </Link>
-                  </Button>
-                ))}
+              {game.genres
+              && game.genres.map((genre) => (
+                <Button
+                  key={genre.id}
+                  css={{
+                    backgroundColor: '$purple400',
+                    fontSize: '$sm',
+                    fontWeight: '$bold',
+                    margin: '$2',
+                    padding: '$1'
+                  }}
+                >
+                  <Link to={`/games/genres/${genre.name}`}>
+                    {genre.name} &nbsp;
+                  </Link>
+                </Button>
+              ))}
               {/* Show release date and summary if they are not undefined */}?{' '}
               {releaseDate} : <p>Release date: {releaseDate}</p> :{' '}
               <p>Release date: Unknown</p>? {game.summary} :{' '}
