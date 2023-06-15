@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Button, Text, Image, Dropdown, Loading, Input, Avatar } from '@nextui-org/react';
+import { Navbar, Button, Text, Image, Dropdown, Loading, Input, Avatar, Modal } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
+import Login from './Login';
+import SignUp from './SignUp';
 import Logo from '../assets/img/logo-the-arcade.png';
 import UserProfile from './UserProfile';
 
@@ -55,18 +57,16 @@ const Header = () => {
         <Link to="/games">Games</Link>
       </Navbar.Content>
       <Navbar.Content>
-        {!accessToken && (
-          <Link to="/login">
-            Login
-          </Link>
-        )}
-        {!accessToken && (
+        {!accessToken
+        && (
           <Navbar.Item>
-            <Link to="/login">
-              Sign Up
-            </Link>
-          </Navbar.Item>
-        )}
+            <Login />
+          </Navbar.Item>)}
+        {!accessToken
+        && (
+          <Navbar.Item>
+            <SignUp />
+          </Navbar.Item>)}
         {accessToken && (
           <Dropdown placement="bottom-right">
             <Navbar.Item>

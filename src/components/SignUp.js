@@ -1,8 +1,3 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable react/jsx-closing-bracket-location */
-// add modes to the login form, so that we can switch between login and signup
-// modal for signup and login
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +35,7 @@ const saveCredentialsToLocalStorage = (
   console.log('user saved to local storage');
 };
 
-const Login = () => {
+const SignUp = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [username, setUsername] = useState('');
@@ -75,7 +70,7 @@ const Login = () => {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({ username: username, password: password })
+      body: JSON.stringify({ username, password })
     };
 
     fetch(API_URL(mode.toLowerCase()), options)
@@ -110,8 +105,8 @@ const Login = () => {
 
   return (
     <div>
-      <Button auto shadow onPress={handler}>
-        Login
+      <Button auto onPress={handler}>
+        Sign up
       </Button>
       <Modal
         closeButton
@@ -126,12 +121,11 @@ const Login = () => {
             defaultValue={mode}
             onChange={setMode}
             orientation="horizontal"
-            label="Mode"
-          >
-            <Radio isActive value="USERS/LOGIN">
+            label="Mode">
+            <Radio value="USERS/LOGIN">
                   Login
             </Radio>
-            <Radio value="USERS/REGISTER">Sign up</Radio>
+            <Radio isActive value="USERS/REGISTER">Sign up</Radio>
           </Radio.Group>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
@@ -142,8 +136,7 @@ const Login = () => {
               size="lg"
               label="Username"
               value={username}
-              onChange={(event) => setUsername(event.target.value)}
-            />
+              onChange={(event) => setUsername(event.target.value)} />
             <Spacer y={1} />
             <Input
               clearable
@@ -152,8 +145,7 @@ const Login = () => {
               size="lg"
               label="Password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
+              onChange={(event) => setPassword(event.target.value)} />
             <Spacer y={1} />
             <Button type="submit">Sign in</Button>
           </form>
@@ -168,4 +160,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
