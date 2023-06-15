@@ -110,7 +110,12 @@ const Login = () => {
 
   return (
     <div>
-      <Button auto shadow onPress={handler}>
+      <Button
+        auto
+        flat
+        color="secondary"
+        onPress={handler}
+        css={{ borderRadius: '$xs' }}>
         Login
       </Button>
       <Modal
@@ -118,9 +123,6 @@ const Login = () => {
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}>
-        <Modal.Header>
-          <Text id="modal-title">Welcome to The Arcade</Text>
-        </Modal.Header>
         <Modal.Body>
           <Radio.Group
             defaultValue={mode}
@@ -149,20 +151,32 @@ const Login = () => {
               clearable
               bordered
               fullWidth
+              type="password"
               size="lg"
               label="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
             <Spacer y={1} />
-            <Button type="submit">Submit</Button>
+            <Button
+              auto
+              ghost
+              color="success"
+              type="submit"
+              css={{ borderRadius: '$xs' }}>Submit
+            </Button>
           </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button auto flat color="error" onPress={closeHandler}>
+          <Modal.Footer>
+            <Button
+              auto
+              ghost
+              color="error"
+              onPress={closeHandler}
+              css={{ borderRadius: '$xs' }}>
               Close
-          </Button>
-        </Modal.Footer>
+            </Button>
+          </Modal.Footer>
+        </Modal.Body>
       </Modal>
     </div>
   );

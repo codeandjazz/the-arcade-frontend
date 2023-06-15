@@ -101,19 +101,27 @@ const GamesList = () => {
           </Card.Body>
         </Card>
         <Dropdown isBordered>
-          <Dropdown.Button css={{ backgroundColor: '$blue600', fontFamily: '$body' }}>
+          <Dropdown.Button
+            auto
+            light
+            css={{ borderRadius: '$xs' }}>
             {genreQuery === '' ? (<Text>All genres</Text>) : (<Text>{genreQuery} games</Text>)}
           </Dropdown.Button>
           <Dropdown.Menu
             selectionMode="single"
             items={storedGenres}
-            aria-label="game genres">
+            aria-label="game genres"
+            variant="light">
             {(genre) => (
               <Dropdown.Item
                 withDivider
                 key={genre.name}>
                 <Button
-                  css={{ borderRadius: '$xs' }}
+                  type="button"
+                  auto
+                  ripple="false"
+                  animated="false"
+                  css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
                   onPress={() => handleGenre(genre.name)}>
                   {genre.name}
                 </Button>
@@ -122,23 +130,38 @@ const GamesList = () => {
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown isBordered>
-          <Dropdown.Button>
+          <Dropdown.Button
+            auto
+            light
+            css={{ borderRadius: '$xs' }}>
             {/* Display the current sort option based on what is stored as sort */}
-            {sort === 'releasedAsce' && 'Oldest first'}
-            {sort === 'releasedDesc' && 'Newest first'}
-            {sort === '' && 'Sort by'}
+            {sort === 'releasedAsce' && <Text>Oldest first</Text>}
+            {sort === 'releasedDesc' && <Text>Newest first</Text>}
+            {sort === '' && <Text>Sort by</Text>}
           </Dropdown.Button>
-          <Dropdown.Menu aria-label="Sort by">
-            <Dropdown.Item>
+          <Dropdown.Menu
+            aria-label="Sort by"
+            variant="light">
+            <Dropdown.Item
+              withDivider>
               <Button
-                css={{ borderRadius: '$xs' }}
+                auto
+                type="button"
+                ripple="false"
+                animated="false"
+                css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
                 onPress={() => handleSort('releasedAsce')}>
                   Oldest first
               </Button>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item
+              withDivider>
               <Button
-                css={{ borderRadius: '$xs' }}
+                auto
+                type="button"
+                ripple="false"
+                animated="false"
+                css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
                 onPress={() => handleSort('releasedDesc')}>
                   Newest first
               </Button>
@@ -146,8 +169,12 @@ const GamesList = () => {
           </Dropdown.Menu>
         </Dropdown>
         <Button
+          auto
+          flat
+          color="error"
+          css={{ borderRadius: '$xs' }}
           onPress={handleClearSelection}>
-          X Clear filters
+          Clear filters
         </Button>
         <Grid.Container gap={1} justify="center" direction="row">
           {loading || storedGames === undefined ? (

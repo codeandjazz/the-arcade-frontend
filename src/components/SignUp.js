@@ -46,7 +46,7 @@ const SignUp = () => {
   // const [favorites, setFavorites] = useState(null);
   /* const [playedGames, setPlayedGames] = useState(null); */
   const [errors, setErrors] = useState(null); // move to store
-  const [mode, setMode] = useState('USERS/LOGIN');
+  const [mode, setMode] = useState('USERS/REGISTER');
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
   const [visible, setVisible] = useState(false);
@@ -105,7 +105,11 @@ const SignUp = () => {
 
   return (
     <div>
-      <Button auto onPress={handler}>
+      <Button
+        auto
+        flat
+        onPress={handler}
+        css={{ borderRadius: '$xs' }}>
         Sign up
       </Button>
       <Modal
@@ -113,9 +117,6 @@ const SignUp = () => {
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}>
-        <Modal.Header>
-          <Text id="modal-title">Welcome to The Arcade</Text>
-        </Modal.Header>
         <Modal.Body>
           <Radio.Group
             defaultValue={mode}
@@ -144,14 +145,25 @@ const SignUp = () => {
               fullWidth
               size="lg"
               label="Password"
+              type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)} />
             <Spacer y={1} />
-            <Button type="submit">submit</Button>
+            <Button
+              type="submit"
+              auto
+              color="success"
+              css={{ borderRadius: '$xs' }}>Submit
+            </Button>
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onPress={closeHandler}>
+          <Button
+            auto
+            flat
+            color="error"
+            onPress={closeHandler}
+            css={{ borderRadius: '$xs' }}>
               Close
           </Button>
         </Modal.Footer>
