@@ -65,6 +65,14 @@ const LandingPage = () => {
           Tell your friends what’s awesome.
         </Text>
       </Container>
+      <Text blockquote css={{ textAlign: 'center', marginTop: '2rem' }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
+        tincidunt dolor. Sed euismod, nisl quis tincidunt aliquet, nunc nisl
+        aliquam nunc, vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis
+        tincidunt aliquet, nunc nisl aliquam nunc, vitae aliquam nunc nisl quis
+        nunc. Sed euismod, nisl quis tincidunt aliquet, nunc nisl aliquam nunc,
+        vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis tincidunt
+      </Text>
       <GamesDisplay10 />
       <Reviews />
       <Users />
