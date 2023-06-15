@@ -8,36 +8,22 @@ const theme = createTheme({
     black: '#000000',
 
     // background colors (light)
-    background: '$purple600',
-    backgroundAlpha: '$purple600', // used for semi-transparent backgrounds like the navbar
+    background: '$white',
+    backgroundAlpha: 'rgba(255, 255, 255, 0.8)', // used for semi-transparent backgrounds like the navbar
     foreground: '$black',
     backgroundContrast: '$white',
 
-    // semantic colors (light)
-    purple50: '#F7F2FD',
-    purple100: '#F1E8FB',
-    purple200: '#EADCF8',
-    purple300: '#E0CBF5',
-    purple400: '#D1B1F0',
-    purple500: '#BC8EE9',
-    purple600: '#7828C8',
-    purple700: '#6622AA',
-    purple800: '#4D1980',
-    purple900: '#290E44',
-    yellow600: '#F5A524',
-    // ...
-
     // brand colors
-    primaryLight: '$purple200',
-    primaryLightHover: '$purple300', // commonly used on hover state
-    primaryLightActive: '$purple400', // commonly used on pressed state
-    primaryLightContrast: '$purple600', // commonly used for text inside the component
-    primary: '$purple600',
-    primaryBorder: '$purple500',
-    primaryBorderHover: '$purple600',
-    primarySolidHover: '$purple700',
+    primaryLight: '$blue200',
+    primaryLightHover: '$blue300', // commonly used on hover state
+    primaryLightActive: '$blue400', // commonly used on pressed state
+    primaryLightContrast: '$blue600', // commonly used for text inside the component
+    primary: '$blue600',
+    primaryBorder: '$blue500',
+    primaryBorderHover: '$blue600',
+    primarySolidHover: '$blue700',
     primarySolidContrast: '$white', // commonly used for text inside the component
-    primaryShadow: '$purple500',
+    primaryShadow: '$blue500',
 
     // ... rest of colors (secondary, success, warning, error, etc)
     secondary: '#7828C8',
