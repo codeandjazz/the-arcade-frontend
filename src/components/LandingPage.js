@@ -42,7 +42,10 @@ const LandingPage = () => {
       <Container
         css={{
           position: 'relative',
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ) ,url(${heroImage})`,
           height: '80vh',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -53,18 +56,50 @@ const LandingPage = () => {
           alignItems: 'center'
         }}
       >
-        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+        <Text
+          h1
+          css={{
+            textAlign: 'center',
+            color: 'white',
+            zIndex: 1,
+            fontFamily: '$body'
+          }}
+        >
           Track games you’ve played.
         </Text>
         <Spacer y={0.5} />
-        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+        <Text
+          h1
+          css={{
+            textAlign: 'center',
+            color: 'white',
+            zIndex: 1,
+            fontFamily: '$body'
+          }}
+        >
           Save those you want to play.
         </Text>
         <Spacer y={0.5} />
-        <Text h1 css={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+        <Text
+          h1
+          css={{
+            textAlign: 'center',
+            color: 'white',
+            zIndex: 1,
+            fontFamily: '$body'
+          }}
+        >
           Tell your friends what’s awesome.
         </Text>
       </Container>
+      <Text blockquote css={{ textAlign: 'center', marginTop: '2rem' }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
+        tincidunt dolor. Sed euismod, nisl quis tincidunt aliquet, nunc nisl
+        aliquam nunc, vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis
+        tincidunt aliquet, nunc nisl aliquam nunc, vitae aliquam nunc nisl quis
+        nunc. Sed euismod, nisl quis tincidunt aliquet, nunc nisl aliquam nunc,
+        vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis tincidunt
+      </Text>
       <GamesDisplay10 />
       <Reviews />
       <Users />

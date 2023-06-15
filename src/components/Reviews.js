@@ -2,7 +2,15 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import { Modal, Card, Text, Container, Button, Image } from '@nextui-org/react';
+import {
+  Modal,
+  Card,
+  Text,
+  Container,
+  Button,
+  Image,
+  Grid
+} from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { user } from '../reducers/user';
@@ -35,6 +43,7 @@ const Reviews = () => {
       if (data.success) {
         setReview(data.response);
         fetchCoverUrls(data.response);
+        console.log(data.response);
       } else {
         console.log(data.message);
       }
@@ -76,65 +85,49 @@ const Reviews = () => {
   }, []);
 
   return (
-    <Container display="flex">
-      <Text
-        h2
-        css={{ fontFamily: '$body', color: '$black' }}
-      >Reviews
+    <Container display="flex" gap={2}>
+      <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
+        Reviews
       </Text>
       {review.map((item, index) => (
         <Card
           key={item._id}
+          shadow
           css={{
             display: 'flex',
             flexDirection: 'row',
-            alignItems: 'center'
+            minHeight: '4rem',
+            padding: '0.5rem 1.5rem',
+            margin: '0.5rem 0'
           }}
         >
-          {coverUrls[index] && (
-            <Image
-              src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-              width={100}
-              height={100}
-            />
-          )}
-          {console.log(item)}
-          <Card.Body css={{ maxWidth: '40%', alignItems: 'baseline' }}>
-            <Text size="$2xl">{item.user.username}</Text>
-            <Text size="$sm">{formatDate(item.createdAt)}</Text>
-            <Text weight="bold">{item.message}</Text>
-          </Card.Body>
-          {/* {item.user._id === localStorage.getItem('userId') ? (
-            <Button.Group css={{ maxWidth: '40%' }} vertical>
-              <Button type="button" onClick={() => deleteReview(item._id)}>
-                Delete
-              </Button>
-              <Button
-                type="button"
-                onClick={() => {
-                  setShowReviewForm(true);
-                  setEditReviewId(item._id);
-                }}
-              >
-                Edit
-              </Button>
-            </Button.Group>
-          ) : (
-            <Button.Group css={{ maxWidth: '40%' }} vertical>
-              <Button onClick={() => deleteReview(item._id)} disabled>
-                Delete
-              </Button>
-              <Button
-                onClick={() => {
-                  setShowReviewForm(true);
-                  setEditReviewId(item._id);
-                }}
-                disabled
-              >
-                Edit
-              </Button>
-            </Button.Group>
-          )} */}
+          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+            {coverUrls[index] && (
+              <Image
+                src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+                width={100}
+                height={100}
+              />
+            )}
+          </Grid>
+          <Grid xs={9} gap={1} css={{ alignItems: 'center' }}>
+            <Card.Body
+              css={{
+                alignItems: 'baseline',
+                flexDirection: 'row'
+              }}
+            >
+              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+                <Text size="$2xl">{item.user.username}</Text>
+              </Grid>
+              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+                <Text size="$sm">{formatDate(item.createdAt)}</Text>
+              </Grid>
+              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+                <Text weight="bold">{item.message}</Text>
+              </Grid>
+            </Card.Body>
+          </Grid>
         </Card>
       ))}
     </Container>

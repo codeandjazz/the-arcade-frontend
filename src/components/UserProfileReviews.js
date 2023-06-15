@@ -6,7 +6,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Grid, Text, Modal, Card, Button } from '@nextui-org/react';
+import {
+  Container,
+  Grid,
+  Text,
+  Modal,
+  Card,
+  Button,
+  Textarea,
+  Spacer
+} from '@nextui-org/react';
 import { formatDate } from '../utils/helpers';
 
 const UserProfileReviews = () => {
@@ -96,23 +105,25 @@ const UserProfileReviews = () => {
     if (reviewId === editReviewId) {
       return (
         <Modal open onClose={() => setShowReviewForm(false)}>
-          <p>Write your review here</p>
-          <textarea
+          <Text h4>Write your review here</Text>
+          <Textarea
             type="text"
             placeholder="Write your review here"
             value={newReviewText}
             onChange={(e) => setNewReviewText(e.target.value)}
             required
           />
-          <button type="button" onClick={() => setShowReviewForm(false)}>
-            Cancel
-          </button>
-          <button
-            type="button"
-            onClick={() => handleReviewEditSubmit(reviewId, newReviewText)}
-          >
-            Update
-          </button>
+          <Button.Group css={{ margin: '1rem auto' }}>
+            <Button type="button" onPress={() => setShowReviewForm(false)}>
+              Cancel
+            </Button>
+            <Spacer x={0.5} />
+            <Button
+              onPress={() => handleReviewEditSubmit(reviewId, newReviewText)}
+            >
+              Update
+            </Button>
+          </Button.Group>
         </Modal>
       );
     }
@@ -144,22 +155,32 @@ const UserProfileReviews = () => {
     }
   };
 
+  console.log('This is review ', review);
+
   return (
     <Container>
       <h1>Reviews</h1>
       {review.map((item) => (
-        <Card gap={2}>
-          <Grid xs={12} md={12}>
-            {/* <Text h4>{item.game}</Text> */}
+        <Card
+          gap={2}
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            minHeight: '4rem',
+            padding: '0 1.5rem'
+          }}
+        >
+          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+            <Text h4>{item.game_name}</Text>
           </Grid>
-          <Grid xs={12} md={12}>
-            <Text h5>{item.message}</Text>
+          <Grid xs={3} css={{ alignItems: 'center' }}>
+            <Text p>"{item.message}"</Text>
           </Grid>
-          <Grid xs={12} md={12}>
-            <Text h6>{formatDate(item.createdAt)}</Text>
+          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+            <Text h4>{formatDate(item.createdAt)}</Text>
           </Grid>
-          <Grid xs={12} md={12}>
-            <Button.Group css={{ maxWidth: '40%' }} vertical>
+          <Grid xs={3}>
+            <Button.Group css={{ margin: 'auto 0' }}>
               <Button type="button" onClick={() => deleteReview(item._id)}>
                 Delete
               </Button>
