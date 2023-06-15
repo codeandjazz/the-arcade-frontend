@@ -46,9 +46,11 @@ const Header = () => {
     dispatch(user.actions.setCreatedAt(null))
     dispatch(user.actions.setReviews([]))
   };
+
   return (
     <Navbar variant="sticky">
       <Navbar.Brand>
+        <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
         <Link to="/">
           <Image src={Logo} width={100} height={50} alt="logo" />
         </Link>
@@ -107,6 +109,23 @@ const Header = () => {
           </Dropdown>
         )}
       </Navbar.Content>
+      <Navbar.Collapse>
+        <Navbar.CollapseItem>
+          <Link to="/">
+            Home
+          </Link>
+        </Navbar.CollapseItem>
+        <Navbar.CollapseItem>
+          <Link to="/about">
+            About
+          </Link>
+        </Navbar.CollapseItem>
+        <Navbar.CollapseItem>
+          <Link to="/games">
+            Games
+          </Link>
+        </Navbar.CollapseItem>
+      </Navbar.Collapse>
     </Navbar>);
 };
 
