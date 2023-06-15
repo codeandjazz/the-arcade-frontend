@@ -77,7 +77,11 @@ const Reviews = () => {
 
   return (
     <Container display="flex">
-      <Text>Reviews</Text>
+      <Text
+        h2
+        css={{ fontFamily: '$body', color: '$black' }}
+      >Reviews
+      </Text>
       {review.map((item, index) => (
         <Card
           key={item._id}

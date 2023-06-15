@@ -33,7 +33,10 @@ const Users = () => {
       <Grid.Container gap={8}>
         <Grid display="flex" direction="column" align="flex-end">
           {loading && <Loading type="points" />}
-          <Text h2>Users</Text>
+          <Text
+            h2
+            css={{ fontFamily: '$body', color: '$black' }}>Users
+          </Text>
           <UserCard storedUsers={storedUsers} />
         </Grid>
       </Grid.Container>

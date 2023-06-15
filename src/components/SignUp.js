@@ -147,7 +147,7 @@ const SignUp = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)} />
             <Spacer y={1} />
-            <Button type="submit">Sign in</Button>
+            <Button type="submit">submit</Button>
           </form>
         </Modal.Body>
         <Modal.Footer>

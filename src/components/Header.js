@@ -7,7 +7,7 @@ import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import Login from './Login';
 import SignUp from './SignUp';
-import Logo from '../assets/img/logo-the-arcade.png';
+import Logo from '../assets/img/-logos_transparent-cropped.png';
 import UserProfile from './UserProfile';
 
 const Header = () => {
@@ -47,14 +47,22 @@ const Header = () => {
     dispatch(user.actions.setReviews([]))
   };
   return (
-    <Navbar isCompact variant="sticky">
+    <Navbar variant="sticky">
       <Navbar.Brand>
-        <Image src={Logo} width={100} height={50} alt="logo" />
+        <Link to="/">
+          <Image src={Logo} width={100} height={50} alt="logo" />
+        </Link>
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/games">Games</Link>
+        <Link to="/">
+          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Home</Text>
+        </Link>
+        <Link to="/about">
+          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>About</Text>
+        </Link>
+        <Link to="/games">
+          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Games</Text>
+        </Link>
       </Navbar.Content>
       <Navbar.Content>
         {!accessToken

@@ -25,6 +25,8 @@ const theme = createTheme({
     primarySolidContrast: '$white', // commonly used for text inside the component
     primaryShadow: '$blue500',
 
+    myBlue: '#1d25f6',
+
     // ... rest of colors (secondary, success, warning, error, etc)
     secondary: '#7828C8',
     success: '#17C964',

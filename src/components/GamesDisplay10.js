@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Grid, Row, Text, Loading, Container } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
-import defaultImg from '../assets/img/default-img.png';
+import defaultImg from '../assets/img/-logos_transparent-cropped.png';
 // import { InnerWrapper, OuterWrapper } from './StyledComponents';
 
 const GamesDisplay10 = () => {
@@ -48,13 +48,10 @@ const GamesDisplay10 = () => {
   return (
     <Container md>
       <Text
-        css={{
-          color: '$yellow600',
-          fontSize: '$xl',
-          fontFamily: '$body'
-        }}
+        h2
+        css={{ fontFamily: '$body', color: '$black' }}
       >
-        10 random games
+        Featured Games
       </Text>
       <Grid.Container gap={1} justify="flex-start" direction="row">
         {loading ? (

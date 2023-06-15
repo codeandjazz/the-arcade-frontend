@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Loading, Card, Row, Text, Container, Pagination, Dropdown, Button } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import { useParams, Link } from 'react-router-dom';
-import defaultImg from '../assets/img/default-img.png';
+import defaultImg from '../assets/img/-logos_transparent-cropped.png';
 import Header from './Header';
 
 const GamesList = () => {
@@ -85,11 +85,13 @@ const GamesList = () => {
     <>
       <Header />
       <Container md>
-        <Text>Games</Text>
+        <Text
+          h2
+          css={{ fontFamily: '$body', color: '$black' }}>Games
+        </Text>
         <Card css={{ borderRadius: '$xs' }}>
           <Card.Body css={{ p: 0 }}>
             <Row wrap="wrap" align="center">
-              <Text>Welcome to the Arcade Games Page!</Text>
               <Text>
                 Browse and explore a wide range of exciting arcade games. Use the filters
                 to narrow down your search by genre and release date. Click on a game card
