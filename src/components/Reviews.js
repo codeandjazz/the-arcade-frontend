@@ -35,6 +35,7 @@ const Reviews = () => {
       if (data.success) {
         setReview(data.response);
         fetchCoverUrls(data.response);
+        console.log(data.response);
       } else {
         console.log(data.message);
       }
@@ -77,10 +78,8 @@ const Reviews = () => {
 
   return (
     <Container display="flex">
-      <Text
-        h2
-        css={{ fontFamily: '$body', color: '$black' }}
-      >Reviews
+      <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
+        Reviews
       </Text>
       {review.map((item, index) => (
         <Card
