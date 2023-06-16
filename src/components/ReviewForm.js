@@ -50,7 +50,7 @@ const ReviewForm = ({ showReviewForm, setShowReviewForm, game }) => {
 
   return (
     <Modal open onClose={handleHideReviewForm}>
-      <form onSubmit={onFormSubmit}>
+      <form style={{ padding: '10px' }} onSubmit={onFormSubmit}>
         <label htmlFor="review">Write your review here: </label>
         <input
           type="text"
@@ -58,11 +58,22 @@ const ReviewForm = ({ showReviewForm, setShowReviewForm, game }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           maxLength={140}
+          style={{ fontWeight: '300' }}
         />
-        <Button type="submit">Submit</Button>
-        <Button type="button" onPress={handleHideReviewForm}>
-          Cancel
-        </Button>
+        <div style={{ display: 'flex', marginTop: '10px', justifyContent: 'center', gap: '40px' }}>
+          <Button
+            auto
+            css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$success' }}
+            type="submit">Submit
+          </Button>
+          <Button
+            auto
+            css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+            type="button"
+            onPress={handleHideReviewForm}>
+            Cancel
+          </Button>
+        </div>
       </form>
     </Modal>
   );

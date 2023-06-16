@@ -111,7 +111,7 @@ const Login = () => {
         flat
         color="secondary"
         onPress={handler}
-        css={{ borderRadius: '$xs' }}
+        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}
       >
         Login
       </Button>
@@ -128,10 +128,12 @@ const Login = () => {
             orientation="horizontal"
             label="Mode"
           >
-            <Radio isActive value="USERS/LOGIN">
+            <Radio isActive value="USERS/LOGIN" css={{ fontWeight: '300' }}>
               Login
             </Radio>
-            <Radio value="USERS/REGISTER">Sign up</Radio>
+            <Radio value="USERS/REGISTER" css={{ fontWeight: '300' }}>
+              Sign up
+            </Radio>
           </Radio.Group>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
@@ -179,6 +181,7 @@ const Login = () => {
           </form>
           {/* <Modal.Footer></Modal.Footer> */}
         </Modal.Body>
+        <Modal.Footer />
       </Modal>
     </Container>
   );

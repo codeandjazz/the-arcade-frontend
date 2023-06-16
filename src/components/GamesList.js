@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Loading, Card, Row, Text, Container, Pagination, Dropdown, Button } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
 import { useParams, Link } from 'react-router-dom';
-import defaultImg from '../assets/img/-logos_transparent-cropped.png';
+import defaultImg from '../assets/img/-logos_transparent.png';
 import Header from './Header';
 
 const GamesList = () => {
@@ -90,9 +90,9 @@ const GamesList = () => {
           css={{ fontFamily: '$body', color: '$black' }}>Games
         </Text>
         <Card css={{ borderRadius: '$xs' }}>
-          <Card.Body css={{ p: 0 }}>
+          <Card.Body css={{ p: 0, backgroundColor: '#f5e6fe' }}>
             <Row wrap="wrap" align="center">
-              <Text>
+              <Text css={{ fontWeight: '300', padding: '5px' }}>
                 Browse and explore a wide range of exciting arcade games. Use the filters
                 to narrow down your search by genre and release date. Click on a game card
                 to view more details and immerse yourself in the world of arcade gaming.
@@ -100,82 +100,85 @@ const GamesList = () => {
             </Row>
           </Card.Body>
         </Card>
-        <Dropdown isBordered>
-          <Dropdown.Button
-            auto
-            light
-            css={{ borderRadius: '$xs' }}>
-            {genreQuery === '' ? (<Text>All genres</Text>) : (<Text>{genreQuery} games</Text>)}
-          </Dropdown.Button>
-          <Dropdown.Menu
-            selectionMode="single"
-            items={storedGenres}
-            aria-label="game genres"
-            variant="light">
-            {(genre) => (
-              <Dropdown.Item
-                withDivider
-                key={genre.name}>
+        <section style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+          <Dropdown isBordered>
+            <Dropdown.Button
+              auto
+              color="success"
+              css={{ borderRadius: '$xs' }}>
+              {genreQuery === '' ? (<Text css={{ fontWeight: '500' }}>All genres</Text>) : (<Text>{genreQuery} games</Text>)}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              selectionMode="single"
+              items={storedGenres}
+              aria-label="game genres"
+              variant="light">
+              {(genre) => (
+                <Dropdown.Item
+                  withDivider
+                  key={genre.name}>
+                  <Button
+                    type="button"
+                    auto
+                    ripple="false"
+                    animated="false"
+                    css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
+                    onPress={() => handleGenre(genre.name)}>
+                    {genre.name}
+                  </Button>
+                </Dropdown.Item>
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown isBordered>
+            <Dropdown.Button
+              auto
+              light
+              css={{ borderRadius: '$xs' }}>
+              {/* Display the current sort option based on what is stored as sort */}
+              {sort === 'releasedAsce' && <Text>Oldest first</Text>}
+              {sort === 'releasedDesc' && <Text>Newest first</Text>}
+              {sort === '' && <Text>Sort by</Text>}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              aria-label="Sort by"
+              variant="light">
+              <Dropdown.Item>
                 <Button
-                  type="button"
                   auto
+                  type="button"
                   ripple="false"
                   animated="false"
                   css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
-                  onPress={() => handleGenre(genre.name)}>
-                  {genre.name}
+                  onPress={() => handleSort('releasedAsce')}>
+                  Oldest first
                 </Button>
               </Dropdown.Item>
-            )}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown isBordered>
-          <Dropdown.Button
-            auto
-            light
-            css={{ borderRadius: '$xs' }}>
-            {/* Display the current sort option based on what is stored as sort */}
-            {sort === 'releasedAsce' && <Text>Oldest first</Text>}
-            {sort === 'releasedDesc' && <Text>Newest first</Text>}
-            {sort === '' && <Text>Sort by</Text>}
-          </Dropdown.Button>
-          <Dropdown.Menu
-            aria-label="Sort by"
-            variant="light">
-            <Dropdown.Item
-              withDivider>
-              <Button
-                auto
-                type="button"
-                ripple="false"
-                animated="false"
-                css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
-                onPress={() => handleSort('releasedAsce')}>
-                  Oldest first
-              </Button>
-            </Dropdown.Item>
-            <Dropdown.Item
-              withDivider>
-              <Button
-                auto
-                type="button"
-                ripple="false"
-                animated="false"
-                css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
-                onPress={() => handleSort('releasedDesc')}>
+              <Dropdown.Item
+                withDivider>
+                <Button
+                  auto
+                  type="button"
+                  ripple="false"
+                  animated="false"
+                  css={{ borderRadius: '$xs', color: '$black', backgroundColor: '$white' }}
+                  onPress={() => handleSort('releasedDesc')}>
                   Newest first
-              </Button>
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Button
-          auto
-          flat
-          color="error"
-          css={{ borderRadius: '$xs' }}
-          onPress={handleClearSelection}>
+                </Button>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </section>
+        <section style={{ display: 'flex', justifyContent: 'flex-end', margin: '20px' }}>
+          <Button
+            auto
+            flat
+            color="error"
+            css={{ borderRadius: '$xs' }}
+            onPress={handleClearSelection}>
           Clear filters
-        </Button>
+          </Button>
+        </section>
         <Grid.Container gap={1} justify="center" direction="row">
           {loading || storedGames === undefined ? (
             <Loading type="points" />
@@ -208,7 +211,7 @@ const GamesList = () => {
                           {game.genres && game.genres.map((genre) => (
                             <Text
                               key={genre.id}
-                              css={{ backgroundColor: '$purple200', fontSize: '$xs', fontWeight: '$bold', marginTop: '$1', marginRight: '$1' }}>
+                              css={{ backgroundColor: '$purple200', fontSize: '$xs', fontWeight: '300', padding: '1px', marginTop: '$1', marginRight: '$1' }}>
                               {genre.name} &nbsp;
                             </Text>
                           ))}
@@ -220,8 +223,8 @@ const GamesList = () => {
               </Grid>
             ))
           )}
+          <Pagination total={totalPages} initialPage={currentPage} onChange={handlePageChange} css={{ marginTop: '30px' }} />
         </Grid.Container>
-        <Pagination total={totalPages} initialPage={currentPage} onChange={handlePageChange} />
       </Container>
     </>
   );

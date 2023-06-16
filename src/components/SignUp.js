@@ -108,8 +108,9 @@ const SignUp = () => {
       <Button
         auto
         flat
+        color="success"
         onPress={handler}
-        css={{ borderRadius: '$xs' }}>
+        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}>
         Sign up
       </Button>
       <Modal
@@ -123,10 +124,10 @@ const SignUp = () => {
             onChange={setMode}
             orientation="horizontal"
             label="Mode">
-            <Radio value="USERS/LOGIN">
+            <Radio value="USERS/LOGIN" css={{ fontWeight: '300' }}>
                   Login
             </Radio>
-            <Radio isActive value="USERS/REGISTER">Sign up</Radio>
+            <Radio isActive value="USERS/REGISTER" css={{ fontWeight: '300' }}>Sign up</Radio>
           </Radio.Group>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
@@ -149,24 +150,27 @@ const SignUp = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)} />
             <Spacer y={1} />
-            <Button
-              type="submit"
-              auto
-              color="success"
-              css={{ borderRadius: '$xs' }}>Submit
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Button
+                auto
+                flat
+                color="success"
+                type="submit"
+                css={{ borderRadius: '$xs' }}>Submit
+              </Button>
+              <Button
+                auto
+                flat
+                color="error"
+                type="button"
+                onPress={closeHandler}
+                css={{ borderRadius: '$xs' }}>
+              Close
+              </Button>
+            </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            auto
-            flat
-            color="error"
-            onPress={closeHandler}
-            css={{ borderRadius: '$xs' }}>
-              Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer />
       </Modal>
     </div>
   );

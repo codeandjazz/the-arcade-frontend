@@ -18,7 +18,7 @@ import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import Login from './Login';
 import SignUp from './SignUp';
-import Logo from '../assets/img/-logos_transparent-cropped.png';
+import Logo from '../assets/img/-logos_transparent.png';
 import UserProfile from './UserProfile';
 
 const Header = () => {
@@ -69,23 +69,23 @@ const Header = () => {
       <Navbar.Content hideIn="xs" variant="underline">
         <Link to="/">
           <Text
-            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
+            css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}
           >
             Home
           </Text>
         </Link>
-        <Link to="/about">
-          <Text
-            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
-          >
-            About
-          </Text>
-        </Link>
         <Link to="/games">
           <Text
-            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
+            css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}
           >
             Games
+          </Text>
+        </Link>
+        <Link to="/about">
+          <Text
+            css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}
+          >
+            About
           </Text>
         </Link>
       </Navbar.Content>
@@ -101,36 +101,29 @@ const Header = () => {
           </Navbar.Item>
         )}
         {accessToken && (
-          <Dropdown placement="bottom-right">
+          <Dropdown light placement="bottom-right">
             <Navbar.Item>
               <Dropdown.Trigger>
                 {/* <UserProfile /> */}
                 <Avatar
                   src="https://xsgames.co/randomusers/avatar.php?g=pixel"
-                  size="md"
+                  size="lg"
                   as="button"
                   bordered
+                  color="success"
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
-            <Dropdown.Menu aria-label="User menu">
+            <Dropdown.Menu variant="light" aria-label="User menu">
               <Dropdown.Item>
-                <Text>Welcome back, {username}</Text>
+                <Link to={`/users/${user_id}`}>
+                  <Text css={{ fontFamily: '$body' }}>MY PROFILE</Text>
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item withDivider>
-                <Link to={`/users/${user_id}`}>My profile</Link>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Button onPress={handleLogout}>
+                <Button color="error" onPress={handleLogout}>
                   <Link to="/">
-                    <Text
-                      css={{
-                        fontSize: '$base',
-                        color: '$white'
-                      }}
-                    >
-                      Log out
-                    </Text>
+                    <Text>Log out</Text>
                   </Link>
                 </Button>
               </Dropdown.Item>
@@ -140,13 +133,25 @@ const Header = () => {
       </Navbar.Content>
       <Navbar.Collapse>
         <Navbar.CollapseItem>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            <Text h2 css={{ fontFamily: '$body' }}>
+              Home
+            </Text>
+          </Link>
         </Navbar.CollapseItem>
         <Navbar.CollapseItem>
-          <Link to="/about">About</Link>
+          <Link to="/games">
+            <Text h2 css={{ fontFamily: '$body' }}>
+              Games
+            </Text>
+          </Link>
         </Navbar.CollapseItem>
         <Navbar.CollapseItem>
-          <Link to="/games">Games</Link>
+          <Link to="/about">
+            <Text h2 css={{ fontFamily: '$body' }}>
+              About
+            </Text>
+          </Link>
         </Navbar.CollapseItem>
       </Navbar.Collapse>
     </Navbar>

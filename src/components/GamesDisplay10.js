@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Grid, Row, Text, Loading, Container } from '@nextui-org/react';
 import { API_URL } from 'utils/urls';
-import defaultImg from '../assets/img/-logos_transparent-cropped.png';
+import defaultImg from '../assets/img/-logos_transparent.png';
 // import { InnerWrapper, OuterWrapper } from './StyledComponents';
 
 const GamesDisplay10 = () => {
@@ -51,7 +51,10 @@ const GamesDisplay10 = () => {
         h2
         css={{ fontFamily: '$body', color: '$black' }}
       >
-        Featured Games
+        Featured
+      </Text>
+      <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>
+        You might want to check these out.
       </Text>
       <Grid.Container gap={1} justify="flex-start" direction="row">
         {loading ? (
