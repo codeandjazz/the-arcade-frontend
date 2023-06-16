@@ -47,7 +47,7 @@ const GameSummary = ({ game }) => {
 
   return (
     <Container
-      md
+      xs
       width="100%"
       gap={0}
       css={{ marginTop: '-100px', zIndex: '$max' }}>
@@ -61,36 +61,33 @@ const GameSummary = ({ game }) => {
         />
       )}
       <Text h1 css={{ fontFamily: '$body' }}>{game.name}</Text>
+      {releaseDate
+      && <Text h4>Release date: {releaseDate}</Text>}
       {/* Map out game genres if available */}
       {game.genres
       && game.genres.map((genre) => (
-        <Button
-          type="button"
-          flat
-          color="secondary"
-          key={genre.id}
-          css={{
-            margin: '$2',
-            padding: '$1',
-            borderRadius: '$xs'
-          }}
-        >
-          <Link to={`/games/genres/${genre.name}`}>
-            <Text>{genre.name} &nbsp;</Text>
-          </Link>
-        </Button>
+        <div key={genre.name}>
+          <Button
+            type="button"
+            flat
+            color="#f5e6fe"
+            css={{
+              margin: '$2',
+              padding: '$1',
+              borderRadius: '$xs'
+            }}
+          >
+            <Link to={`/games/genres/${genre.name}`}>
+              <Text css={{ fontWeight: '300' }}>{genre.name} &nbsp;</Text>
+            </Link>
+          </Button>
+        </div>
       ))}
-      {releaseDate
-      && (
-        <>
-          <Text h4>Release date:</Text>
-          <Text> {releaseDate}</Text>
-        </>)}
       {game.summary
         && (
           <>
             <Text h4>Summary:</Text>
-            <Text>{game.summary}</Text>
+            <Text blockquote css={{ fontWeight: '300', backgroundColor: '#f5e6fe' }}>{game.summary}</Text>
           </>)}
       {showReviewForm && (
         <ReviewForm
@@ -99,14 +96,32 @@ const GameSummary = ({ game }) => {
           game={game}
         />
       )}
-      <Button disabled={!accessToken} onPress={handleShowReviewForm}>Write a review</Button>
-      <Spacer y={0.5} />
-      <Button disabled={!accessToken} onPress={HandleAddFavorite}>
-              ❤️ Add to favorites
-      </Button>
-      <Button disabled={!accessToken} onPress={HandleAddFavorite}>
-              Remove from favorites
-      </Button>
+      <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Button
+          flat
+          css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px' }}
+          disabled={!accessToken}
+          onPress={handleShowReviewForm}>Write a review
+        </Button>
+        <Spacer y={0.5} />
+        <Button
+          flat
+          css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+          type="button"
+          disabled={!accessToken}
+          onPress={HandleAddFavorite}>
+                ❤️ Add to favorites
+        </Button>
+        <Button
+          type="button"
+          css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+          disabled={!accessToken}
+          onPress={HandleAddFavorite}>
+                Remove from favorites
+        </Button>
+        {!accessToken
+        && <Text blockquote>Login or create an account to review, favorite and more.</Text>}
+      </section>
     </Container>
   );
 };
