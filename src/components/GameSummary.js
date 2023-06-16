@@ -46,55 +46,50 @@ const GameSummary = ({ game }) => {
   };
 
   return (
-    <section>
-      <Container
-        md
-        width="100%"
-        gap={0}
-        css={{ marginTop: '-100px', zIndex: '$max' }}
+    <Container
+      md
+      width="100%"
+      gap={0}
+      css={{ marginTop: '-100px', zIndex: '$max' }}>
+      {game?.cover?.url && ( // Check if cover URL is available
+        <>
+          <Image
+            src={game.cover.url.replace('t_thumb', 't_cover_big')}
+            alt={`Cover art of the game ${game.name}`}
+            width={220}
+            height={380}
+            objectFit="cover"
+          />
+          <Button disabled={!accessToken} onPress={handleShowReviewForm}>Write a review</Button>
+          <Spacer y={0.5} />
+          <Button disabled={!accessToken} onPress={HandleAddFavorite}>
+              ❤️ Add to favorites
+          </Button>
+          <Button disabled={!accessToken} onPress={HandleAddFavorite}>
+              Remove from favorites
+          </Button>
+        </>
+      )}
+      <Text h1 css={{ fontFamily: '$body' }}>{game.name}</Text>
+      {/* Map out game genres if available */}
+      {game.genres
+      && game.genres.map((genre) => (
+        <Button
+          type="button"
+          flat
+          color="secondary"
+          key={genre.id}
+          css={{
+                margin: '$2',
+                padding: '$1',
+                borderRadius: '$xs'
+              }}
       >
-        <Row gap={1}>
-          {game?.cover?.url && ( // Check if cover URL is available
-            <Col>
-              <Image
-                src={game.cover.url.replace('t_thumb', 't_cover_big')}
-                alt={`Cover art of the game ${game.name}`}
-                width={220}
-                height={380}
-                objectFit="cover"
-              />
-              <Button disabled={!accessToken} onPress={handleShowReviewForm}>Write a review</Button>
-              <Spacer y={0.5} />
-              <Button disabled={!accessToken} onPress={HandleAddFavorite}>
-                ❤️ Add to favorites
-              </Button>
-              <Button disabled={!accessToken} onPress={HandleAddFavorite}>
-                Remove from favorites
-              </Button>
-            </Col>
-          )}
-          <Col>
-            <Container css={{ marginTop: '100px' }}>
-              <Text h1 css={{ fontFamily: '$body' }}>{game.name}</Text>
-              {/* Map out game genres if available */}
-              {game.genres
-              && game.genres.map((genre) => (
-                <Button
-                  type="button"
-                  flat
-                  color="secondary"
-                  key={genre.id}
-                  css={{
-                    margin: '$2',
-                    padding: '$1',
-                    borderRadius: '$xs'
-                  }}
-                >
-                  <Link to={`/games/genres/${genre.name}`}>
-                    <Text>{genre.name} &nbsp;</Text>
-                  </Link>
-                </Button>
-              ))}
+        <Link to={`/games/genres/${genre.name}`}>
+         <Text>{genre.name} &nbsp;</Text>
+        </Link>
+      </Button>
+      ))}
               {releaseDate
               && (
                 <>
@@ -114,11 +109,7 @@ const GameSummary = ({ game }) => {
                   game={game}
                 />
               )}
-            </Container>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+    </Container>
   );
 };
 
