@@ -114,10 +114,9 @@ const GameSummary = ({ game }) => {
                     </Link>
                   </Button>
                 ))}
-              {/* Show release date and summary if they are not undefined */}?{' '}
-              {releaseDate} : <p>Release date: {releaseDate}</p> :{' '}
-              <p>Release date: Unknown</p>? {game.summary} :{' '}
-              <p>{game.summary}</p> : <p>No summary available</p>
+              {/* Show release date and summary if they are not undefined */}
+              <p>Release date: {releaseDate}</p>
+              <p>{game.summary}</p>
               {/* Add summary, note not all games has summary */}
               {showReviewForm && (
                 <ReviewForm
