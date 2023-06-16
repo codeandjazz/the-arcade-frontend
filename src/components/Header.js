@@ -1,7 +1,18 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Button, Text, Image, Dropdown, Loading, Input, Avatar, Modal } from '@nextui-org/react';
+import {
+  Navbar,
+  Button,
+  Text,
+  Image,
+  Dropdown,
+  Loading,
+  Input,
+  Avatar,
+  Modal
+} from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
@@ -39,12 +50,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     // Remove the user from the store
-    dispatch(user.actions.setAccessToken(null))
-    dispatch(user.actions.setUsername(null))
-    dispatch(user.actions.setUserId(null))
-    dispatch(user.actions.setError(null))
-    dispatch(user.actions.setCreatedAt(null))
-    dispatch(user.actions.setReviews([]))
+    dispatch(user.actions.setAccessToken(null));
+    dispatch(user.actions.setUsername(null));
+    dispatch(user.actions.setUserId(null));
+    dispatch(user.actions.setError(null));
+    dispatch(user.actions.setCreatedAt(null));
+    dispatch(user.actions.setReviews([]));
   };
 
   return (
@@ -57,26 +68,38 @@ const Header = () => {
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
         <Link to="/">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Home</Text>
+          <Text
+            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
+          >
+            Home
+          </Text>
         </Link>
         <Link to="/about">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>About</Text>
+          <Text
+            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
+          >
+            About
+          </Text>
         </Link>
         <Link to="/games">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Games</Text>
+          <Text
+            css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}
+          >
+            Games
+          </Text>
         </Link>
       </Navbar.Content>
       <Navbar.Content>
-        {!accessToken
-        && (
+        {!accessToken && (
           <Navbar.Item>
             <Login />
-          </Navbar.Item>)}
-        {!accessToken
-        && (
+          </Navbar.Item>
+        )}
+        {!accessToken && (
           <Navbar.Item>
             <SignUp />
-          </Navbar.Item>)}
+          </Navbar.Item>
+        )}
         {accessToken && (
           <Dropdown placement="bottom-right">
             <Navbar.Item>
@@ -86,23 +109,29 @@ const Header = () => {
                   src="https://xsgames.co/randomusers/avatar.php?g=pixel"
                   size="md"
                   as="button"
-                  bordered />
+                  bordered
+                />
               </Dropdown.Trigger>
             </Navbar.Item>
-            <Dropdown.Menu
-              aria-label="User menu">
+            <Dropdown.Menu aria-label="User menu">
               <Dropdown.Item>
                 <Text>Welcome back, {username}</Text>
               </Dropdown.Item>
               <Dropdown.Item withDivider>
-                <Link to={`/users/${user_id}`}>
-                  My profile
-                </Link>
+                <Link to={`/users/${user_id}`}>My profile</Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Button
-                  onPress={handleLogout}>
-                  <Link to="/">Logout</Link>
+                <Button onPress={handleLogout}>
+                  <Link to="/">
+                    <Text
+                      css={{
+                        fontSize: '$base',
+                        color: '$white'
+                      }}
+                    >
+                      Log out
+                    </Text>
+                  </Link>
                 </Button>
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -111,22 +140,17 @@ const Header = () => {
       </Navbar.Content>
       <Navbar.Collapse>
         <Navbar.CollapseItem>
-          <Link to="/">
-            Home
-          </Link>
+          <Link to="/">Home</Link>
         </Navbar.CollapseItem>
         <Navbar.CollapseItem>
-          <Link to="/about">
-            About
-          </Link>
+          <Link to="/about">About</Link>
         </Navbar.CollapseItem>
         <Navbar.CollapseItem>
-          <Link to="/games">
-            Games
-          </Link>
+          <Link to="/games">Games</Link>
         </Navbar.CollapseItem>
       </Navbar.Collapse>
-    </Navbar>);
+    </Navbar>
+  );
 };
 
 export default Header;
