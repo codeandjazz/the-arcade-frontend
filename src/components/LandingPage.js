@@ -37,7 +37,7 @@ const LandingPage = () => {
   }
 
   return (
-    <Container>
+    <Container md>
       <Header />
       <Text blockquote css={{ textAlign: 'center', marginTop: '2rem', fontFamily: '$sans', fontWeight: '400' }}>
         Welcome to the Arcade.

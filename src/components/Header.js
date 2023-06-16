@@ -57,13 +57,13 @@ const Header = () => {
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
         <Link to="/">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$black' }}>HOME</Text>
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>Home</Text>
         </Link>
         <Link to="/games">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$black' }}>GAMES</Text>
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>Games</Text>
         </Link>
         <Link to="/about">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$black' }}>ABOUT</Text>
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>About</Text>
         </Link>
       </Navbar.Content>
       <Navbar.Content>
