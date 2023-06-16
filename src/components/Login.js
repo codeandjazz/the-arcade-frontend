@@ -115,7 +115,7 @@ const Login = () => {
         flat
         color="secondary"
         onPress={handler}
-        css={{ borderRadius: '$xs' }}>
+        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}>
         Login
       </Button>
       <Modal

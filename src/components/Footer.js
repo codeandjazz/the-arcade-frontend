@@ -4,12 +4,7 @@ import { Text, Container, Grid, Link, Avatar, css } from '@nextui-org/react';
 
 const Footer = () => {
   return (
-    <Container css={{ backgroundColor: '$accents2' }}>
-      <Grid.Container gap={2} css={{ margin: '0 auto' }}>
-        <Grid direction="row">
-          <Text h3>Created by</Text>
-        </Grid>
-      </Grid.Container>
+    <Container css={{ backgroundColor: '#e0b5fd' }}>
       <Grid.Container gap={2} css={{ margin: '0 auto' }}>
         <Grid xs={6} md={6} direction="column">
           <Grid xs={6} md={6}>
@@ -24,7 +19,7 @@ const Footer = () => {
               <Text>TessAquilon</Text>
             </Container>
           </Grid>
-          <Text h3>Student at Frontend Developer Bootcamp</Text>
+          <Text h3>Front-end developer and tech wizard</Text>
           <Link href="https://github.com/TessAquilon" isExternal>
             Github
           </Link>

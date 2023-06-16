@@ -83,9 +83,9 @@ const UserProfilePage = () => {
           <Grid.Container justify="center" gap={2}>
             <Grid>
               <Card css={{ borderRadius: '$xs' }}>
-                <Card.Body>
+                <Card.Body css={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <UserProfile />
-                  <Text>
+                  <Text css={{ fontWeight: '300' }}>
                     Joined in {joinedMonth} {joinedYear}
                   </Text>
                 </Card.Body>
@@ -138,7 +138,7 @@ const UserProfilePage = () => {
                     </Grid>
                   ))}
                   {!loading && favoriteGames.length === 0 && (
-                    <Text>You have no favorite games</Text>
+                    <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>You have no favorite games</Text>
                   )}
                 </Card.Body>
               </Card>
@@ -150,7 +150,7 @@ const UserProfilePage = () => {
         <Container xs>
           <Card>
             <Card.Body>
-              <Text>Sorry, you need to be logged in to view this page</Text>
+              <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>Sorry, you need to be logged in to view this page</Text>
             </Card.Body>
           </Card>
         </Container>

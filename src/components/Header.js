@@ -7,7 +7,7 @@ import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import Login from './Login';
 import SignUp from './SignUp';
-import Logo from '../assets/img/-logos_transparent-cropped.png';
+import Logo from '../assets/img/-logos_transparent.png';
 import UserProfile from './UserProfile';
 
 const Header = () => {
@@ -57,13 +57,13 @@ const Header = () => {
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline">
         <Link to="/">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Home</Text>
-        </Link>
-        <Link to="/about">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>About</Text>
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>HOME</Text>
         </Link>
         <Link to="/games">
-          <Text css={{ fontFamily: '$body', fontSize: '$xl', color: '$myBlue' }}>Games</Text>
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>GAMES</Text>
+        </Link>
+        <Link to="/about">
+          <Text css={{ fontFamily: '$body', fontSize: '$2xl', color: '$black' }}>ABOUT</Text>
         </Link>
       </Navbar.Content>
       <Navbar.Content>
@@ -78,7 +78,9 @@ const Header = () => {
             <SignUp />
           </Navbar.Item>)}
         {accessToken && (
-          <Dropdown placement="bottom-right">
+          <Dropdown
+            light
+            placement="bottom-right">
             <Navbar.Item>
               <Dropdown.Trigger>
                 {/* <UserProfile /> */}
@@ -90,19 +92,20 @@ const Header = () => {
               </Dropdown.Trigger>
             </Navbar.Item>
             <Dropdown.Menu
+              variant="light"
               aria-label="User menu">
               <Dropdown.Item>
-                <Text>Welcome back, {username}</Text>
-              </Dropdown.Item>
-              <Dropdown.Item withDivider>
                 <Link to={`/users/${user_id}`}>
-                  My profile
+                  <Text css={{ fontFamily: '$body' }}>MY PROFILE</Text>
                 </Link>
               </Dropdown.Item>
-              <Dropdown.Item>
+              <Dropdown.Item withDivider>
                 <Button
+                  color="error"
                   onPress={handleLogout}>
-                  <Link to="/">Logout</Link>
+                  <Link to="/">
+                    <Text>Log out</Text>
+                  </Link>
                 </Button>
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -112,17 +115,23 @@ const Header = () => {
       <Navbar.Collapse>
         <Navbar.CollapseItem>
           <Link to="/">
+            <Text h2 css={{ fontFamily: '$body' }}>
             Home
-          </Link>
-        </Navbar.CollapseItem>
-        <Navbar.CollapseItem>
-          <Link to="/about">
-            About
+            </Text>
           </Link>
         </Navbar.CollapseItem>
         <Navbar.CollapseItem>
           <Link to="/games">
+            <Text h2 css={{ fontFamily: '$body' }}>
             Games
+            </Text>
+          </Link>
+        </Navbar.CollapseItem>
+        <Navbar.CollapseItem>
+          <Link to="/about">
+            <Text h2 css={{ fontFamily: '$body' }}>
+            About
+            </Text>
           </Link>
         </Navbar.CollapseItem>
       </Navbar.Collapse>

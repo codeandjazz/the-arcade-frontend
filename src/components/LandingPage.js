@@ -1,8 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Image, Container, Text, css, Spacer } from '@nextui-org/react';
-import Users from 'components/Users';
 import { user } from '../reducers/user';
 import Header from './Header';
 import Footer from './Footer';
@@ -39,6 +39,9 @@ const LandingPage = () => {
   return (
     <Container>
       <Header />
+      <Text blockquote css={{ textAlign: 'center', marginTop: '2rem', fontFamily: '$sans', fontWeight: '400' }}>
+        Welcome to the Arcade.
+      </Text>
       <Container
         css={{
           position: 'relative',
@@ -53,26 +56,27 @@ const LandingPage = () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          marginBottom: '2rem'
         }}
       >
         <Text
           h1
           css={{
             textAlign: 'center',
-            color: 'white',
+            color: '#f5e6fe',
             zIndex: 1,
             fontFamily: '$body'
           }}
         >
-          Track games you’ve played.
+          Track games you&apos;ve played.
         </Text>
         <Spacer y={0.5} />
         <Text
           h1
           css={{
             textAlign: 'center',
-            color: 'white',
+            color: '#f5e6fe',
             zIndex: 1,
             fontFamily: '$body'
           }}
@@ -84,25 +88,16 @@ const LandingPage = () => {
           h1
           css={{
             textAlign: 'center',
-            color: 'white',
+            color: '#f5e6fe',
             zIndex: 1,
             fontFamily: '$body'
           }}
         >
-          Tell your friends what’s awesome.
+          Tell your friends what&apos;s awesome.
         </Text>
       </Container>
-      <Text blockquote css={{ textAlign: 'center', marginTop: '2rem' }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-        tincidunt dolor. Sed euismod, nisl quis tincidunt aliquet, nunc nisl
-        aliquam nunc, vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis
-        tincidunt aliquet, nunc nisl aliquam nunc, vitae aliquam nunc nisl quis
-        nunc. Sed euismod, nisl quis tincidunt aliquet, nunc nisl aliquam nunc,
-        vitae aliquam nunc nisl quis nunc. Sed euismod, nisl quis tincidunt
-      </Text>
       <GamesDisplay10 />
       <Reviews />
-      <Users />
       <Footer />
     </Container>
   );

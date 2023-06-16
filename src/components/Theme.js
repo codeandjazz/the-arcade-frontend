@@ -8,8 +8,8 @@ const theme = createTheme({
     black: '#000000',
 
     // background colors (light)
-    background: '$white',
-    backgroundAlpha: 'rgba(255, 255, 255, 0.8)', // used for semi-transparent backgrounds like the navbar
+    background: '#e0b5fd',
+    backgroundAlpha: '#e0b5fd', // used for semi-transparent backgrounds like the navbar
     foreground: '$black',
     backgroundContrast: '$white',
 
@@ -28,14 +28,15 @@ const theme = createTheme({
     myBlue: '#1d25f6',
 
     // ... rest of colors (secondary, success, warning, error, etc)
-    secondary: '#7828C8',
-    success: '#17C964',
+    secondary: '#56048c',
+    success: '#b5fde0',
     warning: '#F5A524',
-    error: '#F31260'
+    error: '#fde0b5'
     // gradient
   },
   fonts: {
-    body: 'Audiowide, cursive'
+    body: 'Audiowide, cursive',
+    sans: 'Changa, sans-serif'
   },
   fontSizes: {
     xs: '0.75rem', /* 12px */

@@ -108,8 +108,9 @@ const SignUp = () => {
       <Button
         auto
         flat
+        color="success"
         onPress={handler}
-        css={{ borderRadius: '$xs' }}>
+        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}>
         Sign up
       </Button>
       <Modal

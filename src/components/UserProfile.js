@@ -30,8 +30,7 @@ const UserProfile = () => {
         css={{ fontFamily: '$body', fontSize: '$base' }}
         pointer
         bordered
-        squared
-        color={randomColor()}
+        color="#56048c"
       />
     </Link>
   );

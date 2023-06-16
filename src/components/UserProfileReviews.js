@@ -159,33 +159,27 @@ const UserProfileReviews = () => {
 
   return (
     <Container>
-      <h1>Reviews</h1>
+      <Text h2 css={{ fontFamily: '$body' }}>Reviews</Text>
       {review.map((item) => (
         <Card
           gap={2}
           css={{
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: 'column',
             minHeight: '4rem',
-            padding: '0 1.5rem'
+            padding: '1.5rem 1.5rem',
+            borderRadius: '$xs',
+            marginBottom: '5px'
           }}
         >
-          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
+          <section style={{ display: 'flex', flexDirection: 'column' }}>
+            <Text>{formatDate(item.createdAt)}</Text>
             <Text h4>{item.game_name}</Text>
-          </Grid>
-          <Grid xs={3} css={{ alignItems: 'center' }}>
-            <Text p>"{item.message}"</Text>
-          </Grid>
-          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
-            <Text h4>{formatDate(item.createdAt)}</Text>
-          </Grid>
-          <Grid xs={3}>
+            <Text blockquote>{item.message}</Text>
             <Button.Group css={{ margin: 'auto 0' }}>
-              <Button type="button" onClick={() => deleteReview(item._id)}>
-                Delete
-              </Button>
               <Button
                 type="button"
+                css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$success' }}
                 onClick={() => {
                   setShowReviewForm(true);
                   setEditReviewId(item._id);
@@ -193,8 +187,15 @@ const UserProfileReviews = () => {
               >
                 Edit
               </Button>
+              <Button
+                color="error"
+                css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+                type="button"
+                onClick={() => deleteReview(item._id)}>
+                Delete
+              </Button>
             </Button.Group>
-          </Grid>
+          </section>
           {showReviewForm && showEditReviewModal(item._id)}
         </Card>
       ))}
