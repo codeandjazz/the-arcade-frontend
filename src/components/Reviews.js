@@ -85,12 +85,9 @@ const Reviews = () => {
   }, []);
 
   return (
-    <Container display="flex" gap={2}>
+    <Container md display="flex" gap={2}>
       <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
         Reviews
-      </Text>
-      <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>
-        Games that have recently been reviewed by our users.
       </Text>
       {review.map((item, index) => (
         <Card

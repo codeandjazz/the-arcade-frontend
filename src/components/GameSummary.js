@@ -47,7 +47,7 @@ const GameSummary = ({ game }) => {
 
   return (
     <Container
-      xs
+      md
       width="100%"
       gap={0}
       css={{ marginTop: '-100px', zIndex: '$max' }}>
