@@ -8,13 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
-  Card,
-  Row,
-  Text,
   Input,
   Spacer,
   Button,
-  Checkbox,
   Radio,
   Modal
 } from '@nextui-org/react';
@@ -109,20 +105,22 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <Container>
       <Button
         auto
         flat
         color="secondary"
         onPress={handler}
-        css={{ borderRadius: '$xs' }}>
+        css={{ borderRadius: '$xs' }}
+      >
         Login
       </Button>
       <Modal
         closeButton
         aria-labelledby="modal-title"
         open={visible}
-        onClose={closeHandler}>
+        onClose={closeHandler}
+      >
         <Modal.Body>
           <Radio.Group
             defaultValue={mode}
@@ -131,7 +129,7 @@ const Login = () => {
             label="Mode"
           >
             <Radio isActive value="USERS/LOGIN">
-                  Login
+              Login
             </Radio>
             <Radio value="USERS/REGISTER">Sign up</Radio>
           </Radio.Group>
@@ -158,27 +156,31 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
             <Spacer y={1} />
-            <Button
-              auto
-              ghost
-              color="success"
-              type="submit"
-              css={{ borderRadius: '$xs' }}>Submit
-            </Button>
+            <Button.Group>
+              <Button
+                auto
+                ghost
+                color="success"
+                type="submit"
+                css={{ borderRadius: '$xs' }}
+              >
+                Submit
+              </Button>
+              <Button
+                auto
+                ghost
+                color="error"
+                onPress={closeHandler}
+                css={{ borderRadius: '$xs' }}
+              >
+                Close
+              </Button>
+            </Button.Group>
           </form>
-          <Modal.Footer>
-            <Button
-              auto
-              ghost
-              color="error"
-              onPress={closeHandler}
-              css={{ borderRadius: '$xs' }}>
-              Close
-            </Button>
-          </Modal.Footer>
+          {/* <Modal.Footer></Modal.Footer> */}
         </Modal.Body>
       </Modal>
-    </div>
+    </Container>
   );
 };
 
