@@ -54,7 +54,7 @@ const GamesDisplay10 = () => {
         Featured
       </Text>
       <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>
-        Some games we think you might want to check out.
+        You might want to check these out.
       </Text>
       <Grid.Container gap={1} justify="flex-start" direction="row">
         {loading ? (
