@@ -3,6 +3,7 @@
 import React from 'react';
 import { Text, Container, Collapse, Link } from '@nextui-org/react';
 import Header from './Header';
+import Footer from './Footer';
 
 const AboutUs = () => {
   return (
@@ -51,6 +52,7 @@ const AboutUs = () => {
           </Link>
         </Collapse>
       </Collapse.Group>
+      <Footer />
     </Container>
   );
 };

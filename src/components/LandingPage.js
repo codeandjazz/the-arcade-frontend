@@ -98,7 +98,6 @@ const LandingPage = () => {
       </Container>
       <GamesDisplay10 />
       <Reviews />
-      <Footer />
     </Container>
   );
 };

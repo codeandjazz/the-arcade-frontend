@@ -130,10 +130,10 @@ const Login = () => {
             orientation="horizontal"
             label="Mode"
           >
-            <Radio isActive value="USERS/LOGIN">
+            <Radio isActive value="USERS/LOGIN" css={{ fontWeight: '300' }}>
                   Login
             </Radio>
-            <Radio value="USERS/REGISTER">Sign up</Radio>
+            <Radio value="USERS/REGISTER" css={{ fontWeight: '300' }}>Sign up</Radio>
           </Radio.Group>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
@@ -158,25 +158,27 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
             <Spacer y={1} />
-            <Button
-              auto
-              ghost
-              color="success"
-              type="submit"
-              css={{ borderRadius: '$xs' }}>Submit
-            </Button>
-          </form>
-          <Modal.Footer>
-            <Button
-              auto
-              ghost
-              color="error"
-              onPress={closeHandler}
-              css={{ borderRadius: '$xs' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Button
+                auto
+                flat
+                color="success"
+                type="submit"
+                css={{ borderRadius: '$xs' }}>Submit
+              </Button>
+              <Button
+                auto
+                flat
+                color="error"
+                type="button"
+                onPress={closeHandler}
+                css={{ borderRadius: '$xs' }}>
               Close
-            </Button>
-          </Modal.Footer>
+              </Button>
+            </div>
+          </form>
         </Modal.Body>
+        <Modal.Footer />
       </Modal>
     </div>
   );

@@ -99,38 +99,29 @@ const Reviews = () => {
           css={{
             display: 'flex',
             flexDirection: 'row',
+            alignItems: 'center',
             minHeight: '4rem',
             padding: '0.5rem 1.5rem',
             margin: '0.5rem 0'
           }}
         >
-          <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
-            {coverUrls[index] && (
-              <Image
-                src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-                width={100}
-                height={100}
-              />
-            )}
-          </Grid>
-          <Grid xs={9} gap={1} css={{ alignItems: 'center' }}>
-            <Card.Body
-              css={{
-                alignItems: 'baseline',
-                flexDirection: 'row'
-              }}
-            >
-              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
-                <Text size="$2xl">{item.user.username}</Text>
-              </Grid>
-              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
-                <Text size="$sm">{formatDate(item.createdAt)}</Text>
-              </Grid>
-              <Grid xs={3} gap={1} css={{ alignItems: 'center' }}>
-                <Text weight="bold">{item.message}</Text>
-              </Grid>
-            </Card.Body>
-          </Grid>
+          {coverUrls[index] && (
+            <Image
+              src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+              width={100}
+              height={100}
+            />
+          )}
+          <Card.Body
+            css={{
+              alignItems: 'baseline',
+              flexDirection: 'column'
+            }}
+          >
+            <Text css={{ fontWeight: '300' }}>{formatDate(item.createdAt)}</Text>
+            <Text size="$2xl">{item.user.username}</Text>
+            <Text css={{ fontWeight: '300' }}>{item.message}</Text>
+          </Card.Body>
         </Card>
       ))}
     </Container>

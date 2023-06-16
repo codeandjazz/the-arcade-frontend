@@ -86,7 +86,7 @@ const Header = () => {
                 {/* <UserProfile /> */}
                 <Avatar
                   src="https://xsgames.co/randomusers/avatar.php?g=pixel"
-                  size="md"
+                  size="lg"
                   as="button"
                   bordered />
               </Dropdown.Trigger>
