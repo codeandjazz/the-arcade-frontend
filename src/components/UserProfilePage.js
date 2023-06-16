@@ -57,24 +57,6 @@ const UserProfilePage = () => {
     fetchFavoriteGames();
   }, [accessToken]);
 
-  // Patch request to remove a game from favorites
-  /* const HandleAddFavorite = (game) => {
-    const options = {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: accessToken
-      }
-    };
-    fetch(API_URL(`games/${game._id}/addfavorite`), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          console.log(data);
-        }
-      })
-  } */
-
   return (
     <>
       <Header />
@@ -82,7 +64,7 @@ const UserProfilePage = () => {
         <Container md>
           <Grid.Container justify="center" gap={2}>
             <Grid>
-              <Card css={{ borderRadius: '$xs' }}>
+              <Card css={{ borderRadius: '$xs', backgroundColor: '#f5e6fe' }}>
                 <Card.Body css={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <UserProfile />
                   <Text css={{ fontWeight: '300' }}>
@@ -101,7 +83,7 @@ const UserProfilePage = () => {
                       <Link href={`/games/${game.slug}/${game._id}`}>
                         <Card
                           isPressable
-                          css={{ w: '8rem', h: '15rem', borderRadius: '$xs' }}
+                          css={{ w: '8rem', h: '15rem', borderRadius: '$xs', backgroundColor: '#f5e6fe' }}
                         >
                           <Card.Body css={{ p: 0 }}>
                             {game.cover && game.cover.url ? (
@@ -124,12 +106,6 @@ const UserProfilePage = () => {
                             <Card.Footer css={{ justifyItems: 'flex-start' }}>
                               <Row wrap="wrap" align="center">
                                 <Text>{game.name}</Text>
-                                {/* <Button
-                                  disabled={!accessToken}
-                                  onPress={() => HandleAddFavorite(game._id)}
-                                  size="xs">
-                                  <Text>Remove</Text>
-                                </Button> */}
                               </Row>
                             </Card.Footer>
                           </Card.Body>
@@ -144,18 +120,18 @@ const UserProfilePage = () => {
               </Card>
             </Grid>
           </Grid.Container>
+          <UserProfileReviews />
         </Container>
       )}
       {!accessToken && (
         <Container xs>
           <Card>
             <Card.Body>
-              <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>Sorry, you need to be logged in to view this page</Text>
+              <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300', backgroundColor: '#f5e6fe' }}>Sorry, you need to be logged in to view this page</Text>
             </Card.Body>
           </Card>
         </Container>
       )}
-      <UserProfileReviews />
     </>
   );
 };
