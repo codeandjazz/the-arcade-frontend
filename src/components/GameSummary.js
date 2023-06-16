@@ -46,120 +46,91 @@ const GameSummary = ({ game }) => {
   };
 
   return (
-    <Container
-      md
-      width="100%"
-      gap={0}
-      css={{ marginTop: '-100px', zIndex: '$max' }}
-    >
-      {game?.cover?.url && ( // Check if cover URL is available
-        <Image
-          src={game.cover.url.replace('t_thumb', 't_cover_big')}
-          alt={`Cover art of the game ${game.name}`}
-          width={220}
-          height={380}
-          objectFit="cover"
-        />
-      )}
-      <Text h1 css={{ fontFamily: '$body' }}>
-        {game.name}
-      </Text>
-      {releaseDate && <Text h4>Release date: {releaseDate}</Text>}
-      {/* Map out game genres if available */}
-      {game.genres &&
-        game.genres.map((genre) => (
-          <div key={genre.name}>
-            <Button
-              type="button"
-              flat
-              color="#f5e6fe"
-              css={{
-                margin: '$2',
-                padding: '$1',
-                borderRadius: '$xs'
-              }}
-            >
-              <Link to={`/games/genres/${genre.name}`}>
-                <Text css={{ fontWeight: '300' }}>{genre.name} &nbsp;</Text>
-              </Link>
-            </Button>
-          </div>
-        ))}
-      {game.summary && (
-        <>
-          <Text h4>Summary:</Text>
-          <Text
-            blockquote
-            css={{ fontWeight: '300', backgroundColor: '#f5e6fe' }}
-          >
-            {game.summary}
-          </Text>
-        </>
-      )}
-      {showReviewForm && (
-        <ReviewForm
-          setShowReviewForm={setShowReviewForm}
-          showReviewForm={showReviewForm}
-          game={game}
-        />
-      )}
-      <section
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center'
-        }}
+    <section>
+      <Container
+        md
+        width="100%"
+        gap={0}
+        css={{ marginTop: '-100px', zIndex: '$max' }}
       >
-        <Button
-          flat
-          css={{
-            borderRadius: '$xs',
-            fontWeight: '300',
-            color: '$black',
-            margin: '1px'
-          }}
-          disabled={!accessToken}
-          onPress={handleShowReviewForm}
-        >
-          Write a review
-        </Button>
-        <Spacer y={0.5} />
-        <Button
-          flat
-          css={{
-            borderRadius: '$xs',
-            fontWeight: '300',
-            color: '$black',
-            margin: '1px',
-            backgroundColor: '$error'
-          }}
-          type="button"
-          disabled={!accessToken}
-          onPress={HandleAddFavorite}
-        >
-          ❤️ Add to favorites
-        </Button>
-        <Button
-          type="button"
-          css={{
-            borderRadius: '$xs',
-            fontWeight: '300',
-            color: '$black',
-            margin: '1px',
-            backgroundColor: '$error'
-          }}
-          disabled={!accessToken}
-          onPress={HandleAddFavorite}
-        >
-          Remove from favorites
-        </Button>
-        {!accessToken && (
-          <Text blockquote>
-            Login or create an account to review, favorite and more.
-          </Text>
-        )}
-      </section>
-    </Container>
+        <Row gap={1}>
+          {game?.cover?.url && ( // Check if cover URL is available
+            <Col>
+              <Image
+                src={game.cover.url.replace('t_thumb', 't_cover_big')}
+                alt={`Cover art of the game ${game.name}`}
+                width={220}
+                height={380}
+                objectFit="cover"
+              />
+              <Container>
+                <Spacer y={0.5} />
+                <Button
+                  size="lg"
+                  onPress={handleShowReviewForm}
+                  css={{ margin: '0 auto' }}
+                >
+                  Write a review
+                </Button>
+                <Spacer y={1} />
+                <Button
+                  size="lg"
+                  disabled={!accessToken}
+                  onPress={HandleAddFavorite}
+                  css={{ margin: '0 auto' }}
+                >
+                  ❤️ Add to favorites
+                </Button>
+                <Spacer y={0.5} />
+                <Button
+                  size="lg"
+                  disabled={!accessToken}
+                  onPress={HandleAddFavorite}
+                  css={{ margin: '0 auto' }}
+                >
+                  Remove from favorites
+                </Button>
+              </Container>
+            </Col>
+          )}
+          <Col>
+            <Container css={{ marginTop: '100px' }}>
+              <h1>{game.name}</h1>
+              {/* Map out game genres if available */}
+              {game.genres &&
+                game.genres.map((genre) => (
+                  <Button
+                    key={genre.id}
+                    css={{
+                      backgroundColor: '$purple400',
+                      fontSize: '$sm',
+                      fontWeight: '$bold',
+                      margin: '$2',
+                      padding: '$1'
+                    }}
+                  >
+                    <Link to={`/games/genres/${genre.name}`}>
+                      {genre.name} &nbsp;
+                    </Link>
+                  </Button>
+                ))}
+              {/* Show release date and summary if they are not undefined */}?{' '}
+              {releaseDate} : <p>Release date: {releaseDate}</p> :{' '}
+              <p>Release date: Unknown</p>? {game.summary} :{' '}
+              <p>{game.summary}</p> : <p>No summary available</p>
+              {/* Add summary, note not all games has summary */}
+              {showReviewForm && (
+                <ReviewForm
+                  setShowReviewForm={setShowReviewForm}
+                  showReviewForm={showReviewForm}
+                  game={game}
+                />
+              )}
+            </Container>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 
