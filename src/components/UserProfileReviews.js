@@ -56,7 +56,7 @@ const UserProfileReviews = () => {
   useEffect(() => {
     fetchLoggedInUserReviews(userId);
     console.log(userId);
-  }, []);
+  });
 
   // ////////////////////////////////////// //
 
@@ -159,7 +159,9 @@ const UserProfileReviews = () => {
 
   return (
     <Container>
-      <Text h2 css={{ fontFamily: '$body' }}>Reviews</Text>
+      <Text h2 css={{ fontFamily: '$body' }}>
+        Reviews
+      </Text>
       {review.map((item) => (
         <Card
           gap={2}
@@ -179,7 +181,13 @@ const UserProfileReviews = () => {
             <Button.Group css={{ margin: 'auto 0' }}>
               <Button
                 type="button"
-                css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$success' }}
+                css={{
+                  borderRadius: '$xs',
+                  fontWeight: '300',
+                  color: '$black',
+                  margin: '1px',
+                  backgroundColor: '$success'
+                }}
                 onClick={() => {
                   setShowReviewForm(true);
                   setEditReviewId(item._id);
@@ -189,9 +197,16 @@ const UserProfileReviews = () => {
               </Button>
               <Button
                 color="error"
-                css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+                css={{
+                  borderRadius: '$xs',
+                  fontWeight: '300',
+                  color: '$black',
+                  margin: '1px',
+                  backgroundColor: '$error'
+                }}
                 type="button"
-                onClick={() => deleteReview(item._id)}>
+                onClick={() => deleteReview(item._id)}
+              >
                 Delete
               </Button>
             </Button.Group>
