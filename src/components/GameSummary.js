@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable-next-line */
 /* eslint-disable operator-linebreak */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -19,8 +19,9 @@ import ReviewForm from './ReviewForm';
 
 const GameSummary = ({ game }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
-  // console.log(showReviewForm);
-  // console.log(game.cover.url);
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const [isLoading, setIsLoading] = useState(true);
+  const [coverUrl, setCoverUrl] = useState(null);
 
   const timestamp = game.first_release_date;
   const date = new Date(timestamp * 1000);
@@ -28,9 +29,15 @@ const GameSummary = ({ game }) => {
   const handleShowReviewForm = () => {
     setShowReviewForm(!showReviewForm);
   };
-  const accessToken = useSelector((store) => store.user.accessToken);
-  // Patch request to add a favorite game to the user
-  const HandleAddFavorite = () => {
+
+  useEffect(() => {
+    if (game?.cover?.url) {
+      setCoverUrl(game.cover.url.replace('t_thumb', 't_cover_big'));
+      setIsLoading(false);
+    }
+  }, [game]);
+
+  const handleAddFavorite = () => {
     const options = {
       method: 'PATCH',
       headers: {
@@ -47,6 +54,10 @@ const GameSummary = ({ game }) => {
       });
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>; // Render a loading state if the cover URL is still loading
+  }
+
   return (
     <section>
       <Container
@@ -56,10 +67,11 @@ const GameSummary = ({ game }) => {
         css={{ marginTop: '-100px', zIndex: '$max' }}
       >
         <Row gap={1}>
-          {game?.cover?.url && ( // Check if cover URL is available
+          {/* Check if game has a cover image */}
+          {coverUrl && (
             <Col>
               <Image
-                src={game.cover.url.replace('t_thumb', 't_cover_big')}
+                src={coverUrl}
                 alt={`Cover art of the game ${game.name}`}
                 width={220}
                 height={380}
@@ -78,7 +90,7 @@ const GameSummary = ({ game }) => {
                 <Button
                   size="lg"
                   disabled={!accessToken}
-                  onPress={HandleAddFavorite}
+                  onPress={handleAddFavorite}
                   css={{ margin: '0 auto' }}
                 >
                   ❤️ Add to favorites
@@ -87,7 +99,7 @@ const GameSummary = ({ game }) => {
                 <Button
                   size="lg"
                   disabled={!accessToken}
-                  onPress={HandleAddFavorite}
+                  onPress={handleAddFavorite}
                   css={{ margin: '0 auto' }}
                 >
                   Remove from favorites

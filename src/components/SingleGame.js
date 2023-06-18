@@ -88,7 +88,7 @@ const Game = () => {
             }}
           />
         )}
-        {game && <GameSummary game={game} />}
+        <GameSummary game={game} />
       </Container>
     </>
   );
