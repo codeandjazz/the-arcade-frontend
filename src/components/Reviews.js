@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
@@ -69,20 +70,23 @@ const Reviews = () => {
     }
   }, []);
 
-  const fetchCoverUrls = useCallback(async (reviews) => {
-    try {
-      const urls = await Promise.all(
-        reviews.map((item) => fetchCover(item.game))
-      );
-      setCoverUrls(urls);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const fetchCoverUrls = useCallback(
+    async (reviews) => {
+      try {
+        const urls = await Promise.all(
+          reviews.map((item) => fetchCover(item.game))
+        );
+        setCoverUrls(urls);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [fetchCover]
+  );
 
   useEffect(() => {
     fetchReviews();
-  }, []);
+  }, [fetchReviews]);
 
   return (
     <Container md display="flex" gap={2}>
@@ -115,7 +119,9 @@ const Reviews = () => {
               flexDirection: 'column'
             }}
           >
-            <Text css={{ fontWeight: '300' }}>{formatDate(item.createdAt)}</Text>
+            <Text css={{ fontWeight: '300' }}>
+              {formatDate(item.createdAt)}
+            </Text>
             <Text size="$2xl">{item.user.username}</Text>
             <Text css={{ fontWeight: '300' }}>{item.message}</Text>
           </Card.Body>
