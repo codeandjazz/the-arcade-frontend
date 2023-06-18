@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable-next-line */
+/* eslint-disable operator-linebreak */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';

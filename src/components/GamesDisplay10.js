@@ -47,14 +47,8 @@ const GamesDisplay10 = () => {
 
   return (
     <Container md>
-      <Text
-        h2
-        css={{ fontFamily: '$body', color: '$black' }}
-      >
+      <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
         Featured
-      </Text>
-      <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>
-        You might want to check these out.
       </Text>
       <Grid.Container gap={1} justify="flex-start" direction="row">
         {loading ? (
