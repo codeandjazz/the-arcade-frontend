@@ -56,7 +56,7 @@ const UserProfileReviews = () => {
   useEffect(() => {
     fetchLoggedInUserReviews(userId);
     console.log(userId);
-  });
+  }, [userId]);
 
   // ////////////////////////////////////// //
 
