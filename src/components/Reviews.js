@@ -86,7 +86,7 @@ const Reviews = () => {
 
   useEffect(() => {
     fetchReviews();
-  }, [fetchReviews]);
+  }, []);
 
   return (
     <Container md display="flex" gap={2}>
