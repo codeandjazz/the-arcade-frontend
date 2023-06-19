@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
@@ -23,7 +24,9 @@ import UserProfile from './UserProfile';
 
 const Header = () => {
   // Check if the user is logged in
-  const accessToken = useSelector((store) => store.user.accessToken);
+  const accessToken =
+    useSelector((store) => store.user.accessToken) ||
+    sessionStorage.getItem('accessToken');
   /* const [storedGenres, setStoredGenres] = useState([]); */
   const [loading, setLoading] = useState(true);
   const { username, user_id } = useSelector((store) => store.user);
