@@ -27,7 +27,7 @@ const Reviews = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     if (accessToken) {
       dispatch(user.actions.setAccessToken(accessToken));
     }

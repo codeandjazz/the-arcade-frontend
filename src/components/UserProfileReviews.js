@@ -27,11 +27,12 @@ const UserProfileReviews = () => {
   // get accessToken from store
   const accessToken =
     useSelector((store) => store.user.accessToken) ||
-    localStorage.getItem('accessToken');
+    sessionStorage.getItem('accessToken');
   console.log(accessToken);
   // get userId from store
   const userId =
-    useSelector((store) => store.user.userId) || localStorage.getItem('userId');
+    useSelector((store) => store.user.userId) ||
+    sessionStorage.getItem('userId');
   console.log(userId);
 
   // ////////////////////////////////////// //

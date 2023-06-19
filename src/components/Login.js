@@ -18,7 +18,7 @@ import {
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
-const saveCredentialsToLocalStorage = (
+const saveCredentialsToSessionStorage = (
   accessToken,
   username,
   userId,
@@ -26,12 +26,12 @@ const saveCredentialsToLocalStorage = (
   reviews,
   playedGames
 ) => {
-  localStorage.setItem('accessToken', accessToken);
-  localStorage.setItem('username', username);
-  localStorage.setItem('userId', userId);
-  localStorage.setItem('createdAt', createdAt);
-  localStorage.setItem('reviews', reviews);
-  localStorage.setItem('playedGames', playedGames);
+  sessionStorage.setItem('accessToken', accessToken);
+  sessionStorage.setItem('username', username);
+  sessionStorage.setItem('userId', userId);
+  sessionStorage.setItem('createdAt', createdAt);
+  sessionStorage.setItem('reviews', reviews);
+  sessionStorage.setItem('playedGames', playedGames);
 
   console.log('user saved to local storage');
 };
@@ -86,7 +86,7 @@ const Login = () => {
           // dispatch(user.actions.setFavorites(data.response.favorites));
           // dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
-          saveCredentialsToLocalStorage(
+          saveCredentialsToSessionStorage(
             data.response.accessToken,
             data.response.username,
             data.response.id,

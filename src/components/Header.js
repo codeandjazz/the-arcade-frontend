@@ -49,6 +49,8 @@ const Header = () => {
   }, []); */
   const dispatch = useDispatch();
   const handleLogout = () => {
+    // Clear localStorage
+    sessionStorage.clear();
     // Remove the user from the store
     dispatch(user.actions.setAccessToken(null));
     dispatch(user.actions.setUsername(null));

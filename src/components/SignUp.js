@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +18,7 @@ import {
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
-const saveCredentialsToLocalStorage = (
+const saveCredentialsToSessionStorage = (
   accessToken,
   username,
   userId,
@@ -25,12 +26,12 @@ const saveCredentialsToLocalStorage = (
   reviews,
   playedGames
 ) => {
-  localStorage.setItem('accessToken', accessToken);
-  localStorage.setItem('username', username);
-  localStorage.setItem('userId', userId);
-  localStorage.setItem('createdAt', createdAt);
-  localStorage.setItem('reviews', reviews);
-  localStorage.setItem('playedGames', playedGames);
+  sessionStorage.setItem('accessToken', accessToken);
+  sessionStorage.setItem('username', username);
+  sessionStorage.setItem('userId', userId);
+  sessionStorage.setItem('createdAt', createdAt);
+  sessionStorage.setItem('reviews', reviews);
+  sessionStorage.setItem('playedGames', playedGames);
 
   console.log('user saved to local storage');
 };
@@ -85,7 +86,7 @@ const SignUp = () => {
           // dispatch(user.actions.setFavorites(data.response.favorites));
           // dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
-          saveCredentialsToLocalStorage(
+          saveCredentialsToSessionStorage(
             data.response.accessToken,
             data.response.username,
             data.response.id,
@@ -110,24 +111,29 @@ const SignUp = () => {
         flat
         color="success"
         onPress={handler}
-        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}>
+        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}
+      >
         Sign up
       </Button>
       <Modal
         closeButton
         aria-labelledby="modal-title"
         open={visible}
-        onClose={closeHandler}>
+        onClose={closeHandler}
+      >
         <Modal.Body>
           <Radio.Group
             defaultValue={mode}
             onChange={setMode}
             orientation="horizontal"
-            label="Mode">
+            label="Mode"
+          >
             <Radio value="USERS/LOGIN" css={{ fontWeight: '300' }}>
-                  Login
+              Login
             </Radio>
-            <Radio isActive value="USERS/REGISTER" css={{ fontWeight: '300' }}>Sign up</Radio>
+            <Radio isActive value="USERS/REGISTER" css={{ fontWeight: '300' }}>
+              Sign up
+            </Radio>
           </Radio.Group>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
@@ -138,7 +144,8 @@ const SignUp = () => {
               size="lg"
               label="Username"
               value={username}
-              onChange={(event) => setUsername(event.target.value)} />
+              onChange={(event) => setUsername(event.target.value)}
+            />
             <Spacer y={1} />
             <Input
               clearable
@@ -148,7 +155,8 @@ const SignUp = () => {
               label="Password"
               type="password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)} />
+              onChange={(event) => setPassword(event.target.value)}
+            />
             <Spacer y={1} />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
@@ -156,7 +164,9 @@ const SignUp = () => {
                 flat
                 color="success"
                 type="submit"
-                css={{ borderRadius: '$xs' }}>Submit
+                css={{ borderRadius: '$xs' }}
+              >
+                Submit
               </Button>
               <Button
                 auto
@@ -164,8 +174,9 @@ const SignUp = () => {
                 color="error"
                 type="button"
                 onPress={closeHandler}
-                css={{ borderRadius: '$xs' }}>
-              Close
+                css={{ borderRadius: '$xs' }}
+              >
+                Close
               </Button>
             </div>
           </form>

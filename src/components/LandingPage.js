@@ -15,14 +15,14 @@ import { API_URL } from '../utils/urls';
 const LandingPage = () => {
   const dispatch = useDispatch();
   // if local storage has a token, then update the store with the token
-  if (localStorage.getItem('accessToken')) {
-    const accessToken = localStorage.getItem('accessToken');
-    const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('userId');
-    const createdAt = localStorage.getItem('createdAt');
-    const reviews = localStorage.getItem('reviews');
-    const playedGames = localStorage.getItem('playedGames');
-    // const favorites = localStorage.getItem('favorites');
+  if (sessionStorage.getItem('accessToken')) {
+    const accessToken = sessionStorage.getItem('accessToken');
+    const username = sessionStorage.getItem('username');
+    const userId = sessionStorage.getItem('userId');
+    const createdAt = sessionStorage.getItem('createdAt');
+    const reviews = sessionStorage.getItem('reviews');
+    const playedGames = sessionStorage.getItem('playedGames');
+    // const favorites = sessionStorage.getItem('favorites');
     dispatch(
       user.actions.setAccessToken({
         accessToken,
@@ -39,7 +39,15 @@ const LandingPage = () => {
   return (
     <Container md>
       <Header />
-      <Text blockquote css={{ textAlign: 'center', marginTop: '2rem', fontFamily: '$sans', fontWeight: '400' }}>
+      <Text
+        blockquote
+        css={{
+          textAlign: 'center',
+          marginTop: '2rem',
+          fontFamily: '$sans',
+          fontWeight: '400'
+        }}
+      >
         Welcome to the Arcade.
       </Text>
       <Container
