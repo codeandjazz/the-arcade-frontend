@@ -64,9 +64,11 @@ const Reviews = () => {
         return `https:${data.response.cover.url}`;
       } else {
         console.log(data.message);
+        return null; // Add a return statement here
       }
     } catch (error) {
       console.error(error);
+      return null; // Add a return statement here as well
     }
   }, []);
 
@@ -86,7 +88,7 @@ const Reviews = () => {
 
   useEffect(() => {
     fetchReviews();
-  }, [fetchReviews]);
+  }, []);
 
   return (
     <Container md display="flex" gap={2}>
