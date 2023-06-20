@@ -37,8 +37,8 @@ const Footer = () => {
               <Text>dannebrob</Text>
             </Container>
           </Grid>
-          <Text h3>A passionate frontend developer from Sweden</Text>
-          <Link href="https://github.com/TessAquilon" isExternal>
+          <Text h3>Making ideas come alive on the internet</Text>
+          <Link href="https://github.com/dannebrob" isExternal>
             Github
           </Link>
         </Grid>
