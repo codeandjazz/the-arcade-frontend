@@ -81,6 +81,7 @@ const GameSummary = ({ game }) => {
                 <Spacer y={0.5} />
                 <Button
                   size="lg"
+                  disabled={!accessToken}
                   onPress={handleShowReviewForm}
                   css={{ margin: '0 auto' }}
                 >
