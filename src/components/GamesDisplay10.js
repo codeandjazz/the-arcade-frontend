@@ -50,7 +50,7 @@ const GamesDisplay10 = () => {
       <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
         Featured
       </Text>
-      <Grid.Container gap={1} justify="flex-start" direction="row">
+      <Grid.Container gap={1} justify="center" direction="row">
         {loading ? (
           <Loading type="points" />
         ) : (
