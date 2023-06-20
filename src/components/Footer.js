@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <Container css={{ backgroundColor: '#e0b5fd' }}>
       <Grid.Container gap={2} css={{ margin: '0 auto' }}>
-        <Grid xs={6} md={6} direction="column">
-          <Grid xs={6} md={6}>
+        <Grid xs={12} sm={6} direction="column">
+          <Grid xs={12} sm={6}>
             <Avatar
               rounded
               zoomed
@@ -24,8 +24,8 @@ const Footer = () => {
             Github
           </Link>
         </Grid>
-        <Grid xs={6} md={6} direction="column">
-          <Grid xs={6} md={6}>
+        <Grid xs={12} sm={6} direction="column">
+          <Grid xs={12} sm={6}>
             <Avatar
               rounded
               zoomed
