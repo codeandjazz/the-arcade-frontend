@@ -37,76 +37,78 @@ const LandingPage = () => {
   }
 
   return (
-    <Container md>
+    <>
       <Header />
-      <Text
-        blockquote
-        css={{
-          textAlign: 'center',
-          marginTop: '2rem',
-          fontFamily: '$sans',
-          fontWeight: '400'
-        }}
-      >
-        Welcome to the Arcade.
-      </Text>
-      <Container
-        css={{
-          position: 'relative',
-          backgroundImage: `linear-gradient(
+      <Container md>
+        <Text
+          blockquote
+          css={{
+            textAlign: 'center',
+            marginTop: '2rem',
+            fontFamily: '$sans',
+            fontWeight: '400'
+          }}
+        >
+          Welcome to the Arcade.
+        </Text>
+        <Container
+          css={{
+            position: 'relative',
+            backgroundImage: `linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
           ) ,url(${heroImage})`,
-          height: '80vh',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: '2rem'
-        }}
-      >
-        <Text
-          h1
-          css={{
-            textAlign: 'center',
-            color: '#f5e6fe',
-            zIndex: 1,
-            fontFamily: '$body'
+            height: '80vh',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: '2rem'
           }}
         >
-          Track games you&apos;ve played.
-        </Text>
-        <Spacer y={0.5} />
-        <Text
-          h1
-          css={{
-            textAlign: 'center',
-            color: '#f5e6fe',
-            zIndex: 1,
-            fontFamily: '$body'
-          }}
-        >
-          Save those you want to play.
-        </Text>
-        <Spacer y={0.5} />
-        <Text
-          h1
-          css={{
-            textAlign: 'center',
-            color: '#f5e6fe',
-            zIndex: 1,
-            fontFamily: '$body'
-          }}
-        >
-          Tell your friends what&apos;s awesome.
-        </Text>
+          <Text
+            h1
+            css={{
+              textAlign: 'center',
+              color: '#f5e6fe',
+              zIndex: 1,
+              fontFamily: '$body'
+            }}
+          >
+            Track games you&apos;ve played.
+          </Text>
+          <Spacer y={0.5} />
+          <Text
+            h1
+            css={{
+              textAlign: 'center',
+              color: '#f5e6fe',
+              zIndex: 1,
+              fontFamily: '$body'
+            }}
+          >
+            Save those you want to play.
+          </Text>
+          <Spacer y={0.5} />
+          <Text
+            h1
+            css={{
+              textAlign: 'center',
+              color: '#f5e6fe',
+              zIndex: 1,
+              fontFamily: '$body'
+            }}
+          >
+            Tell your friends what&apos;s awesome.
+          </Text>
+        </Container>
+        <GamesDisplay10 />
+        <Reviews />
       </Container>
-      <GamesDisplay10 />
-      <Reviews />
-    </Container>
+    </>
   );
 };
 
