@@ -12,7 +12,8 @@ import {
   Spacer,
   Button,
   Radio,
-  Modal
+  Modal,
+  Text
 } from '@nextui-org/react';
 
 import { user } from '../reducers/user';
@@ -47,16 +48,12 @@ const Login = () => {
   // const [favorites, setFavorites] = useState(null);
   /* const [playedGames, setPlayedGames] = useState(null); */
   const [errors, setErrors] = useState(null); // move to store
-  const [mode, setMode] = useState('USERS/LOGIN');
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
   const [visible, setVisible] = useState(false);
   const handler = () => setVisible(true);
   const closeHandler = () => setVisible(false);
 
-  useEffect(() => {
-    console.log(mode);
-  }, [mode]);
   useEffect(() => {
     if (accessToken) {
       navigate('/');
@@ -74,7 +71,7 @@ const Login = () => {
       body: JSON.stringify({ username: username, password: password })
     };
 
-    fetch(API_URL(mode.toLowerCase()), options)
+    fetch(API_URL('USERS/LOGIN'.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -98,11 +95,12 @@ const Login = () => {
           dispatch(user.actions.setUserId(null));
           dispatch(user.actions.setCreatedAt(null));
           dispatch(user.actions.setReviews(null));
-          dispatch(user.actions.setError(data.response.message));
-          console.error(data);
+          setErrors('Wrong username or password! Please try again.');
         }
       });
   };
+
+  // check password length and retun false if not long enough
 
   return (
     <Container>
@@ -122,19 +120,7 @@ const Login = () => {
         onClose={closeHandler}
       >
         <Modal.Body>
-          <Radio.Group
-            defaultValue={mode}
-            onChange={setMode}
-            orientation="horizontal"
-            label="Mode"
-          >
-            <Radio isActive value="USERS/LOGIN" css={{ fontWeight: '300' }}>
-              Login
-            </Radio>
-            <Radio value="USERS/REGISTER" css={{ fontWeight: '300' }}>
-              Sign up
-            </Radio>
-          </Radio.Group>
+          <h2 id="modal-title">Login</h2>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
             <Input
@@ -158,6 +144,7 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
             <Spacer y={1} />
+            {errors && <Text color="red">{errors}</Text>}
             <Button.Group>
               <Button
                 auto

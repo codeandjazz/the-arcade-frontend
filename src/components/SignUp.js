@@ -44,10 +44,14 @@ const SignUp = () => {
   const [userId, setUserId] = useState(null);
   const [createdAt, setCreatedAt] = useState(null);
   const [reviews, setReviews] = useState(null);
+  const [usernameError, setUsernameError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [usernameErrorColor, setUsernameErrorColor] = useState(null);
+  const [passwordErrorColor, setPasswordErrorColor] = useState(null);
   // const [favorites, setFavorites] = useState(null);
   /* const [playedGames, setPlayedGames] = useState(null); */
   const [errors, setErrors] = useState(null); // move to store
-  const [mode, setMode] = useState('USERS/REGISTER');
+
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
   const [visible, setVisible] = useState(false);
@@ -55,13 +59,30 @@ const SignUp = () => {
   const closeHandler = () => setVisible(false);
 
   useEffect(() => {
-    console.log(mode);
-  }, [mode]);
-  useEffect(() => {
     if (accessToken) {
       navigate('/');
     }
   }, [accessToken, navigate]);
+
+  useEffect(() => {
+    if (username.length >= 1 && username.length < 5) {
+      setUsernameError('Username must be at least 5 characters long');
+      setUsernameErrorColor('error');
+    } else {
+      setUsernameError(null);
+      setUsernameErrorColor(null);
+    }
+  }, [username]);
+
+  useEffect(() => {
+    if (password.length >= 1 && password.length < 5) {
+      setPasswordError('Password must be at least 5 characters long');
+      setPasswordErrorColor('error');
+    } else {
+      setPasswordError(null);
+      setPasswordErrorColor(null);
+    }
+  }, [password]);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +95,7 @@ const SignUp = () => {
       body: JSON.stringify({ username, password })
     };
 
-    fetch(API_URL(mode.toLowerCase()), options)
+    fetch(API_URL('USERS/REGISTER'.toLowerCase()), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -122,19 +143,12 @@ const SignUp = () => {
         onClose={closeHandler}
       >
         <Modal.Body>
-          <Radio.Group
-            defaultValue={mode}
-            onChange={setMode}
-            orientation="horizontal"
-            label="Mode"
-          >
-            <Radio value="USERS/LOGIN" css={{ fontWeight: '300' }}>
-              Login
-            </Radio>
-            <Radio isActive value="USERS/REGISTER" css={{ fontWeight: '300' }}>
-              Sign up
-            </Radio>
-          </Radio.Group>
+          <Text h3>Sign up</Text>
+          <Text small> Please enter your username and password</Text>
+          <Text small>
+            {' '}
+            Username and password will be stored in our database
+          </Text>
           <Spacer y={1} />
           <form onSubmit={onFormSubmit}>
             <Input
@@ -145,6 +159,8 @@ const SignUp = () => {
               label="Username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
+              helperText={usernameError}
+              helperColor={usernameErrorColor}
             />
             <Spacer y={1} />
             <Input
@@ -156,8 +172,10 @@ const SignUp = () => {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              helperText={passwordError}
+              helperColor={passwordErrorColor}
             />
-            <Spacer y={1} />
+            <Spacer y={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 auto
@@ -165,6 +183,7 @@ const SignUp = () => {
                 color="success"
                 type="submit"
                 css={{ borderRadius: '$xs' }}
+                disabled={username.length < 5 || password.length < 5}
               >
                 Submit
               </Button>
