@@ -2,7 +2,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-closing-bracket-location */
-import { Modal, Button } from '@nextui-org/react';
+import { Modal, Button, Textarea, Spacer } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from 'utils/urls';
@@ -50,30 +50,56 @@ const ReviewForm = ({ showReviewForm, setShowReviewForm, game }) => {
 
   return (
     <Modal open onClose={handleHideReviewForm}>
-      <form style={{ padding: '10px' }} onSubmit={onFormSubmit}>
-        <label htmlFor="review">Write your review here: </label>
-        <input
+      <Modal.Header>Write a review</Modal.Header>
+      <form
+        style={{
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'center'
+        }}
+        onSubmit={onFormSubmit}
+      >
+        <Textarea
           type="text"
+          helperText="Whats the best and worst of this game? (max 140 characters)"
           id="review"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           maxLength={140}
           style={{ fontWeight: '300' }}
         />
-        <div style={{ display: 'flex', marginTop: '10px', justifyContent: 'center', gap: '40px' }}>
+        <Spacer y={1} />
+        <Button.Group css={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             auto
-            css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$success' }}
-            type="submit">Submit
+            disabled={message.length === 0 || message.length > 139}
+            css={{
+              borderRadius: '$xs',
+              fontWeight: '300',
+              color: '$black',
+              margin: '1px',
+              backgroundColor: '$success'
+            }}
+            type="submit"
+          >
+            Submit
           </Button>
           <Button
             auto
-            css={{ borderRadius: '$xs', fontWeight: '300', color: '$black', margin: '1px', backgroundColor: '$error' }}
+            css={{
+              borderRadius: '$xs',
+              fontWeight: '300',
+              color: '$black',
+              margin: '1px',
+              backgroundColor: '$error'
+            }}
             type="button"
-            onPress={handleHideReviewForm}>
+            onPress={handleHideReviewForm}
+          >
             Cancel
           </Button>
-        </div>
+        </Button.Group>
       </form>
     </Modal>
   );
