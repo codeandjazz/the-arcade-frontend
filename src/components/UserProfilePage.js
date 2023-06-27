@@ -65,7 +65,9 @@ const UserProfilePage = () => {
           <Grid.Container justify="center" gap={2}>
             <Grid>
               <Card css={{ borderRadius: '$xs', backgroundColor: '#f5e6fe' }}>
-                <Card.Body css={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <Card.Body
+                  css={{ display: 'flex', justifyContent: 'flex-start' }}
+                >
                   <UserProfile />
                   <Text css={{ fontWeight: '300' }}>
                     Joined in {joinedMonth} {joinedYear}
@@ -76,14 +78,20 @@ const UserProfilePage = () => {
             <Grid>
               <Card css={{ borderRadius: '$xs' }}>
                 <Card.Header>Favorite Games</Card.Header>
-                <Card.Body>
+                <Grid.Container gap={2} wrap="wrap">
                   {loading && <Loading type="points" />}
                   {favoriteGames.map((game) => (
                     <Grid key={game._id}>
-                      <Link href={`/games/${game.slug}/${game._id}`}>
+                      <Link to={`/games/${game.slug}/${game._id}`}>
                         <Card
                           isPressable
-                          css={{ w: '8rem', h: '15rem', borderRadius: '$xs', backgroundColor: '#f5e6fe' }}
+                          css={{
+                            w: '8rem',
+                            h: '15rem',
+                            borderRadius: '$xs',
+                            backgroundColor: '#f5e6fe'
+                          }}
+                          onPress={() => console.log('pressed')}
                         >
                           <Card.Body css={{ p: 0 }}>
                             {game.cover && game.cover.url ? (
@@ -114,9 +122,18 @@ const UserProfilePage = () => {
                     </Grid>
                   ))}
                   {!loading && favoriteGames.length === 0 && (
-                    <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300' }}>You have no favorite games</Text>
+                    <Text
+                      blockquote
+                      css={{
+                        textAlign: 'center',
+                        fontFamily: '$sans',
+                        fontWeight: '300'
+                      }}
+                    >
+                      You have no favorite games
+                    </Text>
                   )}
-                </Card.Body>
+                </Grid.Container>
               </Card>
             </Grid>
           </Grid.Container>
@@ -127,7 +144,17 @@ const UserProfilePage = () => {
         <Container xs>
           <Card>
             <Card.Body>
-              <Text blockquote css={{ textAlign: 'center', fontFamily: '$sans', fontWeight: '300', backgroundColor: '#f5e6fe' }}>Sorry, you need to be logged in to view this page</Text>
+              <Text
+                blockquote
+                css={{
+                  textAlign: 'center',
+                  fontFamily: '$sans',
+                  fontWeight: '300',
+                  backgroundColor: '#f5e6fe'
+                }}
+              >
+                Sorry, you need to be logged in to view this page
+              </Text>
             </Card.Body>
           </Card>
         </Container>
