@@ -61,7 +61,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar variant="sticky">
+    <Navbar>
       <Navbar.Brand>
         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
         <Link to="/">

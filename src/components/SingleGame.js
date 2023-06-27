@@ -74,7 +74,7 @@ const Game = () => {
   return (
     <>
       <Header />
-      <Container width="100%" margin="0 auto">
+      <Container width="100%" margin="0 auto" css={{ marginTop: '100px' }}>
         {loading && <Loading type="points" />}
         {imageURL && (
           <Image // This could be a AI generated image based on the game name
