@@ -72,6 +72,7 @@ const LandingPage = () => {
           <Text
             h1
             css={{
+              fontSize: '2rem',
               textAlign: 'center',
               color: '#f5e6fe',
               zIndex: 1,
@@ -84,6 +85,7 @@ const LandingPage = () => {
           <Text
             h1
             css={{
+              fontSize: '2rem',
               textAlign: 'center',
               color: '#f5e6fe',
               zIndex: 1,
@@ -96,6 +98,7 @@ const LandingPage = () => {
           <Text
             h1
             css={{
+              fontSize: '2rem',
               textAlign: 'center',
               color: '#f5e6fe',
               zIndex: 1,
