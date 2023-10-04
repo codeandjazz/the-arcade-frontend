@@ -1,12 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
+import styled from 'styled-components/macro';
+
+// motion design
+import { Fade } from 'react-awesome-reveal';
+
 import { useDispatch } from 'react-redux';
 import { Image, Container, Text, css, Spacer } from '@nextui-org/react';
 import { user } from '../reducers/user';
 import Header from './Header';
 import Footer from './Footer';
-import heroImage from '../assets/img/hero-img.jpg';
+import heroImage from '../assets/img/hero-img_generated.png';
 // import { OuterWrapper, InnerWrapper } from './StyledComponents';
 import GamesDisplay10 from './GamesDisplay10';
 import Reviews from './Reviews';
@@ -36,81 +41,54 @@ const LandingPage = () => {
     );
   }
 
+  const HeroImage = styled.div`
+  position: relative;
+  background-image: url(${heroImage});
+  height: 80vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  `
+
+  const H1 = styled.h1`
+  font-size: 68px;
+  line-height: 1.75;
+  text-align: center;
+  color: white;
+  zIndex: 1;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #1B3DA6, 0 0 20px #1B3DA6, 0 0 25px #1B3DA6, 0 0 30px #1B3DA6, 0 0 35px #1B3DA6;
+  // animation: glow 1s ease-in-out infinite alternate;
+}
+
+// @keyframes glow {
+//   from {
+//     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+//   }
+//   to {
+//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0073e6, 0 0 40px #0073e6, 0 0 50px #0073e6, 0 0 60px #0073e6, 0 0 70px #0073e6;
+//   }
+// }
+  `
+
   return (
     <>
       <Header />
-      <Container md>
-        <Text
-          blockquote
-          css={{
-            textAlign: 'center',
-            marginTop: '2rem',
-            fontFamily: '$sans',
-            fontWeight: '400'
-          }}
-        >
-          Welcome to the Arcade.
-        </Text>
-        <Container
-          css={{
-            position: 'relative',
-            backgroundImage: `linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-          ) ,url(${heroImage})`,
-            height: '80vh',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: '2rem'
-          }}
-        >
-          <Text
-            h1
-            css={{
-              fontSize: '2rem',
-              textAlign: 'center',
-              color: '#f5e6fe',
-              zIndex: 1,
-              fontFamily: '$body'
-            }}
-          >
-            Track games you&apos;ve played.
-          </Text>
+      <HeroImage>
+        <Fade
+          duration={2000}>
+          <H1>Track games you&apos;ve played.</H1>
           <Spacer y={0.5} />
-          <Text
-            h1
-            css={{
-              fontSize: '2rem',
-              textAlign: 'center',
-              color: '#f5e6fe',
-              zIndex: 1,
-              fontFamily: '$body'
-            }}
-          >
-            Save those you want to play.
-          </Text>
+          <H1>Save those you want to play.</H1>
           <Spacer y={0.5} />
-          <Text
-            h1
-            css={{
-              fontSize: '2rem',
-              textAlign: 'center',
-              color: '#f5e6fe',
-              zIndex: 1,
-              fontFamily: '$body'
-            }}
-          >
-            Tell your friends what&apos;s awesome.
-          </Text>
-        </Container>
-        <GamesDisplay10 />
-        <Reviews />
-      </Container>
+          <H1>Tell your friends what&apos;s awesome.</H1>
+        </Fade>
+      </HeroImage>
+      <GamesDisplay10 />
+      <Reviews />
     </>
   );
 };
