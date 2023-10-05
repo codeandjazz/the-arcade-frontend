@@ -1,7 +1,11 @@
-// import { globalCss } from '@nextui-org/react';
+import styled, { createGlobalStyle } from 'styled-components';
 
-// const GlobalStyles = globalCss({
-// body: { margin: 0, padding: 0 }
-// });
+const GlobalStyle = createGlobalStyle`
+body {
+    background-color: #000;
+}
 
-// export default GlobalStyles;
+
+`
+
+export default GlobalStyle;

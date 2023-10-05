@@ -6,15 +6,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Input,
-  Spacer,
-  Button,
-  Radio,
-  Modal,
-  Text
-} from '@nextui-org/react';
 
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
@@ -103,74 +94,40 @@ const Login = () => {
   // check password length and retun false if not long enough
 
   return (
-    <Container>
-      <Button
-        auto
-        flat
-        color="secondary"
-        onPress={handler}
-        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}
+    <section>
+      <button type="button"
       >
         Login
-      </Button>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Body>
-          <h2 id="modal-title">Login</h2>
-          <Spacer y={1} />
-          <form onSubmit={onFormSubmit}>
-            <Input
-              clearable
-              bordered
-              fullWidth
-              size="lg"
-              label="Username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-            />
-            <Spacer y={1} />
-            <Input
-              clearable
-              bordered
-              fullWidth
-              type="password"
-              size="lg"
-              label="Password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <Spacer y={1} />
-            {errors && <Text color="red">{errors}</Text>}
-            <Button.Group>
-              <Button
-                auto
-                ghost
-                color="success"
-                type="submit"
-                css={{ borderRadius: '$xs' }}
-              >
+      </button>
+      <form onSubmit={onFormSubmit}>
+        <input
+          type="text"
+          label="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        <input
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        {errors && <p>{errors}</p>}
+        <div>
+          <button
+            type="submit"
+          >
                 Submit
-              </Button>
-              <Button
-                auto
-                ghost
-                color="error"
-                onPress={closeHandler}
-                css={{ borderRadius: '$xs' }}
-              >
+          </button>
+          <button
+            type="button"
+            onClick={closeHandler}
+          >
                 Close
-              </Button>
-            </Button.Group>
-          </form>
-          {/* <Modal.Footer></Modal.Footer> */}
-        </Modal.Body>
-        <Modal.Footer />
-      </Modal>
-    </Container>
+          </button>
+        </div>
+      </form>
+    </section>
   );
 };
 

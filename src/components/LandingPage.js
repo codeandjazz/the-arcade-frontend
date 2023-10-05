@@ -7,14 +7,19 @@ import styled from 'styled-components/macro';
 import { Fade } from 'react-awesome-reveal';
 
 import { useDispatch } from 'react-redux';
-import { Image, Container, Text, css, Spacer } from '@nextui-org/react';
 import { user } from '../reducers/user';
+
+// components
 import Header from './Header';
 import Footer from './Footer';
-import heroImage from '../assets/img/hero-img_generated.png';
-// import { OuterWrapper, InnerWrapper } from './StyledComponents';
 import GamesDisplay10 from './GamesDisplay10';
 import Reviews from './Reviews';
+import Navbar from './Navbar';
+
+// image
+import heroImage from '../assets/img/hero-img_generated.png';
+
+// API URL
 import { API_URL } from '../utils/urls';
 
 const LandingPage = () => {
@@ -77,13 +82,12 @@ const LandingPage = () => {
   return (
     <>
       <Header />
+      <Navbar />
       <HeroImage>
         <Fade
           duration={2000}>
           <H1>Track games you&apos;ve played.</H1>
-          <Spacer y={0.5} />
           <H1>Save those you want to play.</H1>
-          <Spacer y={0.5} />
           <H1>Tell your friends what&apos;s awesome.</H1>
         </Fade>
       </HeroImage>

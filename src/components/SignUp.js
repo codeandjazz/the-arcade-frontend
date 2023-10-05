@@ -2,18 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Card,
-  Row,
-  Text,
-  Input,
-  Spacer,
-  Button,
-  Checkbox,
-  Radio,
-  Modal
-} from '@nextui-org/react';
 
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
@@ -48,8 +36,6 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(null);
   const [usernameErrorColor, setUsernameErrorColor] = useState(null);
   const [passwordErrorColor, setPasswordErrorColor] = useState(null);
-  // const [favorites, setFavorites] = useState(null);
-  /* const [playedGames, setPlayedGames] = useState(null); */
   const [errors, setErrors] = useState(null); // move to store
 
   const dispatch = useDispatch();
@@ -127,81 +113,46 @@ const SignUp = () => {
 
   return (
     <div>
-      <Button
-        auto
-        flat
-        color="success"
-        onPress={handler}
-        css={{ borderRadius: '$xs', fontWeight: '300', color: '$black' }}
+      <button
+        type="button"
+        onClick={handler}
       >
         Sign up
-      </Button>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Body>
-          <Text h3>Sign up</Text>
-          <Text small> Please enter your username and password</Text>
-          <Text small>
-            {' '}
+      </button>
+      <p>Sign up</p>
+      <p> Please enter your username and password</p>
+      <p>
+        {' '}
             Username and password will be stored in our database
-          </Text>
-          <Spacer y={1} />
-          <form onSubmit={onFormSubmit}>
-            <Input
-              clearable
-              bordered
-              fullWidth
-              size="lg"
-              label="Username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              helperText={usernameError}
-              helperColor={usernameErrorColor}
-            />
-            <Spacer y={1} />
-            <Input
-              clearable
-              bordered
-              fullWidth
-              size="lg"
-              label="Password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              helperText={passwordError}
-              helperColor={passwordErrorColor}
-            />
-            <Spacer y={2} />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button
-                auto
-                flat
-                color="success"
-                type="submit"
-                css={{ borderRadius: '$xs' }}
-                disabled={username.length < 5 || password.length < 5}
-              >
+      </p>
+      <form onSubmit={onFormSubmit}>
+        <input
+          type="text"
+          label="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        <input
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <div>
+          <button
+            type="submit"
+            disabled={username.length < 5 || password.length < 5}
+          >
                 Submit
-              </Button>
-              <Button
-                auto
-                flat
-                color="error"
-                type="button"
-                onPress={closeHandler}
-                css={{ borderRadius: '$xs' }}
-              >
+          </button>
+          <button
+            type="button"
+            onClick={closeHandler}
+          >
                 Close
-              </Button>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer />
-      </Modal>
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
