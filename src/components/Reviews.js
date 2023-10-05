@@ -3,15 +3,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
-import {
-  Modal,
-  Card,
-  Text,
-  Container,
-  Button,
-  Image,
-  Grid
-} from '@nextui-org/react';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { user } from '../reducers/user';
@@ -91,45 +82,28 @@ const Reviews = () => {
   }, []);
 
   return (
-    <Container md display="flex" gap={2}>
-      <Text h2 css={{ fontFamily: '$body', color: '$black' }}>
-        Reviews
-      </Text>
+    <article>
+      <p>
+        Recently reviewed
+      </p>
       {review.map((item, index) => (
-        <Card
-          key={item._id}
-          shadow
-          css={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            minHeight: '4rem',
-            padding: '0.5rem 1.5rem',
-            margin: '0.5rem 0'
-          }}
-        >
+        <div>
           {coverUrls[index] && (
-            <Image
+            <img
               src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-              width={100}
-              height={100}
+              alt="game cover"
             />
           )}
-          <Card.Body
-            css={{
-              alignItems: 'baseline',
-              flexDirection: 'column'
-            }}
-          >
-            <Text css={{ fontWeight: '300' }}>
+          <div>
+            <p>
               {formatDate(item.createdAt)}
-            </Text>
-            <Text size="$2xl">{item.user.username}</Text>
-            <Text css={{ fontWeight: '300' }}>{item.message}</Text>
-          </Card.Body>
-        </Card>
+            </p>
+            <p>{item.user.username}</p>
+            <p>{item.message}</p>
+          </div>
+        </div>
       ))}
-    </Container>
+    </article>
   );
 };
 

@@ -93,6 +93,7 @@ const LandingPage = () => {
       </HeroImage>
       <GamesDisplay10 />
       <Reviews />
+      <Footer />
     </>
   );
 };
