@@ -2,9 +2,11 @@
 /* eslint-disable quote-props */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-closing-bracket-location */
-import { Modal, Button, Textarea, Spacer } from '@nextui-org/react';
 import React, { useState } from 'react';
+
 import { useSelector } from 'react-redux';
+
+// API URL
 import { API_URL } from 'utils/urls';
 
 const ReviewForm = ({ showReviewForm, setShowReviewForm, game }) => {
@@ -49,59 +51,36 @@ const ReviewForm = ({ showReviewForm, setShowReviewForm, game }) => {
   };
 
   return (
-    <Modal open onClose={handleHideReviewForm}>
-      <Modal.Header>Write a review</Modal.Header>
+    <article>
+      {/* Modal */}
+      <p>Write a review</p>
       <form
-        style={{
-          padding: '10px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignContent: 'center'
-        }}
         onSubmit={onFormSubmit}
       >
-        <Textarea
+        <textarea
           type="text"
-          helperText="Whats the best and worst of this game? (max 140 characters)"
+          placeholder="Whats the best and worst of this game? (max 140 characters)"
           id="review"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           maxLength={140}
-          style={{ fontWeight: '300' }}
         />
-        <Spacer y={1} />
-        <Button.Group css={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            auto
+        <section>
+          <button
             disabled={message.length === 0 || message.length > 139}
-            css={{
-              borderRadius: '$xs',
-              fontWeight: '300',
-              color: '$black',
-              margin: '1px',
-              backgroundColor: '$success'
-            }}
             type="submit"
           >
             Submit
-          </Button>
-          <Button
-            auto
-            css={{
-              borderRadius: '$xs',
-              fontWeight: '300',
-              color: '$black',
-              margin: '1px',
-              backgroundColor: '$error'
-            }}
+          </button>
+          <button
             type="button"
-            onPress={handleHideReviewForm}
+            onClick={handleHideReviewForm}
           >
             Cancel
-          </Button>
-        </Button.Group>
+          </button>
+        </section>
       </form>
-    </Modal>
+    </article>
   );
 };
 

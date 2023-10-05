@@ -1,11 +1,18 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
+import UserProfile from './UserProfile';
+
 import Login from './Login';
 import SignUp from './SignUp';
+
+// logo
+import Logo from '../assets/img/Ninos_Logo_wh1.png';
+
+import './NavbarStyles.css';
 
 const Navbar = () => {
   // Check if the user is logged in
@@ -27,31 +34,48 @@ const Navbar = () => {
     dispatch(user.actions.setReviews([]));
   };
   return (
-    <nav className="navbar">
-      {/* Add your navigation links here */}
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/games">Games</Link></li>
-        <li><Link to="/about">About this website</Link></li>
-        {!accessToken && (
-          <Login />
-        )}
-        {!accessToken && (
-          <SignUp />
-        )}
-      </ul>
-      {accessToken && (
-        <div>
-          {/* User / Avatar */}
-          <Link to={`/users/${user_id}`}>
-         My profile
-          </Link>
-          <button type="button" onClick={handleLogout}>
-            <Link to="/">
-              <p>Log out</p>
-            </Link>
-          </button>
-        </div>)}
+    <nav className="navbar" aria-label="Main Navigation">
+      <div className="navbar-container">
+        <div className="logo">
+          <NavLink to="/">
+            <img src={Logo} alt="logo" width={40} />
+          </NavLink>
+        </div>
+        <div className="nav-elements">
+          <ul>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/games">Games</NavLink></li>
+            <li><NavLink to="/about">About this website</NavLink></li>
+            {!accessToken && (
+              <li>Login</li>
+            )}
+            {!accessToken && (
+              <li>Sign up</li>
+            )}
+            {accessToken && (
+              <li>Log out</li>
+            )}
+            {/* {!accessToken && (
+              <Login />
+            )}
+            {!accessToken && (
+              <SignUp />
+            )} */}
+            {/* {accessToken && (
+              <>
+                <NavLink to={`/users/${user_id}`}>
+          My profile
+                </NavLink>
+                <button type="button" onClick={handleLogout}>
+                  <NavLink to="/">
+                    <p>Log out</p>
+                  </NavLink>
+                </button>
+              </>
+            )} */}
+          </ul>
+        </div>
+      </div>
     </nav>
   )
 }

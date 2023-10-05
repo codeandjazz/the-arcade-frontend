@@ -16,7 +16,9 @@ import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
-import Header from './Header';
+
+import Navbar from './Navbar';
+
 import UserProfileReviews from './UserProfileReviews';
 
 const UserProfilePage = () => {
@@ -59,7 +61,7 @@ const UserProfilePage = () => {
 
   return (
     <>
-      <Header />
+      <Navbar />
       {accessToken && (
         <Container md>
           <Grid.Container justify="center" gap={2}>

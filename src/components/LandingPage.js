@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux';
 import { user } from '../reducers/user';
 
 // components
-import Header from './Header';
 import Footer from './Footer';
 import GamesDisplay10 from './GamesDisplay10';
 import Reviews from './Reviews';
@@ -60,7 +59,7 @@ const LandingPage = () => {
   `
 
   const H1 = styled.h1`
-  font-size: 68px;
+  font-size: 42px;
   line-height: 1.75;
   text-align: center;
   color: white;
@@ -81,7 +80,6 @@ const LandingPage = () => {
 
   return (
     <>
-      <Header />
       <Navbar />
       <HeroImage>
         <Fade

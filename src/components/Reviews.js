@@ -92,6 +92,7 @@ const Reviews = () => {
             <img
               src={coverUrls[index].replace('t_thumb', 't_cover_big')}
               alt="game cover"
+              width={70}
             />
           )}
           <div>

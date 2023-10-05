@@ -13,7 +13,6 @@ import GameSummary from './GameSummary';
 import { API_URL } from '../utils/urls';
 
 // components
-import Header from './Header';
 import Navbar from './Navbar';
 
 const Game = () => {
@@ -74,7 +73,6 @@ const Game = () => {
   }, [game]);
   return (
     <>
-      <Header />
       <Navbar />
       <article>
         {loading && <p>Loading...</p>}

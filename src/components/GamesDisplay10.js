@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
-import defaultImg from '../assets/img/logo-the-arcade.png';
+import defaultImg from '../assets/img/Ninos_Logo_wh1.png';
 
 const GamesDisplay10 = () => {
   const [storedGames, setStoredGames] = useState([]);
@@ -59,11 +59,13 @@ const GamesDisplay10 = () => {
                   <img
                     src={game.cover.url}
                     alt="game cover"
+                    width={70}
                   />
                 ) : (
                   <img
                     src={defaultImg}
                     alt="game cover"
+                    width={70}
                   />
                 )}
                 <p>{game.name}</p>

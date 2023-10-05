@@ -12,7 +12,6 @@ import { useParams, Link } from 'react-router-dom';
 import defaultImg from '../assets/img/Ninos_Logo_bl1.png';
 
 // components
-import Header from './Header';
 import Navbar from './Navbar';
 
 const GameCard = styled.div`
@@ -110,7 +109,6 @@ const GamesList = () => {
 
   return (
     <>
-      <Header />
       <Navbar />
       <article>
         <p>All our games
