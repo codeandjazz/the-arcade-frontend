@@ -58,7 +58,6 @@ const GameSummary = ({ game }) => {
 
   return (
     <section>
-      <div>
         {/* Check if game has a cover image */}
         {coverUrl && (
           <div>
@@ -70,6 +69,7 @@ const GameSummary = ({ game }) => {
             />
           </div>
         )}
+        {accessToken && (
             <div>
               <button
                 type="button"
@@ -93,6 +93,8 @@ const GameSummary = ({ game }) => {
                   Remove from favorites
               </button>
             </div>
+        )}
+            {!accessToken && <p>Login or sign up to review, add to favorites and more.</p>}
         <div>
           <h1>{game.name}</h1>
           {/* Map out game genres if available */}
@@ -117,7 +119,6 @@ const GameSummary = ({ game }) => {
             />
           )}
         </div>
-      </div>
     </section>
   );
 };
