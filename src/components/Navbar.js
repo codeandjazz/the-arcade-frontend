@@ -54,8 +54,15 @@ const Navbar = () => {
             <img src={Logo} alt="logo" width={40} />
           </NavLink>
         </div>
-        <button type="button" className="menu-icon" onClick={handleShowNavbar}>
-          <FontAwesomeIcon icon={faBars} />
+        <button
+          type="button"
+          className="menu-icon button icon-button"
+          aria-label="Icon-only Button"
+          onClick={handleShowNavbar}>
+          <FontAwesomeIcon
+            icon={faBars}
+            aria-hidden="true"
+            focusable="false" />
         </button>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
