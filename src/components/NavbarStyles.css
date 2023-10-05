@@ -46,3 +46,48 @@
     height: 2px;
     background-color: #F241D5;
   }
+
+.menu-icon {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .nav-elements {
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 60px;
+        background-color: black;
+        border: 2px solid #F241D5;
+        width: 0;
+        height: calc(100vh - 60px);
+        transition: all 0.3s ease-in;
+        overflow: hidden;
+      }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+      }
+      .nav-elements.active {
+        width: 270px;
+      }
+    
+      .nav-elements ul {
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .nav-elements ul li {
+        margin-right: unset;
+        margin-top: 22px;
+      }
+}
+
+@media (max-width: 768px) {
+    .nav-elements ul li:not(:last-child) {
+      margin-right: 30px;
+    }
+  }

@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+// hamburger icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import UserProfile from './UserProfile';
@@ -20,6 +25,14 @@ const Navbar = () => {
   /* const [storedGenres, setStoredGenres] = useState([]); */
   const [loading, setLoading] = useState(true);
   const { username, user_id } = useSelector((store) => store.user);
+
+  const [showNavbar, setShowNavbar] = useState(false)
+
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar)
+  }
+
+  console.log(showNavbar);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -41,7 +54,10 @@ const Navbar = () => {
             <img src={Logo} alt="logo" width={40} />
           </NavLink>
         </div>
-        <div className="nav-elements">
+        <button type="button" className="menu-icon" onClick={handleShowNavbar}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+        <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/games">Games</NavLink></li>
