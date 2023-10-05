@@ -31,8 +31,8 @@ const Navbar = () => {
       {/* Add your navigation links here */}
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/games">About</Link></li>
-        <li><Link to="/about">Services</Link></li>
+        <li><Link to="/games">Games</Link></li>
+        <li><Link to="/about">About this website</Link></li>
         {!accessToken && (
           <Login />
         )}

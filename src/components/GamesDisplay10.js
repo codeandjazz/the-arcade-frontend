@@ -50,7 +50,7 @@ const GamesDisplay10 = () => {
       </p>
       <div>
         {loading ? (
-          {/* Loading animation */}
+          <p>Loading...</p>
         ) : (
           storedGames.map((game, index) => (
             <div key={game._id}>
