@@ -7,13 +7,14 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Image, css, Loading } from '@nextui-org/react';
 import axios, { isCancel, AxiosError } from 'axios';
 import NotFoundImg from '../assets/img/not-found-404.jpg';
 import GameSummary from './GameSummary';
 import { API_URL } from '../utils/urls';
 
+// components
 import Header from './Header';
+import Navbar from './Navbar';
 
 const Game = () => {
   const { slug, id } = useParams();
@@ -74,22 +75,17 @@ const Game = () => {
   return (
     <>
       <Header />
-      <Container width="100%" margin="0 auto" css={{ marginTop: '100px' }}>
-        {loading && <Loading type="points" />}
+      <Navbar />
+      <article>
+        {loading && <p>Loading...</p>}
         {imageURL && (
-          <Image // This could be a AI generated image based on the game name
-            showSkeleton
+          <img // This could be a AI generated image based on the game name
             src={imageURL}
             alt={game.name}
-            css={{
-              maxHeight: '300px',
-              width: '100%',
-              objectFit: 'cover'
-            }}
           />
         )}
         <GameSummary game={game} />
-      </Container>
+      </article>
     </>
   );
 };

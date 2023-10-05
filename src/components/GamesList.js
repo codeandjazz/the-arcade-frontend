@@ -1,13 +1,28 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components/macro';
+
+// API URL
 import { API_URL } from 'utils/urls';
+
 import { useParams, Link } from 'react-router-dom';
-import defaultImg from '../assets/img/the-arcade_logo.png';
+
+// image
+import defaultImg from '../assets/img/Ninos_Logo_bl1.png';
 
 // components
 import Header from './Header';
 import Navbar from './Navbar';
+
+const GameCard = styled.div`
+background-color: white;
+`
+
+const GamesDisplay = styled.section`
+display: flex;
+flex-direction: column;
+`
 
 const GamesList = () => {
   // Fetch the games from the API when the component mounts
@@ -152,7 +167,7 @@ const GamesList = () => {
           Clear filters
           </button>
         </section>
-        <section>
+        <GamesDisplay>
           {loading || storedGames === undefined ? (
             <p>Loading...</p>
           ) : (
@@ -160,13 +175,15 @@ const GamesList = () => {
             // eslint-disable-next-line no-underscore-dangle
               <div key={game._id}>
                 <Link to={`/games/${game.slug}/${game._id}`}>
-                  <div>
+                  <GameCard>
                     {game.cover && game.cover.url ? (
                       <img
+                        width={100}
                         src={game.cover.url}
                         alt="game cover" />
                     ) : (
                       <img
+                        width={100}
                         src={defaultImg}
                         alt="game cover" />
                     )}
@@ -179,13 +196,13 @@ const GamesList = () => {
                         </p>
                       ))}
                     </div>
-                  </div>
+                  </GameCard>
                 </Link>
               </div>
             ))
           )}
           {/* <Pagination total={totalPages} initialPage={currentPage} onChange={handlePageChange} /> */}
-        </section>
+        </GamesDisplay>
       </article>
     </>
   );

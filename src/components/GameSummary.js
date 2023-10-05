@@ -1,20 +1,18 @@
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable-next-line */
 /* eslint-disable operator-linebreak */
 import React, { useState, useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Image,
-  Button,
-  Col,
-  Row,
-  Spacer,
-  Text
-} from '@nextui-org/react';
+
+// API URL
 import { API_URL } from 'utils/urls';
+
+// components
 import ReviewForm from './ReviewForm';
 
 const GameSummary = ({ game }) => {
@@ -32,7 +30,7 @@ const GameSummary = ({ game }) => {
 
   useEffect(() => {
     if (game?.cover?.url) {
-      setCoverUrl(game.cover.url.replace('t_thumb', 't_cover_big'));
+      setCoverUrl(game?.cover?.url.replace('t_thumb', 't_cover_big'));
       setIsLoading(false);
     }
   }, [game]);
@@ -60,90 +58,66 @@ const GameSummary = ({ game }) => {
 
   return (
     <section>
-      <Container
-        md
-        width="100%"
-        gap={0}
-        css={{ marginTop: '-100px', zIndex: '$max' }}
-      >
-        <Row gap={1}>
-          {/* Check if game has a cover image */}
-          {coverUrl && (
-            <Col>
-              <Image
-                src={coverUrl}
-                alt={`Cover art of the game ${game.name}`}
-                width={220}
-                height={380}
-                objectFit="cover"
-              />
-              <Container>
-                <Spacer y={0.5} />
-                <Button
-                  size="lg"
-                  disabled={!accessToken}
-                  onPress={handleShowReviewForm}
-                  css={{ margin: '0 auto' }}
-                >
-                  Write a review
-                </Button>
-                <Spacer y={1} />
-                <Button
-                  size="lg"
-                  disabled={!accessToken}
-                  onPress={handleAddFavorite}
-                  css={{ margin: '0 auto' }}
-                >
-                  ❤️ Add to favorites
-                </Button>
-                <Spacer y={0.5} />
-                <Button
-                  size="lg"
-                  disabled={!accessToken}
-                  onPress={handleAddFavorite}
-                  css={{ margin: '0 auto' }}
-                >
+      <div>
+        {/* Check if game has a cover image */}
+        {coverUrl && (
+          <div>
+            <img
+              src={coverUrl}
+              alt={`Cover art of the game ${game.name}`}
+              width={220}
+              height={380}
+            />
+          </div>
+        )}
+            <div>
+              <button
+                type="button"
+                disabled={!accessToken}
+                onClick={handleShowReviewForm}
+              >
+                  Review this game
+              </button>
+              <button
+                type="button"
+                disabled={!accessToken}
+                onClick={handleAddFavorite}
+              >
+                  Add to favorites
+              </button>
+              <button
+                type="button"
+                disabled={!accessToken}
+                onClick={handleAddFavorite}
+              >
                   Remove from favorites
-                </Button>
-              </Container>
-            </Col>
-          )}
-          <Col>
-            <Container css={{ marginTop: '100px' }}>
-              <h1>{game.name}</h1>
-              {/* Map out game genres if available */}
-              {game.genres &&
+              </button>
+            </div>
+        <div>
+          <h1>{game.name}</h1>
+          {/* Map out game genres if available */}
+          {game.genres &&
                 game.genres.map((genre) => (
-                  <Button
+                  <button
+                    type="button"
                     key={genre.id}
-                    css={{
-                      backgroundColor: '$purple400',
-                      fontSize: '$sm',
-                      fontWeight: '$bold',
-                      margin: '$2',
-                      padding: '$1'
-                    }}
                   >
                     <Link to={`/games/genres/${genre.name}`}>
                       {genre.name} &nbsp;
                     </Link>
-                  </Button>
+                  </button>
                 ))}
-              {/* Show release date and summary if they are not undefined */}
-              <p>Release date: {releaseDate}</p>
-              <p>{game.summary}</p>
-              {/* Add summary, note not all games has summary */}
-              {showReviewForm && (
-                <ReviewForm
-                  setShowReviewForm={setShowReviewForm}
-                  showReviewForm={showReviewForm}
-                  game={game}
-                />
-              )}
-            </Container>
-          </Col>
-        </Row>
-      </Container>
+          {releaseDate ? (<p>Release date: {releaseDate}</p>) : (<p>Release date: Unknown</p>)}
+          {game.summary ? (<p>{game.summary}</p>) : (<p>Game summary not available</p>)}
+          {showReviewForm && (
+            <ReviewForm
+              setShowReviewForm={setShowReviewForm}
+              showReviewForm={showReviewForm}
+              game={game}
+            />
+          )}
+        </div>
+      </div>
     </section>
   );
 };

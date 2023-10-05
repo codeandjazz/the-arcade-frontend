@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
-import Logo from '../assets/img/the-arcade_logo.png';
+import Logo from '../assets/img/Ninos_Logo_wh1.png';
 import UserProfile from './UserProfile';
 
 const Header = () => {
@@ -13,7 +13,7 @@ const Header = () => {
     <header>
       <div>
         <Link to="/">
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt="logo" width={70} />
         </Link>
       </div>
     </header>
