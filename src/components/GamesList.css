@@ -1,0 +1,16 @@
+.pagination {
+    list-style: none;
+    height: 31.5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+
+.pagination .active {
+    background-color: #1e50ff;
+    border-radius: 50%;
+  }

@@ -5,8 +5,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+
 import { user } from '../reducers/user';
 import { formatDate } from '../utils/helpers';
+
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const Reviews = () => {
   const [review, setReview] = useState([]);
@@ -86,24 +91,36 @@ const Reviews = () => {
       <p>
         Recently reviewed
       </p>
-      {review.map((item, index) => (
-        <div>
-          {coverUrls[index] && (
-            <img
-              src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-              alt="game cover"
-              width={70}
-            />
-          )}
-          <div>
-            <p>
-              {formatDate(item.createdAt)}
-            </p>
-            <p>{item.user.username}</p>
-            <p>{item.message}</p>
-          </div>
-        </div>
-      ))}
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={125}
+        totalSlides={review.length}
+      >
+        <Slider>
+          {review.map((item, index) => (
+            <Slide index={index} key={review._id}>
+              <div>
+                {coverUrls[index] && (
+                  <img
+                    src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+                    alt="game cover"
+                    width={70}
+                  />
+                )}
+                <div>
+                  <p>
+                    {formatDate(item.createdAt)}
+                  </p>
+                  <p>{item.user.username}</p>
+                  <p>{item.message}</p>
+                </div>
+              </div>
+            </Slide>
+          ))}
+        </Slider>
+        <ButtonBack>Back</ButtonBack>
+        <ButtonNext>Next</ButtonNext>
+      </CarouselProvider>
     </article>
   );
 };

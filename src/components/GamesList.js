@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
@@ -6,6 +7,9 @@ import styled from 'styled-components/macro';
 // API URL
 import { API_URL } from 'utils/urls';
 
+// react paginate
+import ReactPaginate from 'react-paginate';
+
 import { useParams, Link } from 'react-router-dom';
 
 // image
@@ -13,6 +17,9 @@ import defaultImg from '../assets/img/Ninos_Logo_bl1.png';
 
 // components
 import Navbar from './Navbar';
+
+// styles
+import './GamesList.css'
 
 const GameCard = styled.div`
 background-color: white;
@@ -26,15 +33,16 @@ flex-direction: column;
 const GamesList = () => {
   // Fetch the games from the API when the component mounts
   const [storedGames, setStoredGames] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  // Sort by name, rating, etc.
-  // For example, /games/genres/action?sortBy=rating
+  const PAGE_SIZE = 20;
+
   const [sort, setSort] = useState('');
   const [genreQuery, setGenreQuery] = useState('');
   const [storedGenres, setStoredGenres] = useState([]);
-  const PAGE_SIZE = 20;
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -122,42 +130,29 @@ const GamesList = () => {
         </div>
         <section>
           <div className="dropdown">
-            <button
-              type="button"
-              // onClick={toggleDropdown}
-              className="dropbtn">
-              {genreQuery === '' ? 'All genres' : `${genreQuery} games`}
-            </button>
-            <div id="myDropdown" className="dropdown-content">
-              {(genre) => (
-                <button
-                  key={genre.name}
-                  type="button"
-                  onClick={() => handleGenre(genre.name)}>
+            <label htmlFor="genreSelect">Select Genre:</label>
+            <select
+              id="genreSelect"
+              value={genreQuery}
+              onChange={(e) => handleGenre(e.target.value)}>
+              <option value="">All genres</option>
+              {storedGenres.map((genre) => (
+                <option key={genre.name} value={genre.name}>
                   {genre.name}
-                </button>
-              )}
-            </div>
+                </option>
+              ))}
+            </select>
           </div>
           <div className="dropdown">
-            <button
-              type="button"
-              // onClick={toggleDropdown}
-              className="dropbtn">
-              {selectedSortText}
-            </button>
-            <div id="myDropdown" className="dropdown-content">
-              <button
-                type="button"
-                onClick={() => handleSort('releasedAsce')}>
-                  Oldest first
-              </button>
-              <button
-                type="button"
-                onClick={() => handleSort('releasedDesc')}>
-                  Newest first
-              </button>
-            </div>
+            <label htmlFor="sortSelect">Sort by:</label>
+            <select
+              id="sortSelect"
+              value={sort}
+              onChange={(e) => handleSort(e.target.value)}>
+              <option value="">Select one...</option>
+              <option value="releasedAsce">Oldest first</option>
+              <option value="releasedDesc">Newest first</option>
+            </select>
           </div>
           <button
             type="button"
@@ -199,7 +194,15 @@ const GamesList = () => {
               </div>
             ))
           )}
-          {/* <Pagination total={totalPages} initialPage={currentPage} onChange={handlePageChange} /> */}
+          <ReactPaginate
+            containerClassName="pagination"
+            pageClassName="page-item"
+            activeClassName="active"
+            onPageChange={(event) => setCurrentPage(event.selected)}
+            pageCount={totalPages}
+            breakLabel="..."
+            previousLabel="previous"
+            nextLabel="next" />;
         </GamesDisplay>
       </article>
     </>
