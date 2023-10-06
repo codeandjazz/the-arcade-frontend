@@ -5,7 +5,13 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { API_URL } from 'utils/urls';
+
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 import defaultImg from '../assets/img/Ninos_Logo_wh1.png';
 
 const GamesDisplay10 = () => {
@@ -52,24 +58,31 @@ const GamesDisplay10 = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          storedGames.map((game, index) => (
-            <div key={game._id}>
-              <Link to={`/games/${game._id}`}>
-                {game.cover && game.cover.url ? (
-                  <img
-                    src={game.cover.url}
-                    alt="game cover"
-                    width={70}
-                  />
-                ) : (
-                  <img
-                    src={defaultImg}
-                    alt="game cover"
-                    width={70}
-                  />
-                )}
-                <p>{game.name}</p>
-                {game.genres &&
+          <CarouselProvider
+            naturalSlideWidth={100}
+            naturalSlideHeight={125}
+            totalSlides={storedGames.length}
+          >
+            <Slider>
+              {storedGames.map((game, index) => (
+                <Slide index={index} key={game._id}>
+                  <div>
+                    <Link to={`/games/${game._id}`}>
+                      {game.cover && game.cover.url ? (
+                        <img
+                          src={game.cover.url}
+                          alt="game cover"
+                          width={70}
+                        />
+                      ) : (
+                        <img
+                          src={defaultImg}
+                          alt="game cover"
+                          width={70}
+                        />
+                      )}
+                      <p>{game.name}</p>
+                      {game.genres &&
                           game.genres.map((genre) => (
                             <p
                               key={genre.id}
@@ -77,9 +90,14 @@ const GamesDisplay10 = () => {
                               {genre.name} &nbsp;
                             </p>
                           ))}
-              </Link>
-            </div>
-          ))
+                    </Link>
+                  </div>
+                </Slide>
+              ))}
+            </Slider>
+            <ButtonBack>Back</ButtonBack>
+            <ButtonNext>Next</ButtonNext>
+          </CarouselProvider>
         )}
       </div>
     </article>
