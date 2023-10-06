@@ -14,3 +14,7 @@
     background-color: #1e50ff;
     border-radius: 50%;
   }
+
+.pagination .disabled {
+    color: red;
+}

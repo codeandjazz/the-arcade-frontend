@@ -198,7 +198,8 @@ const GamesList = () => {
             containerClassName="pagination"
             pageClassName="page-item"
             activeClassName="active"
-            onPageChange={(event) => setCurrentPage(event.selected)}
+            initialPage={0}
+            onPageChange={(event) => setCurrentPage(event.selected + 1)}
             pageCount={totalPages}
             breakLabel="..."
             previousLabel="previous"
