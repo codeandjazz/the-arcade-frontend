@@ -14,6 +14,7 @@ import { API_URL } from '../utils/urls';
 
 // components
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Game = () => {
   const { slug, id } = useParams();
@@ -84,6 +85,7 @@ const Game = () => {
         )}
         <GameSummary game={game} />
       </article>
+      <Footer />
     </>
   );
 };

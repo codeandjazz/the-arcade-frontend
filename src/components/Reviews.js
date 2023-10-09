@@ -6,6 +6,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import './Reviews.css'
+
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 
 import { user } from '../reducers/user';
@@ -88,9 +90,9 @@ const Reviews = () => {
 
   return (
     <article>
-      <p>
+      <h3>
         Recently reviewed
-      </p>
+      </h3>
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={125}
@@ -98,13 +100,13 @@ const Reviews = () => {
       >
         <Slider>
           {review.map((item, index) => (
-            <Slide index={index} key={review._id}>
+            <Slide index={index} key={review._id} className="reviews_slide">
               <div>
                 {coverUrls[index] && (
                   <img
                     src={coverUrls[index].replace('t_thumb', 't_cover_big')}
                     alt="game cover"
-                    width={70}
+                    width={300}
                   />
                 )}
                 <div>

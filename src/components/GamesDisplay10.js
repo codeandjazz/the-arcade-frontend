@@ -6,6 +6,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import './GamesDisplay10.css';
+
 import { API_URL } from 'utils/urls';
 
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
@@ -31,6 +33,14 @@ const GamesDisplay10 = () => {
         };
         if (data.success) {
           const games = data.response.games;
+          // Access and modify the cover image URL
+          games.forEach((game) => {
+            if (game.cover && game.cover.url) {
+              game.cover.url = game.cover.url.replace('t_thumb', 't_cover_big');
+              console.log(`Game: ${game.name}`);
+              console.log(`Modified Cover Image URL: ${game.cover.url}`);
+            }
+          });
           console.log('this is games from gamesDisplay: ', games);
           // Get 10 random games
           const randomGames = getRandomGames(games, 6);
@@ -51,9 +61,9 @@ const GamesDisplay10 = () => {
 
   return (
     <article>
-      <p>
+      <h3>
         Featured games
-      </p>
+      </h3>
       <div>
         {loading ? (
           <p>Loading...</p>
@@ -65,14 +75,14 @@ const GamesDisplay10 = () => {
           >
             <Slider>
               {storedGames.map((game, index) => (
-                <Slide index={index} key={game._id}>
+                <Slide index={index} key={game._id} className="games_slide">
                   <div>
                     <Link to={`/games/${game._id}`}>
                       {game.cover && game.cover.url ? (
                         <img
                           src={game.cover.url}
                           alt="game cover"
-                          width={70}
+                          width={300}
                         />
                       ) : (
                         <img

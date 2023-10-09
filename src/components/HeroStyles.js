@@ -17,9 +17,11 @@ export const HeroImage = styled.div`
 
 export const H1 = styled.h1`
   z-index: 1;
-  font-size: 42px;
+  font-size: 2.618rem;
   line-height: 1.75;
   text-align: center;
+  font-family: Syne, sans-serif;
+  font-weight: 700;
   color: white;
   zIndex: 1;
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #1B3DA6, 0 0 20px #1B3DA6, 0 0 25px #1B3DA6, 0 0 30px #1B3DA6, 0 0 35px #1B3DA6;

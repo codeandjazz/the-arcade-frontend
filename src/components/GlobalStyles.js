@@ -9,9 +9,14 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    font-family: Syne, sans-serif;
 }
 a {
     text-decoration: none;
+}
+p {
+    font-family: Inter, sans-serif;
 }
 
 `

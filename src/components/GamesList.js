@@ -4,6 +4,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 
+// motion design
+import { Fade } from 'react-awesome-reveal';
+
 // API URL
 import { API_URL } from 'utils/urls';
 
@@ -51,6 +54,14 @@ const GamesList = () => {
         const data = await response.json();
         if (data.success) {
           const { games, total } = data.response;
+          // Access and modify the cover image URL
+          games.forEach((game) => {
+            if (game.cover && game.cover.url) {
+              game.cover.url = game.cover.url.replace('t_thumb', 't_cover_big');
+              console.log(`Game: ${game.name}`);
+              console.log(`Modified Cover Image URL: ${game.cover.url}`);
+            }
+          });
           // Store the games in state
           setStoredGames(games);
           console.log(games);
@@ -166,32 +177,35 @@ const GamesList = () => {
           ) : (
             storedGames.map((game, index) => (
             // eslint-disable-next-line no-underscore-dangle
-              <div key={game._id}>
-                <Link to={`/games/${game.slug}/${game._id}`}>
-                  <GameCard>
-                    {game.cover && game.cover.url ? (
-                      <img
-                        width={100}
-                        src={game.cover.url}
-                        alt="game cover" />
-                    ) : (
-                      <img
-                        width={100}
-                        src={defaultImg}
-                        alt="game cover" />
-                    )}
-                    <div>
-                      <p>{game.name}</p>
-                      {game.genres && game.genres.map((genre) => (
-                        <p
-                          key={genre.id}>
-                          {genre.name} &nbsp;
-                        </p>
-                      ))}
-                    </div>
-                  </GameCard>
-                </Link>
-              </div>
+              <Fade
+                duration={400}>
+                <div key={game._id}>
+                  <Link to={`/games/${game.slug}/${game._id}`}>
+                    <GameCard>
+                      {game.cover && game.cover.url ? (
+                        <img
+                          width={100}
+                          src={game.cover.url}
+                          alt="game cover" />
+                      ) : (
+                        <img
+                          width={100}
+                          src={defaultImg}
+                          alt="game cover" />
+                      )}
+                      <div>
+                        <p>{game.name}</p>
+                        {game.genres && game.genres.map((genre) => (
+                          <p
+                            key={genre.id}>
+                            {genre.name} &nbsp;
+                          </p>
+                        ))}
+                      </div>
+                    </GameCard>
+                  </Link>
+                </div>
+              </Fade>
             ))
           )}
           <ReactPaginate

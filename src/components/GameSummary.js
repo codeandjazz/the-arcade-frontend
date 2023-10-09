@@ -26,7 +26,9 @@ const GameSummary = ({ game }) => {
 
   useEffect(() => {
     if (game?.cover?.url) {
+      console.log('Original URL:', game.cover.url);
       setCoverUrl(game?.cover?.url.replace('t_thumb', 't_cover_big'));
+      console.log('Modified URL:', coverUrl);
       setIsLoading(false);
     }
   }, [game]);

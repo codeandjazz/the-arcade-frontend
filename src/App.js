@@ -18,7 +18,6 @@ import LandingPage from 'components/LandingPage';
 import UserProfilePage from 'components/UserProfilePage';
 import AboutPage from 'components/AboutPage';
 import Login from './components/Login';
-import Game from './components/Game';
 
 export const App = () => {
   const reducer = combineReducers({

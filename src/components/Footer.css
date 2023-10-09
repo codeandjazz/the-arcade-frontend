@@ -1,0 +1,10 @@
+.footer_container {
+    display: flex;
+    border: 2px solid pink;
+}
+
+.footer_content {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid yellow;
+}

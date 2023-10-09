@@ -39,7 +39,6 @@ const LandingPage = () => {
       })
     );
   }
-
   return (
     <>
       <Navbar />
@@ -49,6 +48,6 @@ const LandingPage = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default LandingPage;
