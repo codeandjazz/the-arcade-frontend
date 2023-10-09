@@ -72,7 +72,7 @@
         background-color: black;
       }
       .nav-elements.active {
-        width: 270px;
+        width: 100%;
       }
     
       .nav-elements ul {

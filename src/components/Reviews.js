@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import './Reviews.css'
 
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image } from 'pure-react-carousel';
 
 import { user } from '../reducers/user';
 import { formatDate } from '../utils/helpers';
@@ -97,25 +97,31 @@ const Reviews = () => {
         naturalSlideWidth={100}
         naturalSlideHeight={125}
         totalSlides={review.length}
+        infinite
+        isPlaying
+        visibleSlides={4}
       >
         <Slider>
           {review.map((item, index) => (
             <Slide index={index} key={review._id} className="reviews_slide">
               <div>
-                {coverUrls[index] && (
-                  <img
-                    src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-                    alt="game cover"
-                    width={300}
-                  />
-                )}
-                <div>
-                  <p>
-                    {formatDate(item.createdAt)}
-                  </p>
-                  <p>{item.user.username}</p>
-                  <p>{item.message}</p>
-                </div>
+                <Image
+                  hasMasterSpinner>
+                  {coverUrls[index] && (
+                    <img
+                      src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+                      alt="game cover"
+                      width={100}
+                    />
+                  )}
+                  <div>
+                    <p>
+                      {formatDate(item.createdAt)}
+                    </p>
+                    <p>{item.user.username}</p>
+                    <p>{item.message}</p>
+                  </div>
+                </Image>
               </div>
             </Slide>
           ))}
