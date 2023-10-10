@@ -34,9 +34,9 @@ const GamesDisplay10 = () => {
         if (data.success) {
           const games = data.response.games;
           // Filter games with cover images
-          const gamesWithOriginalCovers = storedGames.filter((game) => game.cover);
+          const gamesWithCovers = storedGames.filter((game) => game.cover);
           // Access and modify the cover image URL
-          gamesWithOriginalCovers.forEach((game) => {
+          gamesWithCovers.forEach((game) => {
             if (game.cover && game.cover.url) {
               game.cover.url = game.cover.url.replace('t_thumb', 't_cover_big');
               console.log(`Game: ${game.name}`);
@@ -45,7 +45,7 @@ const GamesDisplay10 = () => {
           });
           console.log('this is games from gamesDisplay: ', games);
           // Get 10 random games
-          const randomGames = getRandomGames(games, 20);
+          const randomGames = getRandomGames(gamesWithCovers, 20);
           console.log('this is randomGames from gamesDisplay: ', randomGames);
           // Store the games in state
           setStoredGames(randomGames);
@@ -59,6 +59,7 @@ const GamesDisplay10 = () => {
     };
 
     fetchGames();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -100,15 +101,6 @@ const GamesDisplay10 = () => {
                           />
                         )}
                       </Image>
-                      {/* <h4>{game.name}</h4>
-                      {game.genres &&
-                          game.genres.map((genre) => (
-                            <p
-                              key={genre.id}
-                            >
-                              {genre.name} &nbsp;
-                            </p>
-                          ))} */}
                     </Link>
                   </div>
                 </Slide>
