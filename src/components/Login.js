@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-shorthand */
 /* eslint-disable react/jsx-closing-bracket-location */
 // add modes to the login form, so that we can switch between login and signup
@@ -6,6 +7,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import Modal from 'react-modal';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
@@ -93,36 +99,78 @@ const Login = () => {
 
   // check password length and retun false if not long enough
 
+  // Modal logic
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
+  const customStyles = {
+    content: {
+      backgroundColor: 'black'
+    }
+  };
+
+  // Hide other app elements while modal is open
+  Modal.setAppElement('#root');
+
   return (
     <section>
-      <form onSubmit={onFormSubmit}>
-        <input
-          type="text"
-          label="Username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <input
-          type="password"
-          label="Password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        {errors && <p>{errors}</p>}
-        <div>
-          <button
-            type="submit"
-          >
+      <button
+        type="button"
+        className="user-icon button icon-button"
+        aria-label="Icon-only Button"
+        onClick={openModal}>
+        <FontAwesomeIcon
+          icon={faUserLock}
+          aria-hidden="true"
+          focusable="false" />
+      </button>
+      <Modal
+        style={customStyles}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Modal">
+        <h2>Log in to your account</h2>
+        <form onSubmit={onFormSubmit}>
+          <label htmlFor="username" id="Username">Username</label>
+          <input
+            type="text"
+            id="username"
+            label="Username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <label htmlFor="password" id="Password">Password</label>
+          <input
+            type="password"
+            id="password"
+            label="Password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          {errors && <p>{errors}</p>}
+          <div>
+            <button
+              type="submit"
+            >
                 Submit
-          </button>
-          <button
-            type="button"
-            onClick={closeHandler}
-          >
+            </button>
+            <button
+              type="button"
+              onClick={closeModal}
+            >
                 Close
-          </button>
-        </div>
-      </form>
+            </button>
+          </div>
+        </form>
+      </Modal>
     </section>
   );
 };

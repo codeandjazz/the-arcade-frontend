@@ -5,9 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 // hamburger icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-
-import Modal from 'react-modal';
+import { faBars, faUserLock } from '@fortawesome/free-solid-svg-icons';
 
 import { API_URL } from '../utils/urls';
 
@@ -22,9 +20,6 @@ import SignUp from './SignUp';
 import Logo from '../assets/img/Ninos_Logo_wh1.png';
 
 import './Navbar.css';
-
-// Hide other app elements while modal is open
-Modal.setAppElement('#root');
 
 const Navbar = () => {
   // Check if the user is logged in
@@ -42,18 +37,6 @@ const Navbar = () => {
   }
 
   console.log(showNavbar);
-
-  // Modal logic
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-  }
 
   const dispatch = useDispatch();
 
@@ -76,6 +59,7 @@ const Navbar = () => {
             <img src={Logo} alt="logo" width={40} />
           </NavLink>
         </div>
+        {!accessToken && (<Login />)}
         <button
           type="button"
           className="menu-icon button icon-button"
@@ -89,28 +73,9 @@ const Navbar = () => {
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
             <li><NavLink to="/">Home</NavLink></li>
+            <li><SignUp buttonText="Create account" handleShowNavbar={handleShowNavbar} /></li>
             <li><NavLink to="/games">Games</NavLink></li>
             <li><NavLink to="/about">About this website</NavLink></li>
-            <li><button onClick={openModal} type="button">Open Modal</button></li>
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              contentLabel="Modal">{!accessToken && (
-                <Login />
-              )}
-              {accessToken && (
-                <>
-                  <NavLink to={`/users/${user_id}`}>
-          My profile
-                  </NavLink>
-                  <button type="button" onClick={handleLogout}>
-                    <NavLink to="/">
-                      <p>Log out</p>
-                    </NavLink>
-                  </button>
-                </>
-              )}
-            </Modal>
             {/* {!accessToken && (
               <li>Login</li>
             )}

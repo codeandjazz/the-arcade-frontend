@@ -3,8 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import Modal from 'react-modal';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
+
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
+
+import './SignUp.css';
 
 const saveCredentialsToSessionStorage = (
   accessToken,
@@ -24,7 +31,7 @@ const saveCredentialsToSessionStorage = (
   console.log('user saved to local storage');
 };
 
-const SignUp = () => {
+const SignUp = ({ buttonText, handleShowNavbar }) => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [username, setUsername] = useState('');
@@ -111,49 +118,87 @@ const SignUp = () => {
       });
   };
 
+  // Modal logic
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
+  const customStyles = {
+    content: {
+      backgroundColor: 'black'
+    }
+  };
+
+  // Button logic
+
+  const buttonLogic = () => {
+    handleShowNavbar();
+    openModal();
+  }
+
+  // Hide other app elements while modal is open
+  Modal.setAppElement('#root');
+
   return (
-    <div>
+    <section>
       <button
         type="button"
-        onClick={handler}
-      >
-        Sign up
+        onClick={buttonLogic}
+        className="key-icon button icon-button"
+        aria-label="Icon-only Button"><FontAwesomeIcon
+          icon={faKey}
+          aria-hidden="true"
+          focusable="false" />
+        {buttonText}
       </button>
-      <p>Sign up</p>
-      <p> Please enter your username and password</p>
-      <p>
-        {' '}
+      <Modal
+        style={customStyles}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Modal">
+        <p>Sign up</p>
+        <p> Please enter your username and password</p>
+        <p>
+          {' '}
             Username and password will be stored in our database
-      </p>
-      <form onSubmit={onFormSubmit}>
-        <input
-          type="text"
-          label="Username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <input
-          type="password"
-          label="Password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <div>
-          <button
-            type="submit"
-            disabled={username.length < 5 || password.length < 5}
-          >
+        </p>
+        <form onSubmit={onFormSubmit}>
+          <input
+            type="text"
+            label="Username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <input
+            type="password"
+            label="Password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <div>
+            <button
+              type="submit"
+              disabled={username.length < 5 || password.length < 5}
+            >
                 Submit
-          </button>
-          <button
-            type="button"
-            onClick={closeHandler}
-          >
+            </button>
+            <button
+              type="button"
+              onClick={closeModal}
+            >
                 Close
-          </button>
-        </div>
-      </form>
-    </div>
+            </button>
+          </div>
+        </form>
+      </Modal>
+    </section>
   );
 };
 
