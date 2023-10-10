@@ -14,8 +14,6 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image } from '
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import defaultImg from '../assets/img/Ninos_Logo_wh1.png';
-
 const GamesDisplay10 = () => {
   const [storedGames, setStoredGames] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,19 +32,15 @@ const GamesDisplay10 = () => {
         if (data.success) {
           const games = data.response.games;
           // Filter games with cover images
-          const gamesWithCovers = storedGames.filter((game) => game.cover);
+          const gamesWithCovers = games.filter((game) => game.cover);
           // Access and modify the cover image URL
           gamesWithCovers.forEach((game) => {
             if (game.cover && game.cover.url) {
               game.cover.url = game.cover.url.replace('t_thumb', 't_cover_big');
-              console.log(`Game: ${game.name}`);
-              console.log(`Modified Cover Image URL: ${game.cover.url}`);
             }
           });
-          console.log('this is games from gamesDisplay: ', games);
           // Get 10 random games
           const randomGames = getRandomGames(gamesWithCovers, 20);
-          console.log('this is randomGames from gamesDisplay: ', randomGames);
           // Store the games in state
           setStoredGames(randomGames);
         } else {
@@ -68,48 +62,33 @@ const GamesDisplay10 = () => {
         Featured games
       </h3>
       <div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={125}
-            totalSlides={storedGames.length}
-            infinite
-            isPlaying
-            visibleSlides={4}
-          >
-            <Slider>
-              {storedGames.map((game, index) => (
-                <Slide index={index} key={game._id} className="games_slide">
-                  <div className="games_container">
-                    <Link to={`/games/${game._id}`}>
-                      <Image
-                        hasMasterSpinner
-                      >
-                        {game.cover && game.cover.url ? (
-                          <img
-                            src={game.cover.url}
-                            alt="game cover"
-                            width={100}
-                          />
-                        ) : (
-                          <img
-                            src={defaultImg}
-                            alt="game cover"
-                            height={100}
-                          />
-                        )}
-                      </Image>
-                    </Link>
-                  </div>
-                </Slide>
-              ))}
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-          </CarouselProvider>
-        )}
+        <CarouselProvider
+          naturalSlideWidth={100}
+          naturalSlideHeight={125}
+          totalSlides={storedGames.length}
+          infinite
+          isPlaying
+          visibleSlides={4}
+        >
+          <Slider>
+            {storedGames.map((game, index) => (
+              <Slide index={index} key={game._id} className="games_slide">
+                <div className="games_container">
+                  <Link to={`/games/${game._id}`}>
+                    <Image
+                      hasMasterSpinner
+                      src={game.cover.url}
+                      alt="game cover"
+                      className="games_cover-img"
+                    />
+                  </Link>
+                </div>
+              </Slide>
+            ))}
+          </Slider>
+          <ButtonBack>Back</ButtonBack>
+          <ButtonNext>Next</ButtonNext>
+        </CarouselProvider>
       </div>
     </article>
   );
