@@ -1,6 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 
+import './GameReviews.css';
+
 // API URL
 import { API_URL } from 'utils/urls';
 
@@ -15,7 +17,6 @@ const GameReviews = ({ game }) => {
         const response = await fetch(API_URL(`games/${game._id}/reviews`));
         const data = await response.json();
         if (data.success) {
-          console.log(data.response)
           setReviews(data.response)
         } else {
           console.log(data.message);
@@ -30,9 +31,10 @@ const GameReviews = ({ game }) => {
   }, [game._id]);
   return (
     <section>
+      <h3>Reviews</h3>
       {reviews.length > 0 ? (
         reviews.map((item) => (
-          <div key={item._id}>
+          <div key={item._id} className="game-reviews_review">
             <p>
               {formatDate(item.createdAt)}
             </p>

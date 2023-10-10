@@ -101,6 +101,7 @@ const Reviews = () => {
         infinite
         isPlaying
         visibleSlides={4}
+        hasMasterSpinner
       >
         <Slider>
           {review.map((item, index) => (

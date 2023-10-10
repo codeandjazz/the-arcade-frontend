@@ -69,6 +69,7 @@ const GamesDisplay10 = () => {
           infinite
           isPlaying
           visibleSlides={4}
+          hasMasterSpinner
         >
           <Slider>
             {storedGames.map((game, index) => (

@@ -17,7 +17,7 @@ import SignUp from './SignUp';
 // logo
 import Logo from '../assets/img/Ninos_Logo_wh1.png';
 
-import './NavbarStyles.css';
+import './Navbar.css';
 
 const Navbar = () => {
   // Check if the user is logged in

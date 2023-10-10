@@ -98,7 +98,7 @@ const GameSummary = ({ game }) => {
         )}
             {!accessToken && <p>Login or sign up to review, add to favorites and more.</p>}
         <div>
-          <h1>{game.name}</h1>
+          <h2>{game.name}</h2>
           {/* Map out game genres if available */}
           {game.genres &&
                 game.genres.map((genre) => (
