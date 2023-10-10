@@ -23,21 +23,21 @@ const Game = () => {
   const [imageURL, setImage] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const createImg = async (imageDescription) => {
-    const response = await axios.post(
-      'https://the-arcade-backend-6426jh4m2a-no.a.run.app/create',
-      {
-        prompt: imageDescription
-      }
-    );
-    setImage(response.data);
-    console.log(imageURL);
-    setLoading(false);
-  };
+  // const createImg = async (imageDescription) => {
+  //   const response = await axios.post(
+  //     'https://the-arcade-backend-6426jh4m2a-no.a.run.app/create',
+  //     {
+  //       prompt: imageDescription
+  //     }
+  //   );
+  //   setImage(response.data);
+  //   console.log(imageURL);
+  //   setLoading(false);
+  // };
 
-  const handleChange = (e) => {
-    setPrompt(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setPrompt(e.target.value);
+  // };
 
   const fetchGameBasedOnId = async () => {
     try {
@@ -67,22 +67,22 @@ const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (game.name) {
-      createImg(game.name + 'retro video game');
-    }
-  }, [game]);
+  // useEffect(() => {
+  //   if (game.name) {
+  //     createImg(game.name + 'retro video game');
+  //   }
+  // }, [game]);
   return (
     <>
       <Navbar />
       <article>
         {loading && <p>Loading...</p>}
-        {imageURL && (
+        {/* {imageURL && (
           <img // This could be a AI generated image based on the game name
             src={imageURL}
             alt={game.name}
           />
-        )}
+        )} */}
         <GameSummary game={game} />
       </article>
       <Footer />

@@ -10,12 +10,14 @@ import { API_URL } from 'utils/urls';
 
 // components
 import ReviewForm from './ReviewForm';
+import GameReviews from './GameReviews';
 
 const GameSummary = ({ game }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const accessToken = useSelector((store) => store.user.accessToken);
   const [isLoading, setIsLoading] = useState(true);
   const [coverUrl, setCoverUrl] = useState(null);
+  const [gameId, setGameId] = useState();
 
   const timestamp = game.first_release_date;
   const date = new Date(timestamp * 1000);
@@ -30,6 +32,8 @@ const GameSummary = ({ game }) => {
       setCoverUrl(game?.cover?.url.replace('t_thumb', 't_cover_big'));
       console.log('Modified URL:', coverUrl);
       setIsLoading(false);
+      setGameId(game._id);
+      console.log(`Game Id: ${game._id}`)
     }
   }, [game]);
 
@@ -116,6 +120,7 @@ const GameSummary = ({ game }) => {
               game={game}
             />
           )}
+          <GameReviews game={game} />
         </div>
     </section>
   );

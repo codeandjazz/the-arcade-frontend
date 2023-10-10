@@ -86,8 +86,8 @@ const GamesDisplay10 = () => {
               </Slide>
             ))}
           </Slider>
-          <ButtonBack>Back</ButtonBack>
-          <ButtonNext>Next</ButtonNext>
+          {/* <ButtonBack>Back</ButtonBack>
+          <ButtonNext>Next</ButtonNext> */}
         </CarouselProvider>
       </div>
     </article>

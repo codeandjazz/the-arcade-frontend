@@ -6,12 +6,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import './Reviews.css'
 
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image } from 'pure-react-carousel';
 
 import { user } from '../reducers/user';
-import { formatDate } from '../utils/helpers';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
@@ -104,30 +105,20 @@ const Reviews = () => {
         <Slider>
           {review.map((item, index) => (
             <Slide index={index} key={review._id} className="reviews_slide">
-              <div>
-                <Image
-                  hasMasterSpinner>
-                  {coverUrls[index] && (
-                    <img
-                      src={coverUrls[index].replace('t_thumb', 't_cover_big')}
-                      alt="game cover"
-                      width={100}
-                    />
-                  )}
-                  <div>
-                    <p>
-                      {formatDate(item.createdAt)}
-                    </p>
-                    <p>{item.user.username}</p>
-                    <p>{item.message}</p>
-                  </div>
-                </Image>
-              </div>
+              {coverUrls[index] && (
+                <Link to={`/games/${item.game}`}>
+                  <Image
+                    hasMasterSpinner
+                    className="games_cover-img"
+                    src={coverUrls[index].replace('t_thumb', 't_cover_big')}
+                    alt="game cover" />
+                </Link>
+              )}
             </Slide>
           ))}
         </Slider>
-        <ButtonBack>Back</ButtonBack>
-        <ButtonNext>Next</ButtonNext>
+        {/* <ButtonBack>Back</ButtonBack>
+        <ButtonNext>Next</ButtonNext> */}
       </CarouselProvider>
     </article>
   );
