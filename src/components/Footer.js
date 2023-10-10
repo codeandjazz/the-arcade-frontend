@@ -6,6 +6,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer>
+      <button type="button">Scroll to top</button>
       <div className="footer_container">
         <div className="footer_content">
           <p>Nino Aquilon</p>

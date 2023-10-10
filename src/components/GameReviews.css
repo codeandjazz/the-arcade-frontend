@@ -3,3 +3,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.avatar img {
+    width: 100%;
+    height: auto;
+    max-width: 20px;
+    border-radius: 50%;
+    outline-offset: 5px;
+    outline: solid 2px white;
+}

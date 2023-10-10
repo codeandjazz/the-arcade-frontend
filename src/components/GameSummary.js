@@ -10,7 +10,6 @@ import { API_URL } from 'utils/urls';
 
 // components
 import ReviewForm from './ReviewForm';
-import GameReviews from './GameReviews';
 
 const GameSummary = ({ game }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -102,14 +101,9 @@ const GameSummary = ({ game }) => {
           {/* Map out game genres if available */}
           {game.genres &&
                 game.genres.map((genre) => (
-                  <button
-                    type="button"
-                    key={genre.id}
-                  >
-                    <Link to={`/games/genres/${genre.name}`}>
+                  <span>
                       {genre.name} &nbsp;
-                    </Link>
-                  </button>
+                    </span>
                 ))}
           {releaseDate ? (<p>Release date: {releaseDate}</p>) : (<p>Release date: Unknown</p>)}
           {game.summary ? (<p>{game.summary}</p>) : (<p>Game summary not available</p>)}
@@ -120,7 +114,6 @@ const GameSummary = ({ game }) => {
               game={game}
             />
           )}
-          <GameReviews game={game} />
         </div>
     </section>
   );

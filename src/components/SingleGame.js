@@ -10,6 +10,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios, { isCancel, AxiosError } from 'axios';
 import NotFoundImg from '../assets/img/not-found-404.jpg';
 import GameSummary from './GameSummary';
+import GameReviews from './GameReviews';
 import { API_URL } from '../utils/urls';
 
 // components
@@ -76,6 +77,7 @@ const Game = () => {
     <>
       <Navbar />
       <article>
+        <button type="button">Go back</button>
         {loading && <p>Loading...</p>}
         {/* {imageURL && (
           <img // This could be a AI generated image based on the game name
@@ -84,6 +86,7 @@ const Game = () => {
           />
         )} */}
         <GameSummary game={game} />
+        <GameReviews game={game} />
       </article>
       <Footer />
     </>

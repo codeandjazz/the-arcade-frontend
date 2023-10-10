@@ -95,10 +95,6 @@ const Login = () => {
 
   return (
     <section>
-      <button type="button"
-      >
-        Login
-      </button>
       <form onSubmit={onFormSubmit}>
         <input
           type="text"

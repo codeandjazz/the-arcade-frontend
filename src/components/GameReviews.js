@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import './GameReviews.css';
 
+import avatar from 'assets/img/the-arcade_avatar.png';
+
 // API URL
 import { API_URL } from 'utils/urls';
 
@@ -38,7 +40,10 @@ const GameReviews = ({ game }) => {
             <p>
               {formatDate(item.createdAt)}
             </p>
-            <p>{item.username}</p>
+            <div className="avatar">
+              <img src={avatar} alt="avatar" />
+            </div>
+            <p>@{item.user.username}</p>
             <p>{item.message}</p>
           </div>
         ))
