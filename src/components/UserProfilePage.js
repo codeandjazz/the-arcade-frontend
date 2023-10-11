@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
 
+import { CarouselProvider, Slider, Slide, Image } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 
@@ -62,51 +65,47 @@ const UserProfilePage = () => {
           </p>
           <h3>Favorite Games</h3>
           {loading && <p>Loading...</p>}
-          {favoriteGames.map((game) => (
-            <Link to={`/games/${game.slug}/${game._id}`}>
-              {game.cover && game.cover.url ? (
-                <img
-                  src={game.cover.url}
-                  alt="game cover"
-                />
-              ) : (
-                <img
-                  src={defaultImg}
-                  alt="game cover"
-                />
-              )}
-              <p>{game.name}</p>
-            </Link>
-          ))}
+          <CarouselProvider
+            naturalSlideWidth={100}
+            naturalSlideHeight={125}
+            totalSlides={favoriteGames.length}
+            infinite
+            visibleSlides={1}
+            hasMasterSpinner
+          >
+            <Slider>
+              {favoriteGames.map((game) => (
+                <Link to={`/games/${game.slug}/${game._id}`}>
+                  <Slide>
+                    {game.cover && game.cover.url ? (
+                      <Image
+                        src={game.cover.url}
+                        alt="game cover"
+                        width={100}
+                      />
+                    ) : (
+                      <Image
+                        src={defaultImg}
+                        alt="game cover"
+                        width={100}
+                      />
+                    )}
+                    <p>{game.name}</p>
+                  </Slide>
+                </Link>
+              ))}
+            </Slider>
+          </CarouselProvider>
           {!loading && favoriteGames.length === 0 && (
             <p
             >
-                      You have no favorite games
+                      No favorite games yet.
             </p>
           )}
 
           <UserProfileReviews />
         </section>
       )}
-      {/* {!accessToken && (
-        <Container xs>
-          <Card>
-            <Card.Body>
-              <Text
-                blockquote
-                css={{
-                  textAlign: 'center',
-                  fontFamily: '$sans',
-                  fontWeight: '300',
-                  backgroundColor: '#f5e6fe'
-                }}
-              >
-                Sorry, you need to be logged in to view this page
-              </Text>
-            </Card.Body>
-          </Card>
-        </Container>
-      )} */}
     </>
   );
 };

@@ -7,6 +7,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import Modal from 'react-modal';
 import { formatDate } from '../utils/helpers';
 
@@ -142,58 +148,69 @@ const UserProfileReviews = () => {
       <h2>
         Reviews
       </h2>
-      {review.map((item) => (
-        <div
-        >
-          <p>{formatDate(item.createdAt)}</p>
-          <p>{item.game_name}</p>
-          <p>{item.message}</p>
-          <button
-            type="button"
-            onClick={() => {
-              openModal();
-              setEditReviewId(item._id);
-              setNewReviewText(item.message); // Set the initial value to the current review text
-            }}
-          >
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={125}
+        totalSlides={review.length}
+        infinite
+        visibleSlides={1}
+      >
+        <Slider>
+          {review.map((item, index) => (
+            <Slide key={item._id} index={index}>
+              <p>{formatDate(item.createdAt)}</p>
+              <p>{item.game_name}</p>
+              <p>{item.message}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  openModal();
+                  setEditReviewId(item._id);
+                  setNewReviewText(item.message); // Set the initial value to the current review text
+                }}
+              >
+                <FontAwesomeIcon icon={faPenToSquare} />
                 Edit
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              const shouldDelete = window.confirm('Are you sure you want to delete this review?');
-              if (shouldDelete) {
-                deleteReview(item._id);
-              }
-            }}
-          >
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const shouldDelete = window.confirm('Are you sure you want to delete this review?');
+                  if (shouldDelete) {
+                    deleteReview(item._id);
+                  }
+                }}
+              >
+                <FontAwesomeIcon icon={faTrash} />
                 Delete
-          </button>
-          <Modal
-            style={customStyles}
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Modal">
-            <h4>Write your review here</h4>
-            <textarea
-              type="text"
-              placeholder="Write your review here"
-              value={newReviewText}
-              onChange={(e) => setNewReviewText(e.target.value)}
-              required
-            />
-            <button type="button" onClick={closeModal}>
+              </button>
+              <Modal
+                style={customStyles}
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Modal">
+                <h4>Write your review here</h4>
+                <textarea
+                  type="text"
+                  placeholder="Write your review here"
+                  value={newReviewText}
+                  onChange={(e) => setNewReviewText(e.target.value)}
+                  required
+                />
+                <button type="button" onClick={closeModal}>
               Cancel
-            </button>
-            <button
-              type="button"
-              onClick={() => handleReviewEditSubmit(editReviewId, newReviewText)}
-            >
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReviewEditSubmit(editReviewId, newReviewText)}
+                >
               Update
-            </button>
-          </Modal>
-        </div>
-      ))}
+                </button>
+              </Modal>
+            </Slide>
+          ))}
+        </Slider>
+      </CarouselProvider>
     </section>
   );
 };

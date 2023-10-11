@@ -7,8 +7,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@fullpage/react-fullpage": "^0.1.40",
-    "@nextui-org/react": "^1.0.0-beta.13",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "eslint": "^8.21.0",
