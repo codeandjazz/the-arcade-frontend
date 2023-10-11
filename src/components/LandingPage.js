@@ -1,9 +1,11 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { user } from '../reducers/user';
 
 // components
@@ -40,11 +42,14 @@ const LandingPage = () => {
       })
     );
   }
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const { username, user_id } = useSelector((store) => store.user);
   return (
     <>
       <Navbar />
       <Hero />
-      <SignUp buttonText="Get started- it's free!" showIcon={false} />
+      {!accessToken && (<SignUp buttonText="Get started- it's free!" showIcon={false} />)}
+      {accessToken && (<p>Welcome back, <NavLink to={`/users/${user_id}`}>{username}</NavLink>.</p>)}
       <GamesDisplay10 />
       <Reviews />
       <Footer />

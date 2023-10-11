@@ -13,7 +13,6 @@ import GlobalStyle from 'components/GlobalStyles';
 import NotFound from 'components/NotFound';
 import SingleGame from 'components/SingleGame';
 import GamesList from 'components/GamesList';
-import UserProfile from 'components/UserProfile';
 import LandingPage from 'components/LandingPage';
 import UserProfilePage from 'components/UserProfilePage';
 import AboutPage from 'components/AboutPage';

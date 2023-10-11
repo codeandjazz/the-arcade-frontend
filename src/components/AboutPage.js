@@ -3,6 +3,7 @@
 import React from 'react';
 
 // components
+import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -37,9 +38,9 @@ const AboutUs = () => {
             MongoDB, Express, React, and Node.js. All the game data we used is
             from the API provided by:
         </p>
-        <a href="https://www.igdb.com" target="_blank" rel="noreferrer">
+        <Link to="https://www.igdb.com" target="_blank" rel="noreferrer">
             IGDB.com
-        </a>
+        </Link>
         <p>We&apos;d love it if you reported any bugs to us on:</p>
         <a
           href="https://github.com/codeandjazz/the-arcade-frontend/issues/new"
@@ -49,6 +50,23 @@ const AboutUs = () => {
             Github Issues
         </a>
       </section>
+      <div className="footer_container">
+        <div className="footer_content">
+          <p>Nino Aquilon</p>
+          <p>codeandjazz</p>
+          <a href="https://github.com/TessAquilon" target="_blank" rel="noreferrer">
+            Github
+          </a>
+        </div>
+        <div className="footer_content">
+          <p>Daniel Brobäck</p>
+          <p>dannebrob</p>
+          <p>Making ideas come alive on the internet</p>
+          <a href="https://github.com/dannebrob" target="_blank" rel="noreferrer">
+            Github
+          </a>
+        </div>
+      </div>
       <Footer />
     </article>
   );
