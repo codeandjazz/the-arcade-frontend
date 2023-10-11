@@ -160,7 +160,12 @@ const UserProfileReviews = () => {
           </button>
           <button
             type="button"
-            onClick={() => deleteReview(item._id)}
+            onClick={() => {
+              const shouldDelete = window.confirm('Are you sure you want to delete this review?');
+              if (shouldDelete) {
+                deleteReview(item._id);
+              }
+            }}
           >
                 Delete
           </button>
