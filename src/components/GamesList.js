@@ -29,8 +29,9 @@ background-color: white;
 `
 
 const GamesDisplay = styled.section`
-display: flex;
-flex-direction: column;
+display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 `
 
 const GamesList = () => {
@@ -196,10 +197,10 @@ const GamesList = () => {
                       <div>
                         <p>{game.name}</p>
                         {game.genres && game.genres.map((genre) => (
-                          <p
+                          <span
                             key={genre.id}>
                             {genre.name} &nbsp;
-                          </p>
+                          </span>
                         ))}
                       </div>
                     </GameCard>
@@ -208,17 +209,17 @@ const GamesList = () => {
               </Fade>
             ))
           )}
-          <ReactPaginate
-            containerClassName="pagination"
-            pageClassName="page-item"
-            activeClassName="active"
-            initialPage={0}
-            onPageChange={(event) => setCurrentPage(event.selected + 1)}
-            pageCount={totalPages}
-            breakLabel="..."
-            previousLabel="previous"
-            nextLabel="next" />;
         </GamesDisplay>
+        <ReactPaginate
+          containerClassName="pagination"
+          pageClassName="page-item"
+          activeClassName="active"
+          initialPage={0}
+          onPageChange={(event) => setCurrentPage(event.selected + 1)}
+          pageCount={totalPages}
+          breakLabel="..."
+          previousLabel="previous"
+          nextLabel="next" />;
       </article>
     </>
   );
