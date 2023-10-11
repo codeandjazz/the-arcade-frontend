@@ -16,7 +16,7 @@ import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { user } from '../reducers/user';
 import { API_URL } from '../utils/urls';
 
-const saveCredentialsToSessionStorage = (
+const saveCredentialsToLocalStorage = (
   accessToken,
   username,
   userId,
@@ -24,12 +24,12 @@ const saveCredentialsToSessionStorage = (
   reviews,
   playedGames
 ) => {
-  sessionStorage.setItem('accessToken', accessToken);
-  sessionStorage.setItem('username', username);
-  sessionStorage.setItem('userId', userId);
-  sessionStorage.setItem('createdAt', createdAt);
-  sessionStorage.setItem('reviews', reviews);
-  sessionStorage.setItem('playedGames', playedGames);
+  localStorage.setItem('accessToken', accessToken);
+  localStorage.setItem('username', username);
+  localStorage.setItem('userId', userId);
+  localStorage.setItem('createdAt', createdAt);
+  localStorage.setItem('reviews', reviews);
+  localStorage.setItem('playedGames', playedGames);
 
   console.log('user saved to local storage');
 };
@@ -76,14 +76,14 @@ const Login = () => {
           dispatch(user.actions.setReviews(data.response.reviews));
           dispatch(user.actions.setError(null));
           if (rememberMe) {
-            saveCredentialsToSessionStorage(
+            saveCredentialsToLocalStorage(
               data.response.accessToken,
               data.response.username,
               data.response.id,
               data.response.createdAt
             );
           } else {
-            console.log('User chose not to be remembered.');
+            console.log('Error: Could not save user credentials to local storage')
           }
         } else {
           dispatch(user.actions.setAccessToken(null));

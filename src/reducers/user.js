@@ -14,27 +14,21 @@ export const user = createSlice({
   reducers: {
     setUsername: (store, action) => {
       store.username = action.payload;
-      console.log(action.payload);
     },
     setUserId: (store, action) => {
       store.user_id = action.payload;
-      console.log(action.payload);
     },
     setAccessToken: (store, action) => {
       store.accessToken = action.payload;
-      console.log(action.payload);
     },
     setError: (store, action) => {
       store.error = action.payload;
-      console.log(action.payload);
     },
     setCreatedAt: (store, action) => {
       store.createdAt = action.payload;
-      console.log(action.payload);
     },
     setReviews: (store, action) => {
       store.reviews = action.payload;
-      console.log(action.payload);
     }
   }
 });

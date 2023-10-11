@@ -12,7 +12,6 @@ import { API_URL } from 'utils/urls';
 import ReviewForm from './ReviewForm';
 
 const GameSummary = ({ game }) => {
-  const [showReviewForm, setShowReviewForm] = useState(false);
   const accessToken = useSelector((store) => store.user.accessToken);
   const [isLoading, setIsLoading] = useState(true);
   const [coverUrl, setCoverUrl] = useState(null);
@@ -21,9 +20,6 @@ const GameSummary = ({ game }) => {
   const timestamp = game.first_release_date;
   const date = new Date(timestamp * 1000);
   const releaseDate = date.toLocaleDateString();
-  const handleShowReviewForm = () => {
-    setShowReviewForm(!showReviewForm);
-  };
 
   useEffect(() => {
     if (game?.cover?.url) {
@@ -72,13 +68,7 @@ const GameSummary = ({ game }) => {
         )}
         {accessToken && (
             <div>
-              <button
-                type="button"
-                disabled={!accessToken}
-                onClick={handleShowReviewForm}
-              >
-                  Review this game
-              </button>
+              <ReviewForm game={game} />
               <button
                 type="button"
                 disabled={!accessToken}
@@ -107,13 +97,6 @@ const GameSummary = ({ game }) => {
                 ))}
           {releaseDate ? (<p>Release date: {releaseDate}</p>) : (<p>Release date: Unknown</p>)}
           {game.summary ? (<p>{game.summary}</p>) : (<p>Game summary not available</p>)}
-          {showReviewForm && (
-            <ReviewForm
-              setShowReviewForm={setShowReviewForm}
-              showReviewForm={showReviewForm}
-              game={game}
-            />
-          )}
         </div>
     </section>
   );

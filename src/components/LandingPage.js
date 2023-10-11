@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { user } from '../reducers/user';
 
 // components
@@ -21,35 +21,40 @@ import { API_URL } from '../utils/urls';
 
 const LandingPage = () => {
   const dispatch = useDispatch();
-  // if local storage has a token, then update the store with the token
-  if (sessionStorage.getItem('accessToken')) {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const username = sessionStorage.getItem('username');
-    const userId = sessionStorage.getItem('userId');
-    const createdAt = sessionStorage.getItem('createdAt');
-    const reviews = sessionStorage.getItem('reviews');
-    const playedGames = sessionStorage.getItem('playedGames');
-    // const favorites = sessionStorage.getItem('favorites');
-    dispatch(
-      user.actions.setAccessToken({
-        accessToken,
-        username,
-        userId,
-        createdAt,
-        reviews,
-        playedGames
-        // favorites
-      })
-    );
-  }
   const accessToken = useSelector((store) => store.user.accessToken);
+  useEffect(() => {
+    if (accessToken) {
+      // If there is an accessToken in the store, hydrate the store with values from localStorage
+      const storedAccessToken = localStorage.getItem('accessToken');
+      const storedUsername = localStorage.getItem('username');
+      const storedUserId = localStorage.getItem('userId');
+      const storedCreatedAt = localStorage.getItem('createdAt');
+      const storedReviews = localStorage.getItem('reviews');
+      // Update the Redux store with the values from localStorage
+      dispatch(
+        user.actions.setAccessToken(storedAccessToken)
+      );
+      dispatch(
+        user.actions.setUsername(storedUsername)
+      );
+      dispatch(
+        user.actions.setUserId(storedUserId)
+      );
+      dispatch(
+        user.actions.setCreatedAt(storedCreatedAt)
+      );
+      dispatch(
+        user.actions.setReviews(storedReviews)
+      );
+    }
+  }, [accessToken, dispatch])
   const { username, user_id } = useSelector((store) => store.user);
   return (
     <>
       <Navbar />
       <Hero />
       {!accessToken && (<SignUp buttonText="Get started- it's free!" showIcon={false} />)}
-      {accessToken && (<p>Welcome back, <NavLink to={`/users/${user_id}`}>{username}</NavLink>.</p>)}
+      {accessToken && (<p>Welcome back, <Link to={`/users/${user_id}`}>{username}</Link>.</p>)}
       <GamesDisplay10 />
       <Reviews />
       <Footer />

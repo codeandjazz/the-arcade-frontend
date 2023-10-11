@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 
 const UserProfile = () => {
   const { username, user_id } = useSelector((store) => store.user);
-  console.log(`Username: ${username} User id: ${user_id}`)
   return (
     <NavLink to={`/users/${user_id}`}>
       <p>{username}</p>
