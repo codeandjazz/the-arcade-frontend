@@ -6,21 +6,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Container,
-  Grid,
-  Text,
-  Modal,
-  Card,
-  Button,
-  Textarea,
-  Spacer
-} from '@nextui-org/react';
+
+import Modal from 'react-modal';
 import { formatDate } from '../utils/helpers';
 
 const UserProfileReviews = () => {
   const [review, setReview] = useState([]);
-  const [showReviewForm, setShowReviewForm] = useState(false);
   const [newReviewText, setNewReviewText] = useState('');
   const [editReviewId, setEditReviewId] = useState(null);
 
@@ -97,40 +88,6 @@ const UserProfileReviews = () => {
     }
   };
 
-  const handleReviewEditSubmit = (reviewId, reviewText) => {
-    updateReview(reviewId, reviewText);
-    setShowReviewForm(false);
-  };
-
-  const showEditReviewModal = (reviewId) => {
-    if (reviewId === editReviewId) {
-      return (
-        <Modal open onClose={() => setShowReviewForm(false)}>
-          <Text h4>Write your review here</Text>
-          <Textarea
-            type="text"
-            placeholder="Write your review here"
-            value={newReviewText}
-            onChange={(e) => setNewReviewText(e.target.value)}
-            required
-          />
-          <Button.Group css={{ margin: '1rem auto' }}>
-            <Button type="button" onPress={() => setShowReviewForm(false)}>
-              Cancel
-            </Button>
-            <Spacer x={0.5} />
-            <Button
-              onPress={() => handleReviewEditSubmit(reviewId, newReviewText)}
-            >
-              Update
-            </Button>
-          </Button.Group>
-        </Modal>
-      );
-    }
-    return null;
-  };
-
   const deleteReview = async (reviewId) => {
     try {
       const response = await fetch(
@@ -158,64 +115,81 @@ const UserProfileReviews = () => {
 
   console.log('This is review ', review);
 
+  // Modal logic
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  }
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+  const customStyles = {
+    content: {
+      backgroundColor: 'black'
+    }
+  };
+
+  const handleReviewEditSubmit = (reviewId, reviewText) => {
+    updateReview(reviewId, reviewText);
+    closeModal();
+  };
+
+  // Hide other app elements while modal is open
+  Modal.setAppElement('#root');
+
   return (
-    <Container>
-      <Text h2 css={{ fontFamily: '$body' }}>
+    <section>
+      <h2>
         Reviews
-      </Text>
+      </h2>
       {review.map((item) => (
-        <Card
-          gap={2}
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '4rem',
-            padding: '1.5rem 1.5rem',
-            borderRadius: '$xs',
-            marginBottom: '5px'
-          }}
+        <div
         >
-          <section style={{ display: 'flex', flexDirection: 'column' }}>
-            <Text>{formatDate(item.createdAt)}</Text>
-            <Text h4>{item.game_name}</Text>
-            <Text blockquote>{item.message}</Text>
-            <Button.Group css={{ margin: 'auto 0' }}>
-              <Button
-                type="button"
-                css={{
-                  borderRadius: '$xs',
-                  fontWeight: '300',
-                  color: '$black',
-                  margin: '1px',
-                  backgroundColor: '$success'
-                }}
-                onClick={() => {
-                  setShowReviewForm(true);
-                  setEditReviewId(item._id);
-                }}
-              >
+          <p>{formatDate(item.createdAt)}</p>
+          <p>{item.game_name}</p>
+          <p>{item.message}</p>
+          <button
+            type="button"
+            onClick={() => {
+              openModal();
+              setEditReviewId(item._id);
+              setNewReviewText(item.message); // Set the initial value to the current review text
+            }}
+          >
                 Edit
-              </Button>
-              <Button
-                color="error"
-                css={{
-                  borderRadius: '$xs',
-                  fontWeight: '300',
-                  color: '$black',
-                  margin: '1px',
-                  backgroundColor: '$error'
-                }}
-                type="button"
-                onClick={() => deleteReview(item._id)}
-              >
+          </button>
+          <button
+            type="button"
+            onClick={() => deleteReview(item._id)}
+          >
                 Delete
-              </Button>
-            </Button.Group>
-          </section>
-          {showReviewForm && showEditReviewModal(item._id)}
-        </Card>
+          </button>
+          <Modal
+            style={customStyles}
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Modal">
+            <h4>Write your review here</h4>
+            <textarea
+              type="text"
+              placeholder="Write your review here"
+              value={newReviewText}
+              onChange={(e) => setNewReviewText(e.target.value)}
+              required
+            />
+            <button type="button" onClick={closeModal}>
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => handleReviewEditSubmit(editReviewId, newReviewText)}
+            >
+              Update
+            </button>
+          </Modal>
+        </div>
       ))}
-    </Container>
+    </section>
   );
 };
 

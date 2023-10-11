@@ -104,23 +104,18 @@ const Login = () => {
   // check password length and retun false if not long enough
 
   // Modal logic
-
   const [modalIsOpen, setIsOpen] = useState(false);
-
   const openModal = () => {
     setIsOpen(true);
   }
-
   const closeModal = () => {
     setIsOpen(false)
   }
-
   const customStyles = {
     content: {
       backgroundColor: 'black'
     }
   };
-
   // Hide other app elements while modal is open
   Modal.setAppElement('#root');
 

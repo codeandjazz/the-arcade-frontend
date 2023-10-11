@@ -1,19 +1,11 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Text,
-  Grid,
-  Loading,
-  Button
-} from '@nextui-org/react';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
+
 import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 
@@ -63,86 +55,40 @@ const UserProfilePage = () => {
     <>
       <Navbar />
       {accessToken && (
-        <Container md>
-          <Grid.Container justify="center" gap={2}>
-            <Grid>
-              <Card css={{ borderRadius: '$xs', backgroundColor: '#f5e6fe' }}>
-                <Card.Body
-                  css={{ display: 'flex', justifyContent: 'flex-start' }}
-                >
-                  <UserProfile />
-                  <Text css={{ fontWeight: '300' }}>
+        <section>
+          <UserProfile />
+          <p>
                     Joined in {joinedMonth} {joinedYear}
-                  </Text>
-                </Card.Body>
-              </Card>
-            </Grid>
-            <Grid>
-              <Card css={{ borderRadius: '$xs' }}>
-                <Card.Header>Favorite Games</Card.Header>
-                <Grid.Container gap={2} wrap="wrap">
-                  {loading && <Loading type="points" />}
-                  {favoriteGames.map((game) => (
-                    <Grid key={game._id}>
-                      <Link to={`/games/${game.slug}/${game._id}`}>
-                        <Card
-                          isPressable
-                          css={{
-                            w: '8rem',
-                            h: '15rem',
-                            borderRadius: '$xs',
-                            backgroundColor: '#f5e6fe'
-                          }}
-                          onPress={() => console.log('pressed')}
-                        >
-                          <Card.Body css={{ p: 0 }}>
-                            {game.cover && game.cover.url ? (
-                              <Card.Image
-                                src={game.cover.url}
-                                objectFit="cover"
-                                width="100%"
-                                height={140}
-                                alt="image"
-                              />
-                            ) : (
-                              <Card.Image
-                                src={defaultImg}
-                                objectFit="contain"
-                                width="100%"
-                                height={140}
-                                alt="image"
-                              />
-                            )}
-                            <Card.Footer css={{ justifyItems: 'flex-start' }}>
-                              <Row wrap="wrap" align="center">
-                                <Text>{game.name}</Text>
-                              </Row>
-                            </Card.Footer>
-                          </Card.Body>
-                        </Card>
-                      </Link>
-                    </Grid>
-                  ))}
-                  {!loading && favoriteGames.length === 0 && (
-                    <Text
-                      blockquote
-                      css={{
-                        textAlign: 'center',
-                        fontFamily: '$sans',
-                        fontWeight: '300'
-                      }}
-                    >
+          </p>
+          <h3>Favorite Games</h3>
+          {loading && <p>Loading...</p>}
+          {favoriteGames.map((game) => (
+            <Link to={`/games/${game.slug}/${game._id}`}>
+              {game.cover && game.cover.url ? (
+                <img
+                  src={game.cover.url}
+                  alt="game cover"
+                />
+              ) : (
+                <img
+                  src={defaultImg}
+                  alt="game cover"
+                />
+              )}
+              <p>{game.name}</p>
+            </Link>
+          ))}
+          {!loading && favoriteGames.length === 0 && (
+            <p
+            >
                       You have no favorite games
-                    </Text>
-                  )}
-                </Grid.Container>
-              </Card>
-            </Grid>
-          </Grid.Container>
+            </p>
+          )}
+
           <UserProfileReviews />
-        </Container>
+        </section>
       )}
-      {!accessToken && (
+      {/* {!accessToken && (
         <Container xs>
           <Card>
             <Card.Body>
@@ -160,7 +106,7 @@ const UserProfilePage = () => {
             </Card.Body>
           </Card>
         </Container>
-      )}
+      )} */}
     </>
   );
 };
