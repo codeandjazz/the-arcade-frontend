@@ -11,6 +11,7 @@ import Footer from './Footer';
 import GamesDisplay10 from './GamesDisplay10';
 import Reviews from './Reviews';
 import Navbar from './Navbar';
+import SignUp from './SignUp';
 import Hero from './Hero';
 
 // API URL
@@ -43,6 +44,7 @@ const LandingPage = () => {
     <>
       <Navbar />
       <Hero />
+      <SignUp buttonText="Get started- it's free!" showIcon={false} />
       <GamesDisplay10 />
       <Reviews />
       <Footer />

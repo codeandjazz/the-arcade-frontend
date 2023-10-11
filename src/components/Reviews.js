@@ -43,7 +43,6 @@ const Reviews = () => {
       if (data.success) {
         setReview(data.response);
         fetchCoverUrls(data.response);
-        console.log(data.response);
       } else {
         console.log(data.message);
       }
@@ -59,7 +58,6 @@ const Reviews = () => {
       );
       const data = await response.json();
       if (data.success) {
-        console.log(data.response.cover.url);
         return `https:${data.response.cover.url}`;
       } else {
         console.log(data.message);

@@ -37,19 +37,16 @@ const saveCredentialsToSessionStorage = (
 const Login = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
+  const [rememberMe, setRememberMe] = useState(false); // State for the "Remember Me" checkbox
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
   const [createdAt, setCreatedAt] = useState(null);
   const [reviews, setReviews] = useState(null);
-  // const [favorites, setFavorites] = useState(null);
-  /* const [playedGames, setPlayedGames] = useState(null); */
   const [errors, setErrors] = useState(null); // move to store
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
-  const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
-  const closeHandler = () => setVisible(false);
 
   useEffect(() => {
     if (accessToken) {
@@ -77,15 +74,17 @@ const Login = () => {
           dispatch(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setCreatedAt(data.response.createdAt));
           dispatch(user.actions.setReviews(data.response.reviews));
-          // dispatch(user.actions.setFavorites(data.response.favorites));
-          // dispatch(user.actions.setPlayedGames(data.response.playedGames));
           dispatch(user.actions.setError(null));
-          saveCredentialsToSessionStorage(
-            data.response.accessToken,
-            data.response.username,
-            data.response.id,
-            data.response.createdAt
-          );
+          if (rememberMe) {
+            saveCredentialsToSessionStorage(
+              data.response.accessToken,
+              data.response.username,
+              data.response.id,
+              data.response.createdAt
+            );
+          } else {
+            console.log('User chose not to be remembered.');
+          }
         } else {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));
@@ -95,6 +94,11 @@ const Login = () => {
           setErrors('Wrong username or password! Please try again.');
         }
       });
+  };
+
+  // Handle "Remember Me" checkbox
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
   };
 
   // check password length and retun false if not long enough
@@ -156,6 +160,14 @@ const Login = () => {
             onChange={(event) => setPassword(event.target.value)}
           />
           {errors && <p>{errors}</p>}
+          <label>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+            />
+                Remember Me
+          </label>
           <div>
             <button
               type="submit"

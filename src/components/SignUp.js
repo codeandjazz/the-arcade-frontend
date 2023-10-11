@@ -31,7 +31,7 @@ const saveCredentialsToSessionStorage = (
   console.log('user saved to local storage');
 };
 
-const SignUp = ({ buttonText, handleShowNavbar }) => {
+const SignUp = ({ buttonText, showIcon, handleShowNavbar }) => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const [username, setUsername] = useState('');
@@ -47,9 +47,6 @@ const SignUp = ({ buttonText, handleShowNavbar }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate(); // this is a hook that we can use to change the url
-  const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
-  const closeHandler = () => setVisible(false);
 
   useEffect(() => {
     if (accessToken) {
@@ -118,6 +115,8 @@ const SignUp = ({ buttonText, handleShowNavbar }) => {
       });
   };
 
+  // Icon logic
+
   // Modal logic
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -152,10 +151,13 @@ const SignUp = ({ buttonText, handleShowNavbar }) => {
         type="button"
         onClick={buttonLogic}
         className="key-icon button icon-button"
-        aria-label="Icon-only Button"><FontAwesomeIcon
-          icon={faKey}
-          aria-hidden="true"
-          focusable="false" />
+        aria-label="Icon-only Button">
+        {showIcon && (
+          <FontAwesomeIcon
+            icon={faKey}
+            aria-hidden="true"
+            focusable="false" />
+        )}
         {buttonText}
       </button>
       <Modal
@@ -163,7 +165,7 @@ const SignUp = ({ buttonText, handleShowNavbar }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Modal">
-        <p>Sign up</p>
+        <h3>Join the Arcade</h3>
         <p> Please enter your username and password</p>
         <p>
           {' '}
@@ -186,6 +188,7 @@ const SignUp = ({ buttonText, handleShowNavbar }) => {
             <button
               type="submit"
               disabled={username.length < 5 || password.length < 5}
+              onClick={closeModal}
             >
                 Submit
             </button>
