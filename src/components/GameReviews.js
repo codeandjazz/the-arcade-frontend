@@ -29,6 +29,15 @@ const GameReviews = ({ game }) => {
     };
 
     fetchReviewsForGame();
+
+    // polling for new reviews
+    const intervalId = setInterval(() => {
+      fetchReviewsForGame()
+    }, 30000);
+
+    // cleanup timer when component unmounts
+    return () => clearInterval(intervalId)
+
   // eslint-disable-next-line no-underscore-dangle
   }, [game._id]);
   return (

@@ -114,13 +114,6 @@ const GameSummary = ({ game }) => {
               >
                   <FontAwesomeIcon icon={faHeart} />
               </button>
-              {/* <button
-                type="button"
-                disabled={!accessToken}
-                onClick={handleAddFavorite}
-              >
-                  Remove from favorites
-              </button> */}
             </div>
         )}
             {!accessToken && <p>Login or sign up to review, add to favorites and more.</p>}
