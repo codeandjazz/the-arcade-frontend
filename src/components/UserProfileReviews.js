@@ -117,8 +117,6 @@ const UserProfileReviews = () => {
     }
   };
 
-  console.log('This is review ', review);
-
   // Modal logic
   const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = () => {
