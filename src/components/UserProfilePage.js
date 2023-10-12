@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/urls';
 
 import { CarouselProvider, Slider, Slide, Image } from 'pure-react-carousel';
@@ -17,6 +17,7 @@ import Navbar from './Navbar';
 import UserProfileReviews from './UserProfileReviews';
 
 const UserProfilePage = () => {
+  const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
   const createdAt = useSelector((store) => store.user.createdAt);
   const [loading, setLoading] = useState(true);
@@ -54,58 +55,62 @@ const UserProfilePage = () => {
     fetchFavoriteGames();
   }, [accessToken]);
 
+  // Check if there is no access token, and navigate to the home page
+  if (!accessToken) {
+    navigate('/');
+    return null;
+  }
+
   return (
     <>
       <Navbar />
-      {accessToken && (
-        <section>
-          <UserProfile />
-          <p>
+      <section>
+        <UserProfile />
+        <p>
                     Joined in {joinedMonth} {joinedYear}
-          </p>
-          <h3>Favorite Games</h3>
-          {loading && <p>Loading...</p>}
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={125}
-            totalSlides={favoriteGames.length}
-            infinite
-            visibleSlides={1}
-            hasMasterSpinner
+        </p>
+        <h3>Favorite Games</h3>
+        {loading && <p>Loading...</p>}
+        <CarouselProvider
+          naturalSlideWidth={100}
+          naturalSlideHeight={125}
+          totalSlides={favoriteGames.length}
+          infinite
+          visibleSlides={1}
+          hasMasterSpinner
+        >
+          <Slider>
+            {favoriteGames.map((game) => (
+              <Link to={`/games/${game.slug}/${game._id}`}>
+                <Slide>
+                  {game.cover && game.cover.url ? (
+                    <Image
+                      src={game.cover.url}
+                      alt="game cover"
+                      width={100}
+                    />
+                  ) : (
+                    <Image
+                      src={defaultImg}
+                      alt="game cover"
+                      width={100}
+                    />
+                  )}
+                  <p>{game.name}</p>
+                </Slide>
+              </Link>
+            ))}
+          </Slider>
+        </CarouselProvider>
+        {!loading && favoriteGames.length === 0 && (
+          <p
           >
-            <Slider>
-              {favoriteGames.map((game) => (
-                <Link to={`/games/${game.slug}/${game._id}`}>
-                  <Slide>
-                    {game.cover && game.cover.url ? (
-                      <Image
-                        src={game.cover.url}
-                        alt="game cover"
-                        width={100}
-                      />
-                    ) : (
-                      <Image
-                        src={defaultImg}
-                        alt="game cover"
-                        width={100}
-                      />
-                    )}
-                    <p>{game.name}</p>
-                  </Slide>
-                </Link>
-              ))}
-            </Slider>
-          </CarouselProvider>
-          {!loading && favoriteGames.length === 0 && (
-            <p
-            >
                       No favorite games yet.
-            </p>
-          )}
+          </p>
+        )}
 
-          <UserProfileReviews />
-        </section>
-      )}
+        <UserProfileReviews />
+      </section>
     </>
   );
 };

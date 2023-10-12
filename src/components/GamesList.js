@@ -179,8 +179,9 @@ const GamesList = () => {
             storedGames.map((game, index) => (
             // eslint-disable-next-line no-underscore-dangle
               <Fade
-                duration={400}>
-                <div key={game._id}>
+                duration={400}
+                key={game._id}>
+                <div>
                   <Link to={`/games/${game.slug}/${game._id}`}>
                     <GameCard>
                       {game.cover && game.cover.url ? (
