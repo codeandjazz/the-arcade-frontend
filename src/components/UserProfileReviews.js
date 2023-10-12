@@ -7,9 +7,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,6 +17,7 @@ const UserProfileReviews = () => {
   const [review, setReview] = useState([]);
   const [newReviewText, setNewReviewText] = useState('');
   const [editReviewId, setEditReviewId] = useState(null);
+  const [showOlder, setShowOlder] = useState(false);
 
   // get accessToken from store
   const accessToken =
@@ -42,7 +40,7 @@ const UserProfileReviews = () => {
       const data = await response.json();
       if (data.success) {
         console.log(data.response);
-        setReview(data.response);
+        setReview(data.response.reverse());
       } else {
         console.log(data.message);
       }
@@ -153,16 +151,11 @@ const UserProfileReviews = () => {
         Reviews
       </h2>
       {review.length < 1 ? <p>No reviews yet.</p> : (
-        <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-          totalSlides={review.length}
-          infinite
-          visibleSlides={1}
-        >
-          <Slider>
-            {review.map((item, index) => (
-              <Slide key={item._id} index={index}>
+        <section>
+          {review
+            .slice(0, showOlder ? review.length : 5)
+            .map((item) => (
+              <div key={item._id}>
                 <p>{formatDate(item.createdAt)}</p>
                 <p>{item.game_name}</p>
                 <p>{item.message}</p>
@@ -212,10 +205,14 @@ const UserProfileReviews = () => {
               Update
                   </button>
                 </Modal>
-              </Slide>
+              </div>
             ))}
-          </Slider>
-        </CarouselProvider>
+          {review.length > 5 && (
+            <button type="button" onClick={() => setShowOlder(!showOlder)}>
+              {showOlder ? 'Show Less' : 'Show Older'}
+            </button>
+          )}
+        </section>
       )}
 
     </section>

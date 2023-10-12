@@ -13,7 +13,7 @@ import UserProfile from './UserProfile';
 import defaultImg from '../assets/img/default-img.png';
 
 import Navbar from './Navbar';
-
+import Footer from './Footer';
 import UserProfileReviews from './UserProfileReviews';
 
 const UserProfilePage = () => {
@@ -111,6 +111,7 @@ const UserProfilePage = () => {
 
         <UserProfileReviews />
       </section>
+      <Footer />
     </>
   );
 };
