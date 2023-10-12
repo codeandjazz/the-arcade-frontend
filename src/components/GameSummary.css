@@ -1,0 +1,11 @@
+.favorite-button {
+    background-color: grey;
+}
+
+.favorite-button.favorite {
+    background-color: red;
+}
+
+.favorite-button svg {
+    fill: currentColor;
+}

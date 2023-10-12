@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
-import { Container, Text, Grid, css, textTransforms } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 import { useGlitch } from 'react-powerglitch';
 
@@ -11,33 +10,29 @@ const NotFound = () => {
 
   return (
     // Add image as background and style h1 with glitch effect
-    <Container
+    <article
       className="404"
-      css={{
+      style={{
         background: ` no-repeat center url(${NotFound404})`,
         height: '100vh'
       }}
     >
-      <Grid.Container
-        justify="center"
-        alignItems="center"
-        direction="column"
-        css={{ height: '100vh' }}
+      <section
       >
-        <Grid ref={glitch.ref}>
-          <Text h1 style={{ color: 'white' }}>
+        <div ref={glitch.ref}>
+          <h2>
             Game over
-          </Text>
-        </Grid>
-        <Text h2 css={{ color: 'White' }}>
+          </h2>
+        </div>
+        <h3>
           404 - Page not found
-        </Text>
+        </h3>
 
         <Link to="/" css={{ color: 'White' }}>
           Go home
         </Link>
-      </Grid.Container>
-    </Container>
+      </section>
+    </article>
   );
 };
 
