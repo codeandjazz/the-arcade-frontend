@@ -42,7 +42,6 @@ const UserProfilePage = () => {
         const data = await response.json();
         if (data.success) {
           const favGames = data.response;
-          console.log(favGames);
           setFavoriteGames(favGames);
         } else {
           console.log(data.message);

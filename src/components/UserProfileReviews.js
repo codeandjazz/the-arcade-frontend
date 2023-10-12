@@ -23,12 +23,10 @@ const UserProfileReviews = () => {
   const accessToken =
     useSelector((store) => store.user.accessToken) ||
     localStorage.getItem('accessToken');
-  console.log(accessToken);
   // get userId from store
   const userId =
     useSelector((store) => store.user.userId) ||
     localStorage.getItem('userId');
-  console.log(userId);
 
   // ////////////////////////////////////// //
 
@@ -39,7 +37,6 @@ const UserProfileReviews = () => {
       );
       const data = await response.json();
       if (data.success) {
-        console.log(data.response);
         setReview(data.response.reverse());
       } else {
         console.log(data.message);
@@ -52,7 +49,6 @@ const UserProfileReviews = () => {
   useEffect(() => {
     if (userId) {
       fetchLoggedInUserReviews(userId);
-      console.log(`This is the user id: ${userId}`);
     } else {
       console.log('No user id available')
     }

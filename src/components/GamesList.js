@@ -59,13 +59,10 @@ const GamesList = () => {
           games.forEach((game) => {
             if (game.cover && game.cover.url) {
               game.cover.url = game.cover.url.replace('t_thumb', 't_cover_big');
-              console.log(`Game: ${game.name}`);
-              console.log(`Modified Cover Image URL: ${game.cover.url}`);
             }
           });
           // Store the games in state
           setStoredGames(games);
-          console.log(games);
           setTotalPages(Math.ceil(total / PAGE_SIZE))
         } else {
           console.log(data.message);
