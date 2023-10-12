@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import './GameSummary.css';
+
 // API URL
 import { API_URL } from 'utils/urls';
 
@@ -79,7 +81,7 @@ const GameSummary = ({ game }) => {
       .then((data) => {
         if (data.success) {
           console.log(data);
-          setIsFavorite(true); // Update the isFavorite state when the game is added to favorites
+          setIsFavorite(!isFavorite); // Update the isFavorite state when the game is added to favorites
         }
       });
   };

@@ -1,9 +1,9 @@
 .favorite-button {
-    background-color: grey;
+    color: grey;
 }
 
 .favorite-button.favorite {
-    background-color: red;
+    color: red;
 }
 
 .favorite-button svg {
