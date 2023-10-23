@@ -40,7 +40,7 @@ const GamesDisplay10 = () => {
             }
           });
           // Get 10 random games
-          const randomGames = getRandomGames(gamesWithCovers, 20);
+          const randomGames = getRandomGames(gamesWithCovers, 12);
           // Store the games in state
           setStoredGames(randomGames);
         } else {
@@ -68,7 +68,7 @@ const GamesDisplay10 = () => {
           totalSlides={storedGames.length}
           infinite
           isPlaying
-          visibleSlides={4}
+          visibleSlides={6}
           hasMasterSpinner
         >
           <Slider>
